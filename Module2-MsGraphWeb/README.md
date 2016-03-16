@@ -34,23 +34,6 @@ The following is required to complete this module:
 
 > **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.
 
-<a name="Setup" />
-### Setup ###
-In order to run the exercises in this module, you'll need to set up your environment first.
-
-1. Open Windows Explorer and browse to the module's **Source** folder.
-2. Right-click **Setup.cmd** and select **Run as administrator** to launch the setup process that will configure your environment and install the Visual Studio code snippets for this module.
-3. If the User Account Control dialog box is shown, confirm the action to proceed.
-
-> **Note:** Make sure you've checked all the dependencies for this module before running the setup.
-
-<a name="CodeSnippets" />
-### Using the Code Snippets ###
-
-Throughout the module document, you'll be instructed to insert code blocks. For your convenience, most of this code is provided as Visual Studio Code Snippets, which you can access from within Visual Studio 2015 to avoid having to add it manually.
-
->**Note**: Each exercise is accompanied by a starting solution located in the **Begin** folder of the exercise that allows you to follow each exercise independently of the others. Please be aware that the code snippets that are added during an exercise are missing from these starting solutions and may not work until you've completed the exercise. Inside the source code for an exercise, you'll also find an **End** folder containing a Visual Studio solution with the code that results from completing the steps in the corresponding exercise. You can use these solutions as guidance if you need additional help as you work through this module.
-
 ---
 
 <a name="Exercises" />
@@ -103,7 +86,7 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
 
 This exercise uses a starter project with basic project scaffolding pre-configured. Nothing special, just a single-page application that uses **AngularJS** and **Angular Routing**. In this exercise, you will import the **ADAL-Angular** module and leverage it assist in authentication based on the Angular routes that are defined in the application.  
 
-1. Open command prompt and change directory to the module's **Source > Ex1 > Begin** folder. This is the starter folder for this exercise.
+1. Open command prompt and change directory to the module's **Source\Ex1\Begin** folder. This is the starter folder for this exercise.
 
 2. Open the web project in **Visual Studio Code** by typing **code .**
 
@@ -123,7 +106,9 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 5. Return to the command prompt (still set to the project start folder) and start a static web server by typing **superstatic --port 8000**.
 
-		superstatic --port 8000
+	````CMD
+	superstatic --port 8000
+	````
 
 	![superstatic](images/Mod2_ss.png?raw=true "superstatic")
 	
@@ -139,73 +124,85 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 8. Next, we need to import the **Azure Active Directory Authentication Library** (**ADAL**) using **Bower**. On the command prompt type bower install adal-angular --save.
 
-		bower install adal-angular --save
+	````CMD
+	bower install adal-angular --save
+	````
 
 9. If you return to Visual Studio Code and expand the **lib** folder, you should now see the **adal-angular** library that **Bower** imported.
 
 10. In Visual Studio Code, open the **index.html** file in the root of the project.
 
-11. Add script references to **adal.min.js** and **adal-angular.min.js** after the **angular** and **angular-route** reference. Both of these scripts are located in the **lib > adal-angular**:
+11. Add script references to **adal.min.js** and **adal-angular.min.js** after the **angular** and **angular-route** reference. Both of these scripts are located in the **lib\adal-angular**:
 
-	    <!-- ADAL references -->
-    	<script type="text/javascript" src="lib/adal-angular/dist/adal.min.js"></script>
-    	<script type="text/javascript" src="lib/adal-angular/dist/adal-angular.min.js"></script>	
+	````XML
+	<!-- ADAL references -->
+	<script type="text/javascript" src="lib/adal-angular/dist/adal.min.js"></script>
+	<script type="text/javascript" src="lib/adal-angular/dist/adal-angular.min.js"></script>
+	````	
 
 12. Next, open the **app.js** file located in the **app** folder. This is the file that contains all of the application logic.
 
 13. Locate the **myContacts** Angular module that is defined towards the bottom of the file. Modify it to have a dependency on **AdalAngular** and the **config** function to leverage the **adalAuthenticationServiceProvider**. Both of these are examples of AngularJS use of **dependency injection**. That is, we are injecting the **AdalAngular** module and **adalAuthenticationServiceProvider** object into **myContacts**.
 
-		angular.module("myContacts", ["myContacts.services", 
-			"myContacts.controllers", "ngRoute", "AdalAngular"])
-			.config(["$routeProvider", "$httpProvider", "adalAuthenticationServiceProvider", 
-				function($routeProvider, $httpProvider, adalProvider) {
+	````JavaScript
+	angular.module("myContacts", ["myContacts.services", 
+		"myContacts.controllers", "ngRoute", "AdalAngular"])
+		.config(["$routeProvider", "$httpProvider", "adalAuthenticationServiceProvider", 
+			function($routeProvider, $httpProvider, adalProvider) {
+	````
 
 14. Inside the **config** function, notice how **$routeProvider** is used to configure the application routes. There are two defined routes (**login** and **contacts**) and an otherwise block to handle any other undefined route. Modify each of the routes with a boolean **requireADLogin** attribute. This attribute is made possible by the **AdalAngular** module and will force the route to be signed in when set to true. The **login** route should be **requireADLogin** to **false** and **contacts** should set **requireADLogin** to **true**;
 
-		angular.module("myContacts", ["myContacts.services", "myContacts.controllers", "ngRoute", "AdalAngular"])
-			.config(["$routeProvider", "$httpProvider", "adalAuthenticationServiceProvider", function($routeProvider, $httpProvider, adalProvider) {
-    			$routeProvider.when("/login", {
-			        controller: "loginCtrl",
-			        templateUrl: "/app/templates/view-login.html",
-		        	requireADLogin: false
-			    }).when ("/contacts", {
-			        controller: "contactsCtrl",
-			        templateUrl: "/app/templates/view-contacts.html",
-		        	requireADLogin: true
-			    }).otherwise({
-			        redirectTo: "/login"
-			    });
-			}]);
+	````JavaScript
+	angular.module("myContacts", ["myContacts.services", "myContacts.controllers", "ngRoute", "AdalAngular"])
+		.config(["$routeProvider", "$httpProvider", "adalAuthenticationServiceProvider", function($routeProvider, $httpProvider, adalProvider) {
+			$routeProvider.when("/login", {
+				controller: "loginCtrl",
+				templateUrl: "/app/templates/view-login.html",
+				requireADLogin: false
+			}).when ("/contacts", {
+				controller: "contactsCtrl",
+				templateUrl: "/app/templates/view-contacts.html",
+				requireADLogin: true
+			}).otherwise({
+				redirectTo: "/login"
+			});
+		}]);
+	````
   
 15. Next, use the **adalProvider.init()** function to define the app details from the app registration you performed in Task 1. You can add this by using the **o365-adalInit** code snippet directly after the **$routeProvider** defines the routes. You will need to fill in values for **tenant** and **clientId**.
 
-		angular.module("myContacts", ["myContacts.services", "myContacts.controllers", "ngRoute", "AdalAngular"])
-		.config(["$routeProvider", "$httpProvider", "adalAuthenticationServiceProvider", function($routeProvider, $httpProvider, adalProvider) {
-		    $routeProvider.when("/login", {
-		        controller: "loginCtrl",
-		        templateUrl: "/app/templates/view-login.html",
-		        requireADLogin: false
-		    }).when ("/contacts", {
-		        controller: "contactsCtrl",
-		        templateUrl: "/app/templates/view-contacts.html",
-		        requireADLogin: true
-		    }).otherwise({
-		        redirectTo: "/login"
-		    });
-		    
-		    adalProvider.init({
-		        instance: "https://login.microsoftonline.com/",
-		        tenant: "mytenant.onmicrosoft.com",
-		        clientId: "15f43fac-22db-4da6-9aa2-19037ea5138c",
-		        endpoints: {
-		            "MSGraph": "https://graph.microsoft.com"
-		        }
-		    }, $httpProvider);
-		}]);
+	````JavaScript
+	angular.module("myContacts", ["myContacts.services", "myContacts.controllers", "ngRoute", "AdalAngular"])
+	.config(["$routeProvider", "$httpProvider", "adalAuthenticationServiceProvider", function($routeProvider, $httpProvider, adalProvider) {
+		$routeProvider.when("/login", {
+			controller: "loginCtrl",
+			templateUrl: "/app/templates/view-login.html",
+			requireADLogin: false
+		}).when ("/contacts", {
+			controller: "contactsCtrl",
+			templateUrl: "/app/templates/view-contacts.html",
+			requireADLogin: true
+		}).otherwise({
+			redirectTo: "/login"
+		});
+		
+		adalProvider.init({
+			instance: "https://login.microsoftonline.com/",
+			tenant: "mytenant.onmicrosoft.com",
+			clientId: "15f43fac-22db-4da6-9aa2-19037ea5138c",
+			endpoints: {
+				"MSGraph": "https://graph.microsoft.com"
+			}
+		}, $httpProvider);
+	}]);
+	````
 
 16. Return to the command prompt (still set to the project start folder) and start a static web server by typing **superstatic --port 8000**.
 
-		superstatic --port 8000
+	````CMD
+	superstatic --port 8000
+	````
 
 17. Open a browser and navigate to **http://localhost:8000**. This time when you click on the **Sign-in with Office 365** button, the application should force you to sign-in with Office 365. This is because the contacts route requires Azure AD Login (via **requireADLogin** attribute).
 
@@ -225,33 +222,37 @@ In the final Task of Exercise 1, you will convert the hard-coded contacts to rea
 
 2. Update the **loginCtrl** of the **myContacts.controllers** module to leverage the **adalAuthenticationService** dependency and use it to change the application flow based on if the user is authenticated (**adalSvc.userInfo.isAuthenticated**).
 
-		angular.module("myContacts.controllers", [])
-		.controller("loginCtrl", ["$scope", "$location", 
-			"adalAuthenticationService", 
-			function($scope, $location, adalSvc) {
+	````JavaScript
+	angular.module("myContacts.controllers", [])
+	.controller("loginCtrl", ["$scope", "$location", 
+		"adalAuthenticationService", 
+		function($scope, $location, adalSvc) {
 
-		    if (adalSvc.userInfo.isAuthenticated) {
-		        $location.path("/contacts");
-		    }
-		        
-		    $scope.login = function() {
-		        adalSvc.login();  
-		    };
-		}])
+		if (adalSvc.userInfo.isAuthenticated) {
+			$location.path("/contacts");
+		}
+			
+		$scope.login = function() {
+			adalSvc.login();  
+		};
+	}])
+	````
 
 4. Finally, update the **o365Service.getContacts** function in the **myContacts.services** module to use the **$http** object to **GET** the signed-in user's contacts using the **Microsoft Graph** end-point **https://graph.microsoft.com/v1.0/me/contacts**.
 
-	    o365Service.getContacts = function() {
-	        var deferred = $q.defer();
-	        
-	        $http.get("https://graph.microsoft.com/v1.0/me/contacts").then(function(result) {
-	            deferred.resolve(result.data);
-	        }, function(err) {
-	            deferred.reject(err.statusText);
-	        });
-	        
-	        return deferred.promise;
-	    }
+	````JavaScript
+	o365Service.getContacts = function() {
+		var deferred = $q.defer();
+		
+		$http.get("https://graph.microsoft.com/v1.0/me/contacts").then(function(result) {
+			deferred.resolve(result.data);
+		}, function(err) {
+			deferred.reject(err.statusText);
+		});
+		
+		return deferred.promise;
+	}
+	````
 
 4. Every call into the Microsoft Graph requires an **access token** passed as an **Authorization** header of the request. You would normally set these headers on the **$http** object in the above code. However, the **AdalAngular** module automatically does this for you. In fact, **ADAL** handles all of the token management (caching, headers, etc) for you!
 
@@ -326,7 +327,7 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 You will leverage your new app registration in an ASP.NET Core web application. ASP.NET Core is still in preview, so it and the libraries it uses are subject to (and probably will) change.
 
-1. Launch **Visual Studio 2015** and launch the new Project dialog (**File** > **New** > **Project**).
+1. Launch **Visual Studio 2015** and launch the new Project dialog (**File**\**New**\**Project**).
 
 2. In the new project dialog select the **ASP.NET Web Application** template under the **Visual C#** > **Web** templates.
 
@@ -350,10 +351,12 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 6. To get started in the new project, import the following NuGet packages using the Package Manager Console.
 
-		Install-Package Microsoft.AspNet.Authentication.OpenIdConnect -Pre
-		Install-Package Microsoft.AspNet.Authentication.Cookies -Pre
-		Install-Package Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory -Pre
-		Install-Package Microsoft.AspNet.Session -Pre
+	````CMD
+	Install-Package Microsoft.AspNet.Authentication.OpenIdConnect -Pre
+	Install-Package Microsoft.AspNet.Authentication.Cookies -Pre
+	Install-Package Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory -Pre
+	Install-Package Microsoft.AspNet.Session -Pre
+	````
 
 	> **Important Note:** Just to emphasize again, these libraries are prerelease packages and will likely change. The ADAL library is also marked "experimental" and is a preview library for working with v2.0 apps. It will also change as it comes closer to release.
 
@@ -369,23 +372,25 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 10. Next, open the appsettings.json file and add a AzureAD section with config values for AppId, AppPassword, Tenant, Authority, and GraphResourceId.
 
-		{
-      		"Logging": {
-        		"IncludeScopes": false,
-        		"LogLevel": {
-          			"Default": "Verbose",
-          			"System": "Information",
-          			"Microsoft": "Information"
-        		}
-      		},
-      		"AzureAD": {
-        		"AppId": "YOUR_APPLICATION_ID",
-        		"AppPassword": "YOUR_APP_PASSWORD",
-        		"Tenant": "YOUR_TENANT.onmicrosoft.com",
-        		"AadInstance": "https://login.microsoftonline.com/",
-        		"GraphResourceId": "https://graph.microsoft.com"
-      		}
-    	}
+	````JavaScript
+	{
+		"Logging": {
+			"IncludeScopes": false,
+			"LogLevel": {
+				"Default": "Verbose",
+				"System": "Information",
+				"Microsoft": "Information"
+			}
+		},
+		"AzureAD": {
+			"AppId": "YOUR_APPLICATION_ID",
+			"AppPassword": "YOUR_APP_PASSWORD",
+			"Tenant": "YOUR_TENANT.onmicrosoft.com",
+			"AadInstance": "https://login.microsoftonline.com/",
+			"GraphResourceId": "https://graph.microsoft.com"
+		}
+	}
+	````
 
 11. Next, create a **Utils** folder in the root of the web project and then a **SettingsHelper.cs** class in the **Utils** folder.
 
@@ -393,73 +398,83 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 13. Next, create a **SessionTokenCache.cs** class in the **Utils** folder and set it to inherit from **TokenCache** (in the **Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory** namespace).
 
-	    using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        using System.Threading.Tasks;
+	````C#
+	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Threading.Tasks;
 
-        namespace MyContactsV2App.Utils
-        {
-            public class SessionTokenCache : TokenCache
-            {
-            }
-        }
+	namespace MyContactsV2App.Utils
+	{
+		public class SessionTokenCache : TokenCache
+		{
+		}
+	}
+	````
 
 
 15. Next, use the **o365-sessiontokencache** code snippet to populate the remainder of the **SessionTokenCache** class. You may need to resolve a reference to **Microsoft.AspNet.Http**. This class will provide the token caching mechanism for **ADAL**.
 
 16. Finally, open the **Startup.cs** file in the root of the web project. After **Line 51** (app.UseStaticFiles()), insert the **o365-startup** code snippet. You will also have to resolve the following references.
 
-        using Microsoft.AspNet.Authentication.Cookies;
-        using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-        using Microsoft.AspNet.Authentication.OpenIdConnect;
-        using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+	````C#
+	using Microsoft.AspNet.Authentication.Cookies;
+	using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+	using Microsoft.AspNet.Authentication.OpenIdConnect;
+	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+	````
 
 17. The **o365-startup** code snippet configured **session state**, **cookie authentication**, and **OpenIdConnect** authentication with the v2.0 application model.
 
 18. Look at the **UseOpenIdConnectAuthentication** method and notice its use of **Scope** to specify the permissions for the app (**Contacts.ReadWrite** and **offline_access**). Also notice the use of **OnAuthorizationCodeReceived** to handle authorization codes coming back from a user's sign in and app consent.
 
-        app.UseOpenIdConnectAuthentication(options =>
-        {
-            options.AutomaticChallenge = true;
-            options.ClientId = SettingsHelper.AppId;
-            options.Authority = SettingsHelper.Authority;
-            options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.ResponseType = OpenIdConnectResponseTypes.CodeIdToken;
-            options.Scope.Add("https://graph.microsoft.com/contacts.readwrite");
-            options.Scope.Add("offline_access");
-            options.Events = new OpenIdConnectEvents
-            {
-                OnAuthorizationCodeReceived = async (context) =>
-                {
-                    string userObjectId = context.AuthenticationTicket.Principal.FindFirst(SettingsHelper.ObjectIdentifierKey).Value;
-                    ClientCredential clientCred = new ClientCredential(SettingsHelper.AppId, SettingsHelper.AppPassword);
-                    AuthenticationContext authContext = new AuthenticationContext(options.Authority, false, new SessionTokenCache(userObjectId, context.HttpContext));
-                    AuthenticationResult authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
-                        context.Code, new Uri(context.RedirectUri), clientCred, new string[] { "https://graph.microsoft.com/contacts.readwrite" });
-                }
-            };
-        });
+	````C#
+	app.UseOpenIdConnectAuthentication(options =>
+	{
+		options.AutomaticChallenge = true;
+		options.ClientId = SettingsHelper.AppId;
+		options.Authority = SettingsHelper.Authority;
+		options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+		options.ResponseType = OpenIdConnectResponseTypes.CodeIdToken;
+		options.Scope.Add("https://graph.microsoft.com/contacts.readwrite");
+		options.Scope.Add("offline_access");
+		options.Events = new OpenIdConnectEvents
+		{
+			OnAuthorizationCodeReceived = async (context) =>
+			{
+				string userObjectId = context.AuthenticationTicket.Principal.FindFirst(SettingsHelper.ObjectIdentifierKey).Value;
+				ClientCredential clientCred = new ClientCredential(SettingsHelper.AppId, SettingsHelper.AppPassword);
+				AuthenticationContext authContext = new AuthenticationContext(options.Authority, false, new SessionTokenCache(userObjectId, context.HttpContext));
+				AuthenticationResult authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
+					context.Code, new Uri(context.RedirectUri), clientCred, new string[] { "https://graph.microsoft.com/contacts.readwrite" });
+			}
+		};
+	});
+	````
 
 18. While still in the **Startup.cs** file, locate the **ConfigureServices** method and update it as seen below.
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // Add framework services.
-            services.AddMvc();
-            services.AddSession();
-            services.AddCaching();
-        }
+	````C#
+	// This method gets called by the runtime. Use this method to add services to the container.
+	public void ConfigureServices(IServiceCollection services)
+	{
+		// Add framework services.
+		services.AddMvc();
+		services.AddSession();
+		services.AddCaching();
+	}
+	````
 
 19. Authentication has been configured, but you need to update a controller to enforce it. Open the **HomeController.cs** file in the **Controllers** folder and add the [**Authorize**] directive to the Index action.
 
-        [Authorize]
-        public IActionResult Index()
-        {
-            return View();
-        }
+	````C#
+	[Authorize]
+	public IActionResult Index()
+	{
+		return View();
+	}
+	````
 
 20. It is time to test your work. Press **F5** or start the debugger. When the application loads, it should bring up a sign-in screen that you can provide either a Office 365 or Microsoft (MSA) account on. After sign-in, you will be presented with a consent screen to authorize the app the permission scopes passed in. This consent screen will look slightly different if using an MSA account, but it achieves the same thing.
 
@@ -479,7 +494,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 I the final exercise of this module, you will use a v2.0 access token and call into the Microsoft Graph for both Office 365 and Microsoft (MSA) accounts.
 
-1. Open the **Index.cshtml** located in the **Views** > **Home** folder.
+1. Open the **Index.cshtml** located in the **Views**\**Home** folder.
 
 2. Replace the entire view markup with the **o365-contactsindex** code snippet. This configures a table to display the contacts. It also defines the model of the view as a **Newtonsoft.Json.Linq.JArray**. This has been simplified for the workshop. A more solid pattern would be to create a Contact class and parse the JSON from the **Microsoft Graph**.
 
@@ -487,40 +502,44 @@ I the final exercise of this module, you will use a v2.0 access token and call i
 
 3. Open the **HomeController.cs** file in the **Controllers** folder and add update the entire Index action with the **o365-contactsindex** code snippet.
 
-        [Authorize]
-        public async Task<IActionResult> Index()
-        {
-            JArray jsonArray = null;
+	````C#
+	[Authorize]
+	public async Task<IActionResult> Index()
+	{
+		JArray jsonArray = null;
 
-            // Get access token for calling into Microsoft Graph
-            string userObjectId = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(i => i.Type == SettingsHelper.ObjectIdentifierKey).Value;
-            ClientCredential clientCredential = new ClientCredential(SettingsHelper.AppId, SettingsHelper.AppPassword);
-            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, false, new SessionTokenCache(userObjectId, HttpContext));
-            var token = await authContext.AcquireTokenSilentAsync(new string[] { "https://graph.microsoft.com/contacts.readwrite" }, clientCredential, UserIdentifier.AnyUser);
+		// Get access token for calling into Microsoft Graph
+		string userObjectId = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(i => i.Type == SettingsHelper.ObjectIdentifierKey).Value;
+		ClientCredential clientCredential = new ClientCredential(SettingsHelper.AppId, SettingsHelper.AppPassword);
+		AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, false, new SessionTokenCache(userObjectId, HttpContext));
+		var token = await authContext.AcquireTokenSilentAsync(new string[] { "https://graph.microsoft.com/contacts.readwrite" }, clientCredential, UserIdentifier.AnyUser);
 
-            // Use the token to call Microsoft Graph
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Token);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            using (var response = await client.GetAsync(SettingsHelper.GraphResourceId + "/v1.0/me/contacts"))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-                    JObject jObj = JObject.Parse(json);
-                    jsonArray = jObj.Value<JArray>("value");
-                }
-            }
+		// Use the token to call Microsoft Graph
+		HttpClient client = new HttpClient();
+		client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Token);
+		client.DefaultRequestHeaders.Add("Accept", "application/json");
+		using (var response = await client.GetAsync(SettingsHelper.GraphResourceId + "/v1.0/me/contacts"))
+		{
+			if (response.IsSuccessStatusCode)
+			{
+				var json = await response.Content.ReadAsStringAsync();
+				JObject jObj = JObject.Parse(json);
+				jsonArray = jObj.Value<JArray>("value");
+			}
+		}
 
-            return View(jsonArray);
-        }
+		return View(jsonArray);
+	}
+	````
 
 4. You will likely need to resolve a number of reference after inserting this snippet.
 
-        using Newtonsoft.Json.Linq;
-        using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
-        using System.Net.Http;
-        using System.Security.Claims;
+	````C#
+	using Newtonsoft.Json.Linq;
+	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+	using System.Net.Http;
+	using System.Security.Claims;
+	````
 
 5. Here are a few important things to analyze in this snippet.
 
