@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Signing into Office 365</title>
+        <link href="../../content/Office.css" rel="stylesheet" type="text/css" />
+        <link href="../../bower_components/microsoft.office.js/styles/OfficeThemes.css" rel="stylesheet" type="text/css" />
+        <link href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css" rel="stylesheet">
+        <link href="../App.css" rel="stylesheet" type="text/css" />
+        
+        <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+        <script src="../../bower_components/adal-angular/dist/adal.min.js"></script>
+        <script src="https://officejsbeta.azurewebsites.net/office.debug.js "></script>
+        <script src="../App.js"></script>
+        <script src="../../scripts/MicrosoftAjax.js"></script>
+        <script type="text/javascript">
+            Office.initialize = function (reason) {
+                $(document).ready(signIn);
+            };
+
+            function signIn() {
+                var response = { "status": "none", "accessToken": "" };
+
+                window.config = {
+                    instance: "https://login.microsoftonline.com/",
+                    tenant: app.tenant,
+                    clientId: app.clientId,
+                    postLogoutRedirectUri: window.location.origin,
+                    cacheLocation: "localStorage",
+                    endpoints: {
+                        "msgraph": "https://graph.microsoft.com"
+                    }
+                }
+
+                // Setup auth context
+                var authContext = new AuthenticationContext(window.config);
+                authContext.redirectUri = app.redirectUri;
+                authContext.handleWindowCallback();
+
+                var isCallback = authContext.isCallback(window.location.hash);
+                var user = authContext.getCachedUser();
+                
+                // Check if the user is cached
+                if (!user) {
+                    authContext.login();
+                } 
+                else {
+                    // Get access token for graph
+                    authContext.acquireToken("https://graph.microsoft.com", function (error, token) {
+                        // Check for success
+                        if (error || !token) {
+                            // Handle ADAL Error
+                            response.status = "error";
+                            response.accessToken = null;
+                            Office.context.ui.messageParent(JSON.stringify(response));
+                        } 
+                        else {
+                            // Return the roken to the parent
+                            response.status = "success";
+                            response.accessToken = token;
+                            Office.context.ui.messageParent(JSON.stringify(response));
+                        }
+                    });
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="padding">
+            <h2>Signing into Office 365...</h2>
+        </div>
+    </body>
+</html>

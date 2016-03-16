@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Comment Activity";
+}
+@model IEnumerable<MailCRM.Models.Comment>
+
+<h2>Comment Activity</h2>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Contact</th>
+            <th>Comment</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        @foreach (var comment in Model)
+        {
+            <tr>
+                <td>@comment.ContactEmail</td>
+                <td>@comment.CommentText</td>
+                <td>@comment.PostDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //setup signalR stuff
+            var hub = $.connection.commentsHub;
+
+            //listen for comments
+            hub.client.commentReceived = function (comment) {
+                //add the new row
+                $("#tbody").prepend("<tr><td>" + comment.ContactEmail + "</td><td>" + comment.CommentText + "</td><td>" + comment.PostDate + "</td></tr>")
+            };
+
+            //start the connection.
+            $.connection.hub.start().done(function () {
+                hub.server.initialize();
+            });
+        });
+    </script>
+}

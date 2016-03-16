@@ -1,0 +1,35 @@
+{
+  "name": "microsoft-office-js",
+  "version": "1.1.0.9",
+  "authors": [
+    "Andrew Connell <me@andrewconnell.com> (http://www.andrewconnell.com)",
+    "Prannay Budhraja <prannayb@microsoft.com>",
+    "Stefan Bauer <stefan.bauer@n8d.at>"
+  ],
+  "description": "The Office JavaScript API includes objects, methods, properties, events, and enumerations that can be used from apps for Office to interact with Microsoft Office 2013 documents or mail items content.",
+  "license": "MIT",
+  "main": [
+    "scripts/office/1/office.js",
+    "content/officethemes.css"
+  ],
+  "homepage": "https://msdn.microsoft.com/en-US/library/office/fp142185(v=office.1599999)",
+  "keywords": [
+    "Microsoft",
+    "Office",
+    "2013",
+    "API",
+    "JSOM",
+    "JavaScript",
+    "Agave",
+    "Apps",
+    "App",
+    "Developer"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

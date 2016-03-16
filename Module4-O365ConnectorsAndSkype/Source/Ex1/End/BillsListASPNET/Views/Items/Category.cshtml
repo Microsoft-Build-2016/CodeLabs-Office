@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+}
+@model List<BillsListASPNET.Models.Item>
+
+<h2>
+    <a href="/items">for sale</a> > @ViewData["category"] 
+    <a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList%20(@ViewData["category"])&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
+        <img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
+    </a>
+</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3">
+            <div class="card">
+                <span class="price abs">@item.Price</span>
+                <div class="img">
+                    <a href="/items/detail/@item.Id">
+                        <div class="ratio" style="background-image:url('@item.Image')"></div>
+                    </a>
+                </div>
+                <div class="details">
+                    <a href="/items/detail/@item.Id">@item.Title</a> <span class="hidden-sm">(@item.Location)</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

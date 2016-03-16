@@ -1,0 +1,14 @@
+<h2>My Contacts</h2>
+<div class="alert alert-danger" role="alert" ng-show="error">{{error}} (<span ng-click="dismiss()">dismiss</span>)</div>
+<table class="table table-striped table-hover">
+    <thead>
+        <th>Name</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="contact in contacts">
+            <td>{{contact.displayName}}</td>
+            <td>{{contact.emailAddresses[0].address}}</td>
+        </tr>
+    </tbody>
+</table>

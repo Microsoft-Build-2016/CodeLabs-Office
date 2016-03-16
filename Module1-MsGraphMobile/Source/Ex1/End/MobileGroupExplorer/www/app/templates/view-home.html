@@ -1,0 +1,12 @@
+﻿<ion-view view-title="Home">
+    <ion-content>
+        <ion-refresher on-refresh="refresh(true)" spinner="none"></ion-refresher>
+        <ion-list>
+            <div class="item item-avatar" ng-repeat="group in groups">
+                <img ng-src="{{group.img}}" />
+                <h2>{{group.displayName}}</h2>
+                <p>{{group.EmailAddress}}</p>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

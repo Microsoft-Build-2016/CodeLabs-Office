@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="width: 100%">
+    <h4 id="header"></h4>
+    <div class="input-group" style="width: 100%;">
+        <input type="text" class="form-control" id="comment" />
+        <div class="input-group-addon" id="submit" style="cursor: pointer">Submit</div>
+    </div>
+    <ul class="list-group" id="list" style="padding-top: 10px;"></ul>
+</div>
+@section Scripts {
+    <script src="https://appsforoffice.microsoft.com/lib/1.0/hosted/office.js"></script>
+    <script type="text/javascript">
+        Office.initialize = function (reason) {
+            $(document).ready(function () {
+                //look up the sender
+                var sender = Office.context.mailbox.item.sender;
+                $("#header").html("Comments for " + sender.emailAddress);
+                $.ajax({
+                    url: "/api/Comments?email=" + sender.emailAddress,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        var html = "";
+                        $(data).each(function (i, e) {
+                            html += "<li class='list-group-item'>" + e.CommentText + "</li>";
+                        })
+                        $("#list").html(html);
+                    }
+                });
+
+                $("#submit").click(function () {
+                    $.ajax({
+                        url: "/api/Comments",
+                        method: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify({ ContactEmail: sender.emailAddress, CommentText: $("#comment").val() }),
+                        success: function (data) {
+                            var html = $("#list").html();
+                            html = "<li class='list-group-item'>" + $("#comment").val() + "</li>" + html;
+                            $("#list").html(html);
+                            $("#comment").val("");
+                        }
+                    });
+                });
+            });
+        };
+    </script>
+}
