@@ -68,7 +68,7 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 
 3. Bring up **Solution Explorer** to familiarize yourself with the project scaffolding.
 
-	![Starter project in Solution Explorer](images/Mod1_SlnExplorer.png?raw=true "Starter project in Solution Explorer")
+	![Starter project in Solution Explorer](Images/Mod1_SlnExplorer.png?raw=true "Starter project in Solution Explorer")
 	
 	_Starter project in Solution Explorer_
 	
@@ -168,7 +168,7 @@ In this task, you will explore the debugging options for an Apache Cordova proje
 
 1. Look at the debugging toolbar in Visual Studio Community 2015 and locate the **Solution Platform** and **Debug Target** options.
 
-	![Solution Platform and Debug Tagets](images/Mod1_Targets.png?raw=true "Solution Platform and Debug Tagets")
+	![Solution Platform and Debug Tagets](Images/Mod1_Targets.png?raw=true "Solution Platform and Debug Tagets")
 	
 	_Solution Platform and Debug Tagets_
 
@@ -180,7 +180,7 @@ In this task, you will explore the debugging options for an Apache Cordova proje
 
 5. Once the emulator launches and Android boots, the application should automatically launch with the Visual Studio debugger attached. Right now the application doesn't do much as it has hard-coded group data. This completes **Exercise 1**, but you might keep the emulator up for subsequent exercises.
 
-	![Start project with hard-coded groups](images/Mod1_Debug1.png?raw=true "Start project with hard-coded groups")
+	![Start project with hard-coded groups](Images/Mod1_Debug1.png?raw=true "Start project with hard-coded groups")
 	
 	_Start project with hard-coded groups_
 
@@ -200,7 +200,7 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 
 2. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
-	![Office 365 App Registration Tool sign-in](images/Mod1_AppRegSignin.png?raw=true "Office 365 App Registration Tool sign-in")
+	![Office 365 App Registration Tool sign-in](Images/Mod1_AppRegSignin.png?raw=true "Office 365 App Registration Tool sign-in")
 	
 	_Office 365 App Registration Tool sign-in_
 
@@ -213,7 +213,7 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
  
 4. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise.
 
-	![App registration confirmation with Client ID](images/Mod1_AppRegConfirm.png?raw=true "App registration confirmation with Client ID")
+	![App registration confirmation with Client ID](Images/Mod1_AppRegConfirm.png?raw=true "App registration confirmation with Client ID")
 	
 	_App registration confirmation with Client ID_
 
@@ -231,7 +231,7 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 
 2. Click on the **Plugins** link in the side navigation of the configuration screen. The **Plugins** view allows you to add powerful plug-ins to your Apache Cordova project. There are a number of popular "**Core**" plug-ins listed, but you can also import local plug-ins or plug-ins from Git using the **Custom** option. Locate the **Active Directory Authentication Library (ADAL)** plugin and click the **Add** button.
 
-	![ADAL Cordova plug-in](images/Mod1_ADAL.png?raw=true "ADAL Cordova plug-in")
+	![ADAL Cordova plug-in](Images/Mod1_ADAL.png?raw=true "ADAL Cordova plug-in")
 	
 	_ADAL Cordova plug-in_
 
@@ -274,13 +274,13 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 
 9. When the app loads, it should display an Office 365 sign-in screen. You didn't have to build a sign-in screen...ADAL provided you with one. Sign-in using your Office 365 account or the one that was provided to you.
 
-	![Sign-in via ADAL plug-in](images/Mod1_Signin.png?raw=true "Sign-in via ADAL plug-in")
+	![Sign-in via ADAL plug-in](Images/Mod1_Signin.png?raw=true "Sign-in via ADAL plug-in")
 	
 	_Sign-in via ADAL plug-in_
 
 10. After you sign-in, the you will be prompted to consent to the permissions the mobile app is requesting (that you configured when you registered the app). Click the **Accept** button to consent to the application permissions.
 
-	![Consent via ADAL plug-in](images/Mod1_Consent.png?raw=true "Consent via ADAL plug-in")
+	![Consent via ADAL plug-in](Images/Mod1_Consent.png?raw=true "Consent via ADAL plug-in")
 	
 	_Consent via ADAL plug-in_
 
@@ -385,7 +385,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 
 7. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. All groups should display the same generic group photo, but in **Task 2** you will update the app the lazy load the actual group photos.
 
-	![App with groups using Microsoft Graph](images/Mod1_Debug2.png?raw=true "App with groups using Microsoft Graph")
+	![App with groups using Microsoft Graph](Images/Mod1_Debug2.png?raw=true "App with groups using Microsoft Graph")
 	
 	_App with groups using Microsoft Graph_
 
@@ -505,7 +505,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 
 9. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. The groups will initially load with the generic group.png image, but will later load the actual group photos from Office 365.
 
-	![Groups with group photos loaded through Microsoft Graph](images/Mod1_Debug3.png?raw=true "Groups with group photos loaded through Microsoft Graph")
+	![Groups with group photos loaded through Microsoft Graph](Images/Mod1_Debug3.png?raw=true "Groups with group photos loaded through Microsoft Graph")
 	
 	_Groups with group photos loaded through Microsoft Graph_
 	

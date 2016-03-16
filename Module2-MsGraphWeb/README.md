@@ -63,7 +63,7 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
 
 2. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
-	![App registration sign-in](images/Mod2_AppRegSignin.png?raw=true "App registration sign-in")
+	![App registration sign-in](Images/Mod2_AppRegSignin.png?raw=true "App registration sign-in")
 	
 	_App registration sign-in_
 	
@@ -77,7 +77,7 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
  
 4. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise. The registration tool will also list a **Client Secret**, but you can ignore that as we will be using an **Implicit OAuth Flow** that doesn't use the Secret.
 
-	![Registration Confirmation](images/Mod2_AppRegConfirm.png?raw=true "Registration Confirmation")
+	![Registration Confirmation](Images/Mod2_AppRegConfirm.png?raw=true "Registration Confirmation")
 	
 	_Registration Confirmation_
 
@@ -98,7 +98,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 	- **app**: the folder containing all of the application logic and partial views/templates.
 	- **lib**: the folder containing all the frameworks/dependent scripts (ex: Bootstrap, Angular, etc). All of these were imported using **bower**.
 
-	![Project structure](images/Mod2_ProjStruct.png?raw=true "Project structure")
+	![Project structure](Images/Mod2_ProjStruct.png?raw=true "Project structure")
 	
 	_Project structure_
 	
@@ -110,13 +110,13 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 	superstatic --port 8000
 	````
 
-	![superstatic](images/Mod2_ss.png?raw=true "superstatic")
+	![superstatic](Images/Mod2_ss.png?raw=true "superstatic")
 	
 	_superstatic_
 	
 6. Open a browser and navigate to **http://localhost:8000**. Get a feel for the flow of the application. It has two views...a **login** view and a **list** view that display contacts. Currently, the application is hard-coded, so the sign-in button on the login form just switches views to a hard-coded list of contacts.
 
-	![Hard-coded contacts](images/Mod2_ContactsHardCode.png?raw=true "Hard-coded contacts")
+	![Hard-coded contacts](Images/Mod2_ContactsHardCode.png?raw=true "Hard-coded contacts")
 	
 	_Hard-coded contacts_
 	
@@ -206,7 +206,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 17. Open a browser and navigate to **http://localhost:8000**. This time when you click on the **Sign-in with Office 365** button, the application should force you to sign-in with Office 365. This is because the contacts route requires Azure AD Login (via **requireADLogin** attribute).
 
-	![Sign-in](images/Mod2_SignIn.png?raw=true "Sign-in")
+	![Sign-in](Images/Mod2_SignIn.png?raw=true "Sign-in")
 	
 	_Sign-in_
 	
@@ -283,7 +283,7 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 1. Open a browser and navigate to [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com "https://apps.dev.microsoft.com").
 
-	![Application Registration Portal](images/Mod2_AppPortal.png?raw=true "Application Registration Portal")
+	![Application Registration Portal](Images/Mod2_AppPortal.png?raw=true "Application Registration Portal")
 	
 	_Application Registration Portal_
 	
@@ -293,7 +293,7 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 4. Once you sign into the Application Registration Portal, click the **Add an app** to launch the **New Application Registration** dialog.
 
-	![New app registration dialog](images/Mod2_AppRegV2.png?raw=true "New app registration dialog")
+	![New app registration dialog](Images/Mod2_AppRegV2.png?raw=true "New app registration dialog")
 	
 	_New app registration dialog_
 	
@@ -301,7 +301,7 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 6. On the new app confirmation screen, click the **Generate New Password** button to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you display it again.
 
-	![Generate secret](images/Mod2_Secret.png?raw=true "Generate secret")
+	![Generate secret](Images/Mod2_Secret.png?raw=true "Generate secret")
 	
 	_Generate secret_
 	
@@ -309,13 +309,13 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 8. scroll down to the **Platforms** section and click the **Add Platform** button and then select **Web** for the new platform.
 
-	![Add platform](images/Mod2_platforms.png?raw=true "Add platform")
+	![Add platform](Images/Mod2_platforms.png?raw=true "Add platform")
 	
 	_Add platform_
 	
 9. When the Add Platform dialog closes, enter the **Redirect URI** of **https://localhost:44300/signin-oidc** and then click the Save button at the bottom of the screen.
 
-	![app redirect](images/Mod2_Redirect.png?raw=true "app redirect")
+	![app redirect](Images/Mod2_Redirect.png?raw=true "app redirect")
 	
 	_app redirect_
 	
@@ -331,19 +331,19 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 2. In the new project dialog select the **ASP.NET Web Application** template under the **Visual C#** > **Web** templates.
 
-	![New project](images/Mod2_NewProj1.png?raw=true "New project")
+	![New project](Images/Mod2_NewProj1.png?raw=true "New project")
 	
 	_New project_
 
 3. On the **New ASP.NET Project** dialog select **Web Application** in the **ASP.NET 5 Templates** section and then click the **Change Authentication** button.
 
-	![Web project type](images/Mod2_NewProj2.png?raw=true "Web project type")
+	![Web project type](Images/Mod2_NewProj2.png?raw=true "Web project type")
 	
 	_Web project type_
 
 4. On the **Change Authentication** dialog, change the option to **No Authentication**. You will manually add authentication using an OWIN startup class.
 
-	![No Auth](images/Mod2_NoAuth.png?raw=true "No Auth")
+	![No Auth](Images/Mod2_NoAuth.png?raw=true "No Auth")
 	
 	_No Auth_
 
@@ -366,7 +366,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 9. Check the **Enable SSL** checkbox and change the **App URL** to **https://localhost:44300** before saving and closing the project properties screen.
 
-	![Project Properties](images/Mod2_ProjProp.png?raw=true "Project Properties")
+	![Project Properties](Images/Mod2_ProjProp.png?raw=true "Project Properties")
 	
 	_Project Properties_
 
@@ -478,13 +478,13 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 20. It is time to test your work. Press **F5** or start the debugger. When the application loads, it should bring up a sign-in screen that you can provide either a Office 365 or Microsoft (MSA) account on. After sign-in, you will be presented with a consent screen to authorize the app the permission scopes passed in. This consent screen will look slightly different if using an MSA account, but it achieves the same thing.
 
-	![Consent](images/Mod2_Consent.png?raw=true "Consent")
+	![Consent](Images/Mod2_Consent.png?raw=true "Consent")
 	
 	_Consent_
 
 21. After consenting the application, the browser should return to the application. Did it work? Yes, as long as you are on the default view. In the next Task, you will mark REST calls into the **Microsoft Graph**.
 
-	![Authenticated](images/Mod2_Authenticated.png?raw=true "Authenticated")
+	![Authenticated](Images/Mod2_Authenticated.png?raw=true "Authenticated")
 	
 	_Authenticated_
 	
@@ -549,7 +549,7 @@ I the final exercise of this module, you will use a v2.0 access token and call i
 
 6. It is time to test your work. Press **F5** or start the debugger. After signing into the application, the Home view should display contacts for the user that signed in. This works with NO code change between Office 365 and Microsoft (MSA) accounts!
 
-	![Completed solution](images/Mod2_complete.png?raw=true "Completed solution")
+	![Completed solution](Images/Mod2_complete.png?raw=true "Completed solution")
 	
 	_Completed solution_
 
