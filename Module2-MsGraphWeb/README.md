@@ -1,4 +1,4 @@
-<a name="HOLTop" />
+﻿<a name="HOLTop" />
 # Web Development and the Microsoft Graph #
 
 ---
@@ -80,8 +80,10 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
 
 2. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
-	![App registration sign-in](http://i.imgur.com/Ke2N6p3.png)
-
+	![App registration sign-in](images/Mod2_AppRegSignin.png?raw=true "App registration sign-in")
+	
+	_App registration sign-in_
+	
 3. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
 
 	- **App name**: **Angular Contacts**
@@ -92,7 +94,9 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
  
 4. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise. The registration tool will also list a **Client Secret**, but you can ignore that as we will be using an **Implicit OAuth Flow** that doesn't use the Secret.
 
-	![Registration Confirmation](http://i.imgur.com/VrEDzGe.png)
+	![Registration Confirmation](images/Mod2_AppRegConfirm.png?raw=true "Registration Confirmation")
+	
+	_Registration Confirmation_
 
 <a name="Ex1Task2"></a>
 #### Task 2 - Leveraging AdalAngular ####
@@ -111,20 +115,26 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 	- **app**: the folder containing all of the application logic and partial views/templates.
 	- **lib**: the folder containing all the frameworks/dependent scripts (ex: Bootstrap, Angular, etc). All of these were imported using **bower**.
 
-	![Project structure](http://i.imgur.com/0U1IZ1W.png)
-
+	![Project structure](images/Mod2_ProjStruct.png?raw=true "Project structure")
+	
+	_Project structure_
+	
 4. Open the **app.js** file located in the **app** folder. Notice that the **o365Service.getContacts** function returns hard-coded contact data. This will be converted to real contacts from Office 365 by the end of the exercise.
 
 5. Return to the command prompt (still set to the project start folder) and start a static web server by typing **superstatic --port 8000**.
 
 		superstatic --port 8000
 
-	![superstatic](http://i.imgur.com/T65B1pQ.png)
-
+	![superstatic](images/Mod2_ss.png?raw=true "superstatic")
+	
+	_superstatic_
+	
 6. Open a browser and navigate to **http://localhost:8000**. Get a feel for the flow of the application. It has two views...a **login** view and a **list** view that display contacts. Currently, the application is hard-coded, so the sign-in button on the login form just switches views to a hard-coded list of contacts.
 
-	![Hard-coded contacts](http://i.imgur.com/rfym9Ce.png)
-
+	![Hard-coded contacts](images/Mod2_ContactsHardCode.png?raw=true "Hard-coded contacts")
+	
+	_Hard-coded contacts_
+	
 7. Let's convert the application to leverage the application registration we completed in Task 1. First, stop the static web server by typing **Ctrl-C** in the command window.
 
 8. Next, we need to import the **Azure Active Directory Authentication Library** (**ADAL**) using **Bower**. On the command prompt type bower install adal-angular --save.
@@ -199,8 +209,10 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 17. Open a browser and navigate to **http://localhost:8000**. This time when you click on the **Sign-in with Office 365** button, the application should force you to sign-in with Office 365. This is because the contacts route requires Azure AD Login (via **requireADLogin** attribute).
 
-	![Sign-in](http://i.imgur.com/ySOA4aM.png)
-
+	![Sign-in](images/Mod2_SignIn.png?raw=true "Sign-in")
+	
+	_Sign-in_
+	
 18. You have successfully implemented Azure AD authentication using **ADAL.js**. In the next exercise, you will replace the hard-coded contact data with real contacts in the **Microsoft Graph**.
 
 
@@ -270,31 +282,42 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 1. Open a browser and navigate to [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com "https://apps.dev.microsoft.com").
 
-	![Application Registration Portal](http://i.imgur.com/Cdb2C2X.png)
-
+	![Application Registration Portal](images/Mod2_AppPortal.png?raw=true "Application Registration Portal")
+	
+	_Application Registration Portal_
+	
 2. Click the **Sign in with Microsoft** button.
 
 3. On the **Sign In** screen, you can use either an organization account (ex: Office 365) or Microsoft account (ex: Outlook.com, Live.com, etc). For this exercise, use your **Office 365 account** or the one that was assigned to you.
 
 4. Once you sign into the Application Registration Portal, click the **Add an app** to launch the **New Application Registration** dialog.
 
-	![New app registration dialog](http://i.imgur.com/v86YniX.png)
-
+	![New app registration dialog](images/Mod2_AppRegV2.png?raw=true "New app registration dialog")
+	
+	_New app registration dialog_
+	
 5. Provide a **Name** for the new app and click the **Create application** button.
 
 6. On the new app confirmation screen, click the **Generate New Password** button to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you display it again.
 
-	![Generate secret](http://i.imgur.com/BVFaLlI.png)
-
+	![Generate secret](images/Mod2_Secret.png?raw=true "Generate secret")
+	
+	_Generate secret_
+	
 7. Once you have copied and closed the New password generated dialog,  copy the **Application Id** GUID.
 
 8. scroll down to the **Platforms** section and click the **Add Platform** button and then select **Web** for the new platform.
 
-	![Add platform](http://i.imgur.com/dDuhbU6.png)
-
+	![Add platform](images/Mod2_platforms.png?raw=true "Add platform")
+	
+	_Add platform_
+	
 9. When the Add Platform dialog closes, enter the **Redirect URI** of **https://localhost:44300/signin-oidc** and then click the Save button at the bottom of the screen.
 
-	![app redirect](http://i.imgur.com/xvHUsRR.png)
+	![app redirect](images/Mod2_Redirect.png?raw=true "app redirect")
+	
+	_app redirect_
+	
 
 10. The v2.0 application is registered and ready to be used in the next tasks. If you have registered applications with Azure AD in the past, you will notice that no permissions needed to be pre-configured. The v2.0 model passes permission scopes in when requesting tokens. We will explore that more in the subsequent tasks.
 
@@ -307,15 +330,21 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 2. In the new project dialog select the **ASP.NET Web Application** template under the **Visual C#** > **Web** templates.
 
-	![New project 1](http://i.imgur.com/OQHXRDK.png)
+	![New project](images/Mod2_NewProj1.png?raw=true "New project")
+	
+	_New project_
 
 3. On the **New ASP.NET Project** dialog select **Web Application** in the **ASP.NET 5 Templates** section and then click the **Change Authentication** button.
 
-	![web project type](http://i.imgur.com/BMV6N8X.png)
+	![Web project type](images/Mod2_NewProj2.png?raw=true "Web project type")
+	
+	_Web project type_
 
 4. On the **Change Authentication** dialog, change the option to **No Authentication**. You will manually add authentication using an OWIN startup class.
 
-	![No Auth](http://i.imgur.com/A0yHUok.png)
+	![No Auth](images/Mod2_NoAuth.png?raw=true "No Auth")
+	
+	_No Auth_
 
 5. Once you have changed the authentication, click the **OK** button to provision the new project using the ASP.NET 5 template.
 
@@ -334,7 +363,9 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 9. Check the **Enable SSL** checkbox and change the **App URL** to **https://localhost:44300** before saving and closing the project properties screen.
 
-	![Project Properties](http://i.imgur.com/hsjqHXj.png)
+	![Project Properties](images/Mod2_ProjProp.png?raw=true "Project Properties")
+	
+	_Project Properties_
 
 10. Next, open the appsettings.json file and add a AzureAD section with config values for AppId, AppPassword, Tenant, Authority, and GraphResourceId.
 
@@ -432,11 +463,15 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 20. It is time to test your work. Press **F5** or start the debugger. When the application loads, it should bring up a sign-in screen that you can provide either a Office 365 or Microsoft (MSA) account on. After sign-in, you will be presented with a consent screen to authorize the app the permission scopes passed in. This consent screen will look slightly different if using an MSA account, but it achieves the same thing.
 
-	![Consent](http://i.imgur.com/O19iUIq.png)
+	![Consent](images/Mod2_Consent.png?raw=true "Consent")
+	
+	_Consent_
 
 21. After consenting the application, the browser should return to the application. Did it work? Yes, as long as you are on the default view. In the next Task, you will mark REST calls into the **Microsoft Graph**.
 
-	![Authenticated](http://i.imgur.com/FmCsQ91.png)
+	![Authenticated](images/Mod2_Authenticated.png?raw=true "Authenticated")
+	
+	_Authenticated_
 	
 
 <a name="Ex2Task3"></a>
@@ -495,7 +530,9 @@ I the final exercise of this module, you will use a v2.0 access token and call i
 
 6. It is time to test your work. Press **F5** or start the debugger. After signing into the application, the Home view should display contacts for the user that signed in. This works with NO code change between Office 365 and Microsoft (MSA) accounts!
 
-	![Completed solution](http://i.imgur.com/snyyHPJ.png)
+	![Completed solution](images/Mod2_complete.png?raw=true "Completed solution")
+	
+	_Completed solution_
 
 <a name="Summary" />
 ## Summary ##

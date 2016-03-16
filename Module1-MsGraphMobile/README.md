@@ -505,7 +505,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 
 9. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. The groups will initially load with the generic group.png image, but will later load the actual group photos from Office 365.
 
-	![Groups with group photos loaded through Microsoft Graph](images/Mod1_Debug3.png.png?raw=true "Groups with group photos loaded through Microsoft Graph")
+	![Groups with group photos loaded through Microsoft Graph](images/Mod1_Debug3.png?raw=true "Groups with group photos loaded through Microsoft Graph")
 	
 	_Groups with group photos loaded through Microsoft Graph_
 	
