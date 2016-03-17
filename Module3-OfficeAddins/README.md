@@ -59,7 +59,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 <a name="Ex1Task1"></a>
 #### Task 1 - Converting the Web Application ####
 
-In this Task, you will get the starter project up and running, then convert it to host and Office Add-in. Specifically, you will convert it to host a Mail Add-in activated when you read messages.
+In this task, you will get the starter project up and running, then convert it to host and Office Add-in. Specifically, you will convert it to host a Mail Add-in activated when you read messages.
 
 1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
 
@@ -136,12 +136,12 @@ In this Task, you will get the starter project up and running, then convert it t
 	}
 	````
 
-16. The conversion is complete and this Task is complete. You could try debugging the add-in, but right now the add-in will display a blank page. You will add functionality in **Task 2**.
+16. The conversion is complete and this task is complete. You could try debugging the add-in, but right now the add-in will display a blank page. You will add functionality in **Task 2**.
 
 <a name="Ex1Task2"></a>
 #### Task 2 - Leveraging Office.js in Outlook ####
 
-Office Add-ins can use just about any web technology (minus ActiveX). The become really powerful when combined with back-end services. In this Task, you will modify the add-in to leverage Office.js and communicate with some back-end REST services that are already hosted in the solution.
+Office Add-ins can use just about any web technology (minus ActiveX). The become really powerful when combined with back-end services. In this task, you will modify the add-in to leverage Office.js and communicate with some back-end REST services that are already hosted in the solution.
 
 1. Open the **Agave.cshtml** file located at **Views > Home** in the **MailCRM** web project.
 
@@ -308,7 +308,7 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 Visual Studio handles the entire add-in hosting, deployment, and debugging with one simple button. For non-Visual Studio developers, it is important to understand how to perform these tasks. In Task 2 of Exercise 2, you will host the web application, deploy the add-in manifest, and test the add-in in Office.
 
-1. Return to the command prompt you used in the previous Task. It should be opened to the project folder, but if no, change directories to that location.
+1. Return to the command prompt you used in the previous task. It should be opened to the project folder, but if no, change directories to that location.
 
 2. Next, **gulp serve-static** in command window to allow a Gulp task to host the web application on port **8443**.
 
