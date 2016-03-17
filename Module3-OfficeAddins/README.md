@@ -35,23 +35,6 @@ The following is required to complete this module:
 
 > **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.
 
-<a name="Setup" />
-### Setup ###
-In order to run the exercises in this module, you'll need to set up your environment first.
-
-1. Open Windows Explorer and browse to the module's **Source** folder.
-2. Right-click **Setup.cmd** and select **Run as administrator** to launch the setup process that will configure your environment and install the Visual Studio code snippets for this module.
-3. If the User Account Control dialog box is shown, confirm the action to proceed.
-
-> **Note:** Make sure you've checked all the dependencies for this module before running the setup.
-
-<a name="CodeSnippets" />
-### Using the Code Snippets ###
-
-Throughout the module document, you'll be instructed to insert code blocks. For your convenience, most of this code is provided as Visual Studio Code Snippets, which you can access from within Visual Studio 2015 to avoid having to add it manually.
-
->**Note**: Each exercise is accompanied by a starting solution located in the **Begin** folder of the exercise that allows you to follow each exercise independently of the others. Please be aware that the code snippets that are added during an exercise are missing from these starting solutions and may not work until you've completed the exercise. Inside the source code for an exercise, you'll also find an **End** folder containing a Visual Studio solution with the code that results from completing the steps in the corresponding exercise. You can use these solutions as guidance if you need additional help as you work through this module.
-
 ---
 
 <a name="Exercises" />
@@ -80,7 +63,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 In this Task, you will get the starter project up and running, then convert it to host and Office Add-in. Specifically, you will convert it to host a Mail Add-in activated when you read messages.
 
-1. Open Windows Explorer and browse to the module's **Source > Ex1 > Begin** folder.
+1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
 
 2. The solution contains two projects. **MailCRM** is an ASP.NET MVC app that hosts all the web components of the solution. **MailCRM.Data** is a data project the defined the data model for the solution. You need to publish the database to **LocalDB**. Right-click the **MailCRM.Data** project and select **Publish**.
 
@@ -148,10 +131,12 @@ In this Task, you will get the starter project up and running, then convert it t
 
 15. The conversion is almost complete, but the new **Agave** view doesn't have a matching activity in the **HomeController**. Open the **HomeContoller.cs** file in the **Controllers** folder of the **MailCRM** project. Add the following activity inside the **HomeController** class.
 
-		public ActionResult Agave()
-        {
-            return View();
-        }
+	````C#
+	public ActionResult Agave()
+	{
+		return View();
+	}
+	````
 
 16. The conversion is complete and this Task is complete. You could try debugging the add-in, but right now the add-in will display a blank page. You will add functionality in **Task 2**.
 
@@ -164,55 +149,63 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 
 2. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for).
 
-        Office.initialize = function (reason) {
-            $(document).ready(function () {
-                //look up the sender
-                var sender = Office.context.mailbox.item.sender;
+	````JavaScript
+	Office.initialize = function (reason) {
+		$(document).ready(function () {
+			 //look up the sender
+			 var sender = Office.context.mailbox.item.sender;
+	````
 
 3. Using the sender, you should perform a **REST** **GET** using the endpoint syntax /api/Comments?email=*{sender_email}*. Replace **sender_email** with email address of the sender, which can be found at **sender.emailAddress**. The **o365-httpget** code snippet can help you add a **JQuery** script block for performing an **HTTP** **GET**.
 
-        $.ajax({
-        	url: "/api/Comments?email=" + sender.emailAddress,
-            method: "GET",
-            dataType: "json",
-            success: function (data) {
-            
-            }
-        });
+	````JavaScript
+	$.ajax({
+	url: "/api/Comments?email=" + sender.emailAddress,
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+		
+		}
+	});
+	````
 
 4. Next, add some additional script to loop through the data returned from the REST service and build the user interface in the **list** element. While you are at it, set the **header** element to the **sender.emailAddress** you retrieved from **Office.js** in **Step 2**.
 
-		$("#header").html("Comments for " + sender.emailAddress);
-        $.ajax({
-        	url: "/api/Comments?email=" + sender.emailAddress,
-            method: "GET",
-            dataType: "json",
-            success: function (data) {
-            	var html = "";
-				$(data).each(function (i, e) {
-					html += "<li class='list-group-item'>" + e.CommentText + "</li>";
-				})
-				$("#list").html(html);
-            }
-        });
+	````JavaScript
+	$("#header").html("Comments for " + sender.emailAddress);
+	  $.ajax({
+		url: "/api/Comments?email=" + sender.emailAddress,
+			method: "GET",
+			dataType: "json",
+			success: function (data) {
+				var html = "";
+			$(data).each(function (i, e) {
+				html += "<li class='list-group-item'>" + e.CommentText + "</li>";
+			})
+			$("#list").html(html);
+			}
+	  });
+	````
 
 5. Finally, add some script to **POST** new comments when the **submit** element is clicked. You can use the **o365-httppost** code snippet to generate a **JQuery** **HTTP** **POST** block and use the **/api/Comments** REST endpoint.
 
-		$("#submit").click(function () {
-        	$.ajax({
-            	url: "/api/Comments",
-               	method: "POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: JSON.stringify({ ContactEmail: sender.emailAddress, CommentText: $("#comment").val() }),
-                success: function (data) {
-                	var html = $("#list").html();
-                    html = "<li class='list-group-item'>" + $("#comment").val() + "</li>" + html;
-                    $("#list").html(html);
-                    $("#comment").val("");
-                }
-            });
-        });
+	````JavaScript
+	$("#submit").click(function () {
+		$.ajax({
+				url: "/api/Comments",
+					method: "POST",
+				 contentType: "application/json; charset=utf-8",
+				 dataType: "json",
+				 data: JSON.stringify({ ContactEmail: sender.emailAddress, CommentText: $("#comment").val() }),
+				 success: function (data) {
+					var html = $("#list").html();
+					  html = "<li class='list-group-item'>" + $("#comment").val() + "</li>" + html;
+					  $("#list").html(html);
+					  $("#comment").val("");
+				 }
+			});
+	  });
+	````
 
 6. To test the add-in, press **F5** or start the debugger. If you are prompted to **Connect to Exchange email account**, provide the Office 365 credentials that were provided to you.
 
@@ -228,7 +221,7 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 
 8. With the add-in expanded, you can add new comments for a contact by typing in the text box and clicking submit.
 
-![Mail Add-in](Images/Mod3_Mail2.png?raw=true "Mail Add-in")
+	![Mail Add-in](Images/Mod3_Mail2.png?raw=true "Mail Add-in")
     
     _Mail Add-in_
 
@@ -273,19 +266,27 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 2. Change directories the C:\Project folder.
 
-		cd C:\Projects
+	````CMD
+	cd C:\Projects
+	````
 
 3. Create a new directory for your Office Add-in named **ContactCleanup**
 
-		mkdir ContactCleanup
+	````CMD
+	mkdir ContactCleanup
+	````
 
 4. Change directories to the new directory.
 
-		cd ContactCleanup
+	````CMD
+	cd ContactCleanup
+	````
 
 5. Start the **Yeoman generator for Office Add-ins** by typing **yo office**.
 
-		yo office
+	````CMD
+	yo office
+	````
 
 6. The **Yeoman generator for Office Add-ins** is a command-line version of the new Office add-in wizard in Visual Studio. It will walk you though a few questions. Provide the following responses:
 
@@ -300,7 +301,9 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 7. After providing the details above, Yeoman will use a number of tools to generate a starter project that will be used throughout this exercise. When it is complete, type the following to open the project in Visual Studio Code.
 
-		Code .
+	````CMD
+	Code .
+	````
 
 <a name="Ex2Task2"></a>
 #### Task 2 - Explore Deploy/Debug Scenarios ####
@@ -311,7 +314,9 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
 2. Next, **gulp serve-static** in command window to allow a Gulp task to host the web application on port **8443**.
 
-		gulp serve-static
+	````CMD
+	gulp serve-static
+	````
 
 	![Gulp serve-static](Images/Mod3_Gulp.png?raw=true "Gulp serve-static")
     
@@ -456,15 +461,19 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 
 3. After the variable **self** is defined, add properties to **self** for **clientId**, **tenant**, and **redirectUrl** with values from the app registration you performed in the previous task (**tenant** will be the domain of the Office 365 account you are using such as sometenant.onmicrosoft.com).
 
-    	self.clientId = "31b239c4-bd0e-4225-89e0-d59b7c52155b";
-    	self.tenant = "rzdemos.com";
-    	self.redirectUri = "https://localhost:8443/app/auth/auth.html";
+	````JavaScript
+	self.clientId = "31b239c4-bd0e-4225-89e0-d59b7c52155b";
+	self.tenant = "rzdemos.com";
+	self.redirectUri = "https://localhost:8443/app/auth/auth.html";
+	````
 
 4. Next, open a command prompt to the location of your Office add-in project you started with Yeoman. If you need to stop the Gulp task, press Ctrl-C.
 
 5. Install the **adal-angular** module by typing the command listed below in the command prompt:
 
-		bower install adal-angular --save
+	````CMD
+	bower install adal-angular --save
+	````
 
 6. Return to **Visual Studio Code** and create a new folder named **auth** inside the **app** folder (ex: **app/auth**).
 
@@ -472,80 +481,90 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 
 8. **auth.html** will use **ADAL.js** to authenticate users of your app. Use the code snippet **o365-authjs** to complete this file by typing **o365-authjs** and pressing enter. The snippet will add script to check if the user is authenticated. If so, it will get an **access token** for the **Microsoft Graph** and return it to the parent (later in the exercise you will launch this page in a dialog). If the user isn't authenticated, it will force them through a sign-in and consent flow with Azure AD. Below is main block that handles that.
 
-		var user = authContext.getCachedUser();
-                
-        // Check if the user is cached
-        if (!user) {
-        	authContext.login();
-        } 
-        else {
-        	// Get access token for graph
-        	authContext.acquireToken("https://graph.microsoft.com", function (error, token) {
-        		// Check for success
-            	if (error || !token) {
-            		// Handle ADAL Error
-                	response.status = "error";
-                    response.accessToken = null;
-                    Office.context.ui.messageParent(JSON.stringify(response));
-                } 
-                else {
-                	// Return the roken to the parent
-                    response.status = "success";
-                    response.accessToken = token;
-                    Office.context.ui.messageParent(JSON.stringify(response));
-                }
-            });
-        }
+	````C#
+	var user = authContext.getCachedUser();
+				 
+	  // Check if the user is cached
+	  if (!user) {
+		authContext.login();
+	  } 
+	  else {
+		// Get access token for graph
+		authContext.acquireToken("https://graph.microsoft.com", function (error, token) {
+			// Check for success
+				if (error || !token) {
+					// Handle ADAL Error
+					response.status = "error";
+					  response.accessToken = null;
+					  Office.context.ui.messageParent(JSON.stringify(response));
+				 } 
+				 else {
+					// Return the roken to the parent
+					  response.status = "success";
+					  response.accessToken = token;
+					  Office.context.ui.messageParent(JSON.stringify(response));
+				 }
+			});
+	  }
+	````
 
-9. Next, let's modify the main user interface of the add-in. Open the **home.html** file located in the **app > home** folder and simplify the body to look like the following.
+9. Next, let's modify the main user interface of the add-in. Open the **home.html** file located in the **app\home** folder and simplify the body to look like the following.
 
-        <body>
-            <div id="content-header">
-                <div class="padding">
-                    <h1>Contact Clean-up</h1>
-                </div>
-            </div>
-            <div id="content-main">
-                <div class="padding">
-					<h3>Status: <span id="status">Disconnected</span></h3>
-                    <button id="btnSignin">Sign-in with Office 365</button>
-                    <button id="btnSave" style="display: none;" disabled="true">Save Changes</button>
-                </div>
-            </div>
-        </body>
+	````HTML
+	<body>
+		<div id="content-header">
+			 <div class="padding">
+				  <h1>Contact Clean-up</h1>
+			 </div>
+		</div>
+		<div id="content-main">
+			 <div class="padding">
+			<h3>Status: <span id="status">Disconnected</span></h3>
+				  <button id="btnSignin">Sign-in with Office 365</button>
+				  <button id="btnSave" style="display: none;" disabled="true">Save Changes</button>
+			 </div>
+		</div>
+	</body>
+	````
 
-10. Open the **home.js** file located in the **app > home** folder and modify the **(document).ready** script as seen below. This script loads the **auth.html** page in a dialog using a new **Dialog API** when the **btnSignin** element is clicked.
+10. Open the **home.js** file located in the **app\home** folder and modify the **(document).ready** script as seen below. This script loads the **auth.html** page in a dialog using a new **Dialog API** when the **btnSignin** element is clicked.
 
-	    var _dlg; // global pointer to the dialog
-	    
-	    // The initialize function must be run each time a new page is loaded
-	    Office.initialize = function(reason){
-	        $(document).ready(function(){
-	            app.initialize();
-	
-	            $("#btnSignin").click(function () {
-	                var url = "https://localhost:8443/app/auth/auth.html";
-	                
-	                Office.context.ui.displayDialogAsync(url, { height: 40, width: 40, requireHTTPS: true }, function (result) {
-	                    _dlg = result.value;
-	                    _dlg.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogMessageReceived, dialogMessageReceived);
-	                });
-	            });
-	        });
-	    };
+	````JavaScript
+	var _dlg; // global pointer to the dialog
+
+	// The initialize function must be run each time a new page is loaded
+	Office.initialize = function(reason){
+	  $(document).ready(function(){
+			app.initialize();
+
+			$("#btnSignin").click(function () {
+				 var url = "https://localhost:8443/app/auth/auth.html";
+				 
+				 Office.context.ui.displayDialogAsync(url, { height: 40, width: 40, requireHTTPS: true }, function (result) {
+					  _dlg = result.value;
+					  _dlg.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogMessageReceived, dialogMessageReceived);
+				 });
+			});
+	  });
+	};
+	````
 
 11. _**dlg.addEventHandler** is adding an event handler to listen for messages sent from the dialog. Add a new **dialogMessageReceived** function with a **result** parameter to satisfy this handler.
 
-		function dialogMessageReceived(result) {
-			if (result && JSON.parse(result.message).status === "success") 
-            	$("#status").html("Connected");
-			else
-				$("#status").html("Authentication Failed");
-		};
+	````JavaScript
+	function dialogMessageReceived(result) {
+		if (result && JSON.parse(result.message).status === "success") 
+				$("#status").html("Connected");
+		else
+			$("#status").html("Authentication Failed");
+	};
+	````
 
 12. You should be ready to test authentication now. If needed, start the web server by typing **gulp serve-static** in a command prompt.
 
-		gulp serve-static
+	````CMD
+	gulp serve-static
+	````
 
 13. Test the add-in the **Excel 2016** client. When you click on the Sign-in with Office 365 button, the add-in should launch a dialog for you to sign-in and consent to the app permissions.
 
@@ -566,62 +585,66 @@ In the final task, you will use the **access token** returned from the dialog an
 
 1. Modify the **dialogMessageReceived** function to call into the Microsoft Graph. Notice the **Authorization** header we are setting on the request to "**Bearer** " plus the **access token** returned from the dialog. This is required to successfully get data back from the Microsoft Graph.
 
-	    function dialogMessageReceived(result) {
-	        if (result && JSON.parse(result.message).status === "success") {
-	            $("#status").html("Connected");
-	            
-	            //close the dialog and call into Graph
-	            _dlg.close();
-	            var _token = JSON.parse(result.message);
-	            $.ajax({
-	                url: "https://graph.microsoft.com/v1.0/me/contacts",
-	                headers: {
-	                    "accept": "application/json",
-	                    "Authorization": "Bearer " + _token.accessToken
-	                },
-	                success: function (data) {
-						//DO STUFF WITH DATA
-					}
-				});
+	````JavaScript
+	function dialogMessageReceived(result) {
+	  if (result && JSON.parse(result.message).status === "success") {
+			$("#status").html("Connected");
+			
+			//close the dialog and call into Graph
+			_dlg.close();
+			var _token = JSON.parse(result.message);
+			$.ajax({
+				 url: "https://graph.microsoft.com/v1.0/me/contacts",
+				 headers: {
+					  "accept": "application/json",
+					  "Authorization": "Bearer " + _token.accessToken
+				 },
+				 success: function (data) {
+				//DO STUFF WITH DATA
 			}
-			else
-				$("#status").html("Authentication Failed");
-		};
+		});
+	}
+	else
+		$("#status").html("Authentication Failed");
+	};
+	````
 
 2. Inside the **success** callback, add script to loop through the returned contacts and write them to Excel using the **Office.context.document.setSelectedDataAsync** function.
 
-		success: function (data) {
-        	var _officeTable = new Office.TableData();
-            _officeTable.headers = ["First", "Last", "PrimaryEmail", "Company", "WorkPhone", "MobilePhone"];
-                    
-            $(data.value).each(function (i, e) {
-            	var _item = [
-                	e.givenName,
-                    e.surname,
-                    (e.emailAddresses.length > 0) ? e.emailAddresses[0].address : "",
-                    (e.companyName) ? e.companyName : "",
-                    (e.businessPhones.length > 0) ? e.businessPhones[0] : "",
-                    (e.mobilePhone) ? e.mobilePhone : ""
-				];
+	````JavaScript
+	success: function (data) {
+		var _officeTable = new Office.TableData();
+			_officeTable.headers = ["First", "Last", "PrimaryEmail", "Company", "WorkPhone", "MobilePhone"];
+					  
+			$(data.value).each(function (i, e) {
+				var _item = [
+					e.givenName,
+					  e.surname,
+					  (e.emailAddresses.length > 0) ? e.emailAddresses[0].address : "",
+					  (e.companyName) ? e.companyName : "",
+					  (e.businessPhones.length > 0) ? e.businessPhones[0] : "",
+					  (e.mobilePhone) ? e.mobilePhone : ""
+			];
 
-            	_officeTable.rows.push(_item);
-			});
+				_officeTable.rows.push(_item);
+		});
 
-			//toggle the buttons and set the data into Excel
-            $("#btnSignin").hide();
-            $("#btnSave").show();
-            Office.context.document.setSelectedDataAsync(_officeTable, 
-				{
-					coercionType: Office.CoercionType.Table,
-                    cellFormat: [{ 
-						cells: Office.Table.All, 
-						format: { width: "auto fit" } 
-					}]
-                }, 
-				function (asyncResult) {
-					//TODO: Handle the result
-				}
-			);
+		//toggle the buttons and set the data into Excel
+			$("#btnSignin").hide();
+			$("#btnSave").show();
+			Office.context.document.setSelectedDataAsync(_officeTable, 
+			{
+				coercionType: Office.CoercionType.Table,
+					  cellFormat: [{ 
+					cells: Office.Table.All, 
+					format: { width: "auto fit" } 
+				}]
+				 }, 
+			function (asyncResult) {
+				//TODO: Handle the result
+			}
+		);
+	````
 
 3. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Connects** using the **Microsoft Graph** and write them to a table in Excel.
 
