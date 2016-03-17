@@ -44,7 +44,7 @@ This module includes the following exercises:
 
 1. [Getting Familiar with the Solution](#Exercise1)
 2. [Registering the App with Azure AD](#Exercise2)
-3. [Implementing the ADAL Plug-in for Authentication](#Exercise3)
+3. [Implementing the ADAL plug-in for Authentication](#Exercise3)
 4. [Using Microsoft Graph to load Office 365 Groups](#Exercise4)
 
 Estimated time to complete this module: **60 minutes**
@@ -59,7 +59,7 @@ In this module you will build a native mobile application using the **Apache Cor
 This exercise uses a starter project with basic project scaffolding pre-configured. The solution uses the **Ionic Framework** and **AngularJS** to facilitate the app design and functionality. Ionic is an open source front-end SDK that makes it incredibly easy to build beautiful and interactive mobile apps with Apache Cordova. You do not need any prior experience with Apache Cordova, Ionic, or AngularJS to complete this module.
 
 <a name="Ex1Task1"></a>
-#### Task 1 - Explore the Solution ####
+#### Task 1 - Exploring the Solution ####
 In this tasks you will explore the starter solution in Visual Studio and get familiar with the project structure of a project leveraging **Apache Cordova**, **Ionic**, and **AngularJS**.
 
 1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
@@ -192,7 +192,7 @@ In this task, you will explore the debugging options for an Apache Cordova proje
 Now that you are familiar with the project structure, it's time to convert the application to authenticate against Azure Active Directory and call into the Microsoft Graph. In this exercise, you'll register an application in Azure AD and capture app details that will be used in subsequent exercises.
 
 <a name="Ex2Task1"></a>
-#### Task 1 - Register the App ####
+#### Task 1 - Registering the App ####
 
 In this task, you'll go through the steps of registering an app in Azure AD using the **Office 365 App Registration Tool**. You can also register apps in the **Azure Management Portal**, but the **Office 365 App Registration Tool** allows you to register applications without having access to the **Azure Management Portal**.
 
@@ -218,12 +218,12 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 	_App registration confirmation with Client ID_
 
 <a name="Exercise3"></a>
-### Exercise 3: Implementing the ADAL Plug-in for Authentication ###
+### Exercise 3: Implementing the ADAL plug-in for Authentication ###
 
 In this exercise, you'll take the application registration from Exercise 2 and leverage it with the Apache Cordova mobile app in Visual Studio. This involves adding the Azure Active Directory Authentication Library (ADAL) plug-in and writing some script against ADAL in our project.
 
 <a name="Ex3Task1"></a>
-#### Task 1 - Adding the ADAL Plugin ####
+#### Task 1 - Adding the ADAL plug-in ####
 
 In this task, you'll add the Azure Active Directory Authentication Library (ADAL) plug-in for Apache Cordova to the project.
 
@@ -295,7 +295,7 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 In this exercise, you'll take the token you acquired in Exercise 3 and use it to call into the Microsoft Graph to query data stored in Office 365. Specifically, you will query the new Office 365 groups and group photos.
 
 <a name="Ex4Task1"></a>
-#### Task 1 - Query Office 365 Groups with the Microsoft Graph ####
+#### Task 1 - Querying Office 365 Groups with the Microsoft Graph ####
 
 In this task, you'll replace the hard-coded groups with actual group data from Office 365 by calling the Microsoft Graph.
 
@@ -314,7 +314,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 				...
 	````
 
-3. Locate the **getGroups** function and update it to use **$http** to **GET** the current user's joined groups with the Microsoft Graph (**https://graph.microsoft.com/beta/me/joinedgroups**). This operation should be completed directly after the call to **getTokenForResource**.
+3. Locate the **getGroups** function and update it to use **http** to **GET** the current user's joined groups with the Microsoft Graph [graph.microsoft.com/beta/me/joinedgroups](https://graph.microsoft.com/beta/me/joinedgroups). This operation should be completed directly after the call to **getTokenForResource**.
 
 	````JavaScript
 	myappService.getGroups = function () {
