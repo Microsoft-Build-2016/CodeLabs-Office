@@ -32,8 +32,6 @@ The following is required to complete this module:
 
 [1]: https://www.visualstudio.com/products/visual-studio-community-vs
 
-> **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.
-
 ---
 
 <a name="Exercises" />
