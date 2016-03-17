@@ -562,5 +562,3 @@ By completing this module, you should have:
 - Explored both organizational and consumer scenarios for leveraging the Microsoft Graph
 - Built a client-side application that connect to the Microsoft Graph using an implicit flow
 - Developed a server-side application with the Microsoft Graph and converged authentication
-
-> **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.

@@ -414,5 +414,3 @@ By completing this module, you should have:
 - Manually registered an Office 365 Connector and used a webhook to send data into Office 365.
 - Connected an existing web application to Office 365 via Office 365 Connectors, including the addition of "Connect to Office 365" buttons, handling callbacks from Office 365, and sending data into Office 365 via webhooks.
 - Skype-enabled and existing web application using the Skype Web SDK.
-
-> **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.

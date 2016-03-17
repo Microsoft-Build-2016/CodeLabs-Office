@@ -518,5 +518,3 @@ By completing this module, you should have:
 - Leveraged the Azure Active Directory Authentication Library (ADAL) plug-in for Apache Cordova to easily authenticate mobile users against Azure AD
 - Created and tested a mobile app that connects to the Microsoft Graph and works on most modern mobile platforms using Apache Cordova
 - Worked with Office 365 group data and photos
-
-> **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.

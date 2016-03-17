@@ -672,5 +672,3 @@ By completing this module, you should have:
 - Converted existing web applications to host Office Add-ins
 - Leveraged open source tools to build Office Add-ins outside of Visual Studio
 - Authenticated and connected to the Microsoft Graph from and Office Add-in
-
-> **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.
