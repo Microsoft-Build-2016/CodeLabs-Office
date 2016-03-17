@@ -59,13 +59,13 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
 
 1. Open a browser and navigate to the **Office 365 App Registration Tool** at **[http://dev.office.com/app-registration](http://dev.office.com/app-registration "http://dev.office.com/app-registration")**.
 
-1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
+1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
 	![App registration sign-in](Images/Mod2_AppRegSignin.png?raw=true "App registration sign-in")
 
 	_App registration sign-in_
 
-1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
+1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click **Register App**.
 
 	- **App name**: **Angular Contacts**
 	- **App type**: **Web**
@@ -202,7 +202,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 	superstatic --port 8000
 	````
 
-1. Open a browser and navigate to **http://localhost:8000**. This time when you click on the **Sign-in with Office 365** button, the application should force you to sign-in with Office 365. This is because the contacts route requires Azure AD Login (via **requireADLogin** attribute).
+1. Open a browser and navigate to **http://localhost:8000**. This time when you click **Sign-in with Office 365**, the application should force you to sign-in with Office 365. This is because the contacts route requires Azure AD Login (via **requireADLogin** attribute).
 
 	![Sign-in](Images/Mod2_SignIn.png?raw=true "Sign-in")
 
@@ -285,19 +285,19 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 	_Application Registration Portal_
 
-1. Click the **Sign in with Microsoft** button.
+1. Click **Sign in with Microsoft**.
 
 1. On the **Sign In** screen, you can use either an organization account (ex: Office 365) or Microsoft account (ex: Outlook.com, Live.com, etc). For this exercise, use your **Office 365 account** or the one that was assigned to you.
 
-1. Once you sign into the Application Registration Portal, click the **Add an app** to launch the **New Application Registration** dialog.
+1. Once you sign into the Application Registration Portal, click **Add an app** to launch the **New Application Registration** dialog.
 
 	![New app registration dialog](Images/Mod2_AppRegV2.png?raw=true "New app registration dialog")
 
 	_New app registration dialog_
 
-1. Provide a **Name** for the new app and click the **Create application** button.
+1. Provide a **Name** for the new app and click **Create application**.
 
-1. On the new app confirmation screen, click the **Generate New Password** button to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you display it again.
+1. On the new app confirmation screen, click **Generate New Password** to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you display it again.
 
 	![Generate secret](Images/Mod2_Secret.png?raw=true "Generate secret")
 
@@ -305,13 +305,13 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 1. Once you have copied and closed the New password generated dialog,  copy the **Application Id** GUID.
 
-1. scroll down to the **Platforms** section and click the **Add Platform** button and then select **Web** for the new platform.
+1. scroll down to the **Platforms** section and click **Add Platform**, then select **Web** for the new platform.
 
 	![Add platform](Images/Mod2_platforms.png?raw=true "Add platform")
 
 	_Add platform_
 
-1. When the Add Platform dialog closes, enter the **Redirect URI** of **https://localhost:44300/signin-oidc** and then click the Save button at the bottom of the screen.
+1. When the Add Platform dialog closes, enter the **Redirect URI** of **https://localhost:44300/signin-oidc** and then click **Save** at the bottom of the screen.
 
 	![app redirect](Images/Mod2_Redirect.png?raw=true "app redirect")
 
@@ -333,7 +333,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 	_New project_
 
-1. On the **New ASP.NET Project** dialog select **Web Application** in the **ASP.NET 5 Templates** section and then click the **Change Authentication** button.
+1. On the **New ASP.NET Project** dialog select **Web Application** in the **ASP.NET 5 Templates** section and then click **Change Authentication**.
 
 	![Web project type](Images/Mod2_NewProj2.png?raw=true "Web project type")
 
@@ -345,7 +345,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 	_No Auth_
 
-1. Once you have changed the authentication, click the **OK** button to provision the new project using the ASP.NET 5 template.
+1. Once you have changed the authentication, click **OK** to provision the new project using the ASP.NET 5 template.
 
 1. To get started in the new project, import the following NuGet packages using the Package Manager Console.
 
