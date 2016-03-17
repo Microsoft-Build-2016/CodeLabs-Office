@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Mobile Development and the Microsoft Graph #
 
 ---
@@ -41,9 +41,9 @@ The following is required to complete this module:
 This module includes the following exercises:
 
 1. [Get Familiar with Solution](#Exercise1)
-2. [Register App with Azure AD](#Exercise2)
-3. [Implement ADAL Plug-in for Authentication](#Exercise3)
-4. [Use Microsoft Graph to load Office 365 Groups](#Exercise4)
+1. [Register App with Azure AD](#Exercise2)
+1. [Implement ADAL Plug-in for Authentication](#Exercise3)
+1. [Use Microsoft Graph to load Office 365 Groups](#Exercise4)
 
 Estimated time to complete this module: **60 minutes**
 
@@ -62,17 +62,17 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 
 1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
 
-2. Double-click the solution file (**MobileGroupExplorer.sln**) to open the solution in **Visual Studio Community 2015**.
+1. Double-click the solution file (**MobileGroupExplorer.sln**) to open the solution in **Visual Studio Community 2015**.
 
-3. Bring up **Solution Explorer** to familiarize yourself with the project scaffolding.
+1. Bring up **Solution Explorer** to familiarize yourself with the project scaffolding.
 
 	![Starter project in Solution Explorer](Images/Mod1_SlnExplorer.png?raw=true "Starter project in Solution Explorer")
 	
 	_Starter project in Solution Explorer_
 	
-4. Open and explore the **config.xml** file, which contains the configuration for the app, including app details (name, icons, splash screens) and plug-ins. Click on the different links in the left navigation to get an idea of the different configuration settings available.
+1. Open and explore the **config.xml** file, which contains the configuration for the app, including app details (name, icons, splash screens) and plug-ins. Click on the different links in the left navigation to get an idea of the different configuration settings available.
 
-5. The **www** folder contains all the web artifacts that make up the user interface of an Apache Cordova application. Expand this folder and open the **Index.html** file. This application is considered a **Single-Page Application** (**SPA**). A SPA displays a single HTML page (**Index.html**) in which partial views are dynamically loaded into. In this application, the dynamic partial views are loaded into the **ion-nav-view** directive on **Line 16**.
+1. The **www** folder contains all the web artifacts that make up the user interface of an Apache Cordova application. Expand this folder and open the **Index.html** file. This application is considered a **Single-Page Application** (**SPA**). A SPA displays a single HTML page (**Index.html**) in which partial views are dynamically loaded into. In this application, the dynamic partial views are loaded into the **ion-nav-view** directive on **Line 16**.
 
 	````HTML
 	<body>
@@ -87,9 +87,9 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 		</div>
 	````
 
-6. The partial views are located under **www\app\templates**.
+1. The partial views are located under **www\app\templates**.
 
-7. Open and explore the **index.js** file located under **www\scripts**. This is the default script file that the Apache Cordova project template includes. It subscribes to device events such as **deviceready**, **pause**, and **resume**. On **Line 18**, we are attaching an **AngularJS** module named to **myapp** to the **Index.html** page (also called "**bootstrapping**" the module).
+1. Open and explore the **index.js** file located under **www\scripts**. This is the default script file that the Apache Cordova project template includes. It subscribes to device events such as **deviceready**, **pause**, and **resume**. On **Line 18**, we are attaching an **AngularJS** module named to **myapp** to the **Index.html** page (also called "**bootstrapping**" the module).
 
 	````JavaScript
 	(function () {
@@ -109,7 +109,7 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 		};
 	````
 
-8. Most of the app functionality is contained in the **services.js**, **controllers.js**, and **app.js** files in the **www\app** folder. Let's start by opening and exploring the **services.js** file. This module  (**myapp.services**) defines a **factory** which provides persistent data and functionality across the app. Notice right now this factory has group data hard-coded. By the end of the module, this will be dynamic data queried from the **Microsoft Graph**.
+1. Most of the app functionality is contained in the **services.js**, **controllers.js**, and **app.js** files in the **www\app** folder. Let's start by opening and exploring the **services.js** file. This module  (**myapp.services**) defines a **factory** which provides persistent data and functionality across the app. Notice right now this factory has group data hard-coded. By the end of the module, this will be dynamic data queried from the **Microsoft Graph**.
 
 	````JavaScript
 	var groups = [
@@ -128,9 +128,9 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 	};
 	````
 
-9. Open and explore the **controllers.js** file located under **www\app**. **Ionic** and **AngularJS** make use of a **Model**/**View**/**Controller** (**MVC**) architecture, and this module (**myapp.controllers**) contains all the controllers for the application. Notice controllers for **appCtrl** and **homeCtrl**.
+1. Open and explore the **controllers.js** file located under **www\app**. **Ionic** and **AngularJS** make use of a **Model**/**View**/**Controller** (**MVC**) architecture, and this module (**myapp.controllers**) contains all the controllers for the application. Notice controllers for **appCtrl** and **homeCtrl**.
 
-10. Open and explore the **app.js** file located under **www\app**. This file defines the primary module (**myapp**) for the application. **AngularJS** make heavy use of **dependency injection**. The brackets following the module name defines the other modules **myapp** is dependent on, including **Ionic**, **myapp.controllers**, and **myapp.services**.
+1. Open and explore the **app.js** file located under **www\app**. This file defines the primary module (**myapp**) for the application. **AngularJS** make heavy use of **dependency injection**. The brackets following the module name defines the other modules **myapp** is dependent on, including **Ionic**, **myapp.controllers**, and **myapp.services**.
 
 	````JavaScript
 	(function () {
@@ -140,7 +140,7 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 			"myapp.controllers", "myapp.services"])
 	````
 
-11. **app.js** also defines all the routes that make the app more dynamic. Notice that each route defined the **url** (path), **controller**, and **templateUrl** (view) that is used on the route. The route table also defines an **otherwise** criteria, which is used when an unrecognized path is encountered in the application.
+1. **app.js** also defines all the routes that make the app more dynamic. Notice that each route defined the **url** (path), **controller**, and **templateUrl** (view) that is used on the route. The route table also defines an **otherwise** criteria, which is used when an unrecognized path is encountered in the application.
 
 	````JavaScript
 	.config(function ($stateProvider, $urlRouterProvider) {
@@ -170,13 +170,13 @@ In this task, you will explore the debugging options for an Apache Cordova proje
 	
 	_Solution Platform and Debug Tagets_
 
-2. The **Solution Platform** dropdown allows you to select a platform target. It should have options for **Android**, **iOS**, **Windows Phone (Universal)**, **Windows Phone 8**, **Windows-AnyCPU**, **Windows-ARM**, **Windows-x64**, and **Windows-x86**. Each **Solution Platform** has its own unique **Debug Target** options. Look at some of the different **Debug Target** options by selecting different **Solution Platforms**. Note that most of the options allow for both emulator and physical device debugging options.
+1. The **Solution Platform** dropdown allows you to select a platform target. It should have options for **Android**, **iOS**, **Windows Phone (Universal)**, **Windows Phone 8**, **Windows-AnyCPU**, **Windows-ARM**, **Windows-x64**, and **Windows-x86**. Each **Solution Platform** has its own unique **Debug Target** options. Look at some of the different **Debug Target** options by selecting different **Solution Platforms**. Note that most of the options allow for both emulator and physical device debugging options.
 
-3. Select **Android** as the **Solution Platfrom** and **VS Emulator 5" KitKat (4.4) XXHDPI Phone** as **Debug Target**.
+1. Select **Android** as the **Solution Platfrom** and **VS Emulator 5" KitKat (4.4) XXHDPI Phone** as **Debug Target**.
 
-4. Press **F5** or start the debugger to launch the **Visual Studio Emulator for Android**.
+1. Press **F5** or start the debugger to launch the **Visual Studio Emulator for Android**.
 
-5. Once the emulator launches and Android boots, the application should automatically launch with the Visual Studio debugger attached. Right now the application doesn't do much as it has hard-coded group data. This completes **Exercise 1**, but you might keep the emulator up for subsequent exercises.
+1. Once the emulator launches and Android boots, the application should automatically launch with the Visual Studio debugger attached. Right now the application doesn't do much as it has hard-coded group data. This completes **Exercise 1**, but you might keep the emulator up for subsequent exercises.
 
 	![Start project with hard-coded groups](Images/Mod1_Debug1.png?raw=true "Start project with hard-coded groups")
 	
@@ -196,20 +196,20 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 
 1. Open a browser and navigate to the **Office 365 App Registration Tool** at **[http://dev.office.com/app-registration](http://dev.office.com/app-registration "http://dev.office.com/app-registration")**.
 
-2. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
+1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
 	![Office 365 App Registration Tool sign-in](Images/Mod1_AppRegSignin.png?raw=true "Office 365 App Registration Tool sign-in")
 	
 	_Office 365 App Registration Tool sign-in_
 
-3. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
+1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
 
 	- **App name**: **MobileGraphExplorer**
 	- **App type**: **Native**
 	- **Redirect URI**: **http://localhost:8000**
 	- **App permissions**: **Groups.Read.All**
  
-4. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise.
+1. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise.
 
 	![App registration confirmation with Client ID](Images/Mod1_AppRegConfirm.png?raw=true "App registration confirmation with Client ID")
 	
@@ -227,15 +227,15 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 
 1. Locate and open the **config.xml** file in the root of the project to open the Apache Cordova project configuration screen.
 
-2. Click on the **Plugins** link in the side navigation of the configuration screen. The **Plugins** view allows you to add powerful plug-ins to your Apache Cordova project. There are a number of popular "**Core**" plug-ins listed, but you can also import local plug-ins or plug-ins from Git using the **Custom** option. Locate the **Active Directory Authentication Library (ADAL)** plugin and click the **Add** button.
+1. Click on the **Plugins** link in the side navigation of the configuration screen. The **Plugins** view allows you to add powerful plug-ins to your Apache Cordova project. There are a number of popular "**Core**" plug-ins listed, but you can also import local plug-ins or plug-ins from Git using the **Custom** option. Locate the **Active Directory Authentication Library (ADAL)** plugin and click the **Add** button.
 
 	![ADAL Cordova plug-in](Images/Mod1_ADAL.png?raw=true "ADAL Cordova plug-in")
 	
 	_ADAL Cordova plug-in_
 
-3. Once the **ADAL** plug-in finishes downloading, open the **services.js** file located in the **www\app** folder. 
+1. Once the **ADAL** plug-in finishes downloading, open the **services.js** file located in the **www\app** folder. 
 
-4. Right before the return statement on **Line 31**, insert the app settings code snippet by typing **o365-appsettings** and pressing **tab**. This will insert some private variable into the module that contain details about your app. You should update the value **aadAppClientId** to the **Client ID** you received when registering your application in **Exercise 2** (also update **aadAppRedirect** if you did not go with the default value of **http://localhost:8000**).
+1. Right before the return statement on **Line 31**, insert the app settings code snippet by typing **o365-appsettings** and pressing **tab**. This will insert some private variable into the module that contain details about your app. You should update the value **aadAppClientId** to the **Client ID** you received when registering your application in **Exercise 2** (also update **aadAppRedirect** if you did not go with the default value of **http://localhost:8000**).
 
 	````JavaScript
 	var aadAuthContext = null;
@@ -245,15 +245,15 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 	var graphResource = "https://graph.microsoft.com";
 	````
 
-5. Next, we need to add some script that uses the **ADAL** plug-in to assist with authentication and getting tokens for calling the Microsoft Graph. Directly under the settings you just added to the **service.js** file, add the ADAL Cordova code snippet by typing **o365-adalcordova** and pressing **tab**.
+1. Next, we need to add some script that uses the **ADAL** plug-in to assist with authentication and getting tokens for calling the Microsoft Graph. Directly under the settings you just added to the **service.js** file, add the ADAL Cordova code snippet by typing **o365-adalcordova** and pressing **tab**.
 
-6. The **o365-adalcordova** code snippet adds a number of functions that makes authentication and token acquisition a breeze. Here is a high-level summary of the functions (also note that all three functions return promises):
+1. The **o365-adalcordova** code snippet adds a number of functions that makes authentication and token acquisition a breeze. Here is a high-level summary of the functions (also note that all three functions return promises):
 
 	- **getTokenForResource**: gets an access token for a specific resource. First tries to get the token silently from token cache (using getTokenForResourceSilent) but prompts the user if silent acquisition fails. This is the function that is called before making calls to the Microsoft Graph.
 	- **getTokenForResourceSilent**: attempts to get an access token for a  specific resource silently by using the token cache for the application. Called by getTokenForResource
 	- **getaadAuthContext**: returns the authentication context (instantiating it if necessary).
 
-7. In the same **services.js** file, locate the **getGroups** function (**Line 24**) and modify it to call **getTokenForResource** before resolving the promise. You can pass the **graphResource** variable as the resource parameter in **getTokenForResource**:
+1. In the same **services.js** file, locate the **getGroups** function (**Line 24**) and modify it to call **getTokenForResource** before resolving the promise. You can pass the **graphResource** variable as the resource parameter in **getTokenForResource**:
 
 	````JavaScript
 	myappService.getGroups = function () {
@@ -268,21 +268,21 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 	};
 	````
 
-8. Press **F5** or start the debugger to deploy the updated app to the **Visual Studio Emulator for Android**.
+1. Press **F5** or start the debugger to deploy the updated app to the **Visual Studio Emulator for Android**.
 
-9. When the app loads, it should display an Office 365 sign-in screen. You didn't have to build a sign-in screen...ADAL provided you with one. Sign-in using your Office 365 account or the one that was provided to you.
+1. When the app loads, it should display an Office 365 sign-in screen. You didn't have to build a sign-in screen...ADAL provided you with one. Sign-in using your Office 365 account or the one that was provided to you.
 
 	![Sign-in via ADAL plug-in](Images/Mod1_Signin.png?raw=true "Sign-in via ADAL plug-in")
 	
 	_Sign-in via ADAL plug-in_
 
-10. After you sign-in, the you will be prompted to consent to the permissions the mobile app is requesting (that you configured when you registered the app). Click the **Accept** button to consent to the application permissions.
+1. After you sign-in, the you will be prompted to consent to the permissions the mobile app is requesting (that you configured when you registered the app). Click the **Accept** button to consent to the application permissions.
 
 	![Consent via ADAL plug-in](Images/Mod1_Consent.png?raw=true "Consent via ADAL plug-in")
 	
 	_Consent via ADAL plug-in_
 
-11. After consenting the application, the ADAL will close all the Azure AD screens and return to the home view of the application. The groups displayed are still hard-coded, but that will change in **Exercise 4**. 
+1. After consenting the application, the ADAL will close all the Azure AD screens and return to the home view of the application. The groups displayed are still hard-coded, but that will change in **Exercise 4**. 
 
 	> **Note:** Once you consent to the application, you won't be prompted again for consent (unless you delete the consent). You also won't be prompted to sign-in next time you launch the app, as the ADAL plug-in automatically handles token caching. You should only be prompted sign-in after your token invalidates (ex: Office 365 password changes), you go 14 days without launching the app, or after 90 days of continual use.
 
@@ -299,7 +299,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 
 1. Open the **services.js** file located in the **www\app** folder.
 
-2. Add the **$http** dependency on factory definition.
+1. Add the **$http** dependency on factory definition.
 
 	````JavaScript
 	(function () {
@@ -312,7 +312,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 				...
 	````
 
-3. Locate the **getGroups** function and update it to use **$http** to **GET** the current user's joined groups with the Microsoft Graph (**https://graph.microsoft.com/beta/me/joinedgroups**). This operation should be completed directly after the call to **getTokenForResource**.
+1. Locate the **getGroups** function and update it to use **$http** to **GET** the current user's joined groups with the Microsoft Graph (**https://graph.microsoft.com/beta/me/joinedgroups**). This operation should be completed directly after the call to **getTokenForResource**.
 
 	````JavaScript
 	myappService.getGroups = function () {
@@ -330,7 +330,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 	};
 	````
 
-4. Calling into the Microsoft Graph requires that the access token is attached to the **Authorization** header of all request (as **Bearer** token). Update the code to set this header and the **accept** header to **application/json;odata=verbose**.
+1. Calling into the Microsoft Graph requires that the access token is attached to the **Authorization** header of all request (as **Bearer** token). Update the code to set this header and the **accept** header to **application/json;odata=verbose**.
 
 	> **Note:** The code below also implements error checking on the getTokenForResource and $http calls. If an error occurs, the getGroups function rejects the promise.
 
@@ -358,7 +358,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 	};
 	````
 
-5. Next, open the **controllers.js** file located at **www\app** and update the code after **Line 49** to default an **img** property for each group to **"images/group.png"**. In **Task 2**, we will query the Microsoft to display the actual group photo.
+1. Next, open the **controllers.js** file located at **www\app** and update the code after **Line 49** to default an **img** property for each group to **"images/group.png"**. In **Task 2**, we will query the Microsoft to display the actual group photo.
 
 	````JavaScript
 	myappService.getGroups().then(function (data) {
@@ -379,9 +379,9 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 	});
 	````
 
-6. Press **F5** or start the debugger to deploy the updated app to the **Visual Studio Emulator for Android**.
+1. Press **F5** or start the debugger to deploy the updated app to the **Visual Studio Emulator for Android**.
 
-7. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. All groups should display the same generic group photo, but in **Task 2** you will update the app the lazy load the actual group photos.
+1. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. All groups should display the same generic group photo, but in **Task 2** you will update the app the lazy load the actual group photos.
 
 	![App with groups using Microsoft Graph](Images/Mod1_Debug2.png?raw=true "App with groups using Microsoft Graph")
 	
@@ -394,7 +394,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 
 1. Open the **services.js** file located at **www\app**.
 
-2. Directly below the **getGroups** function, define a **loadPhotoAsync** function on the **myappService** that takes **obj** and **type** parameters. The **obj** parameter will be object we are loading a photo for and the **type** is the type of object in the Microsoft Graph (ex: users, groups, etc). Also configure the new function to return a **promise**.
+1. Directly below the **getGroups** function, define a **loadPhotoAsync** function on the **myappService** that takes **obj** and **type** parameters. The **obj** parameter will be object we are loading a photo for and the **type** is the type of object in the Microsoft Graph (ex: users, groups, etc). Also configure the new function to return a **promise**.
 
 	````JavaScript
 	myappService.loadPhotoAsync = function (obj, type) {
@@ -404,7 +404,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 	};
 	````
 
-3. The Microsoft Graph uses the following end-point pattern to get photos: **https://graph.microsoft.com/{version}/{type}/{objectid}/photo/$value**. Hopefully you can see that the **obj** and **type** parameters are all we need to get photos for groups or users. Update the **loadPhotoAsync** function to **GET** the photo for the group passed in. Remember that you need a token (via **loadPhotoAsync**) and it must be included in the **Authorization** header of the request.
+1. The Microsoft Graph uses the following end-point pattern to get photos: **https://graph.microsoft.com/{version}/{type}/{objectid}/photo/$value**. Hopefully you can see that the **obj** and **type** parameters are all we need to get photos for groups or users. Update the **loadPhotoAsync** function to **GET** the photo for the group passed in. Remember that you need a token (via **loadPhotoAsync**) and it must be included in the **Authorization** header of the request.
 
 	````JavaScript
 	myappService.loadPhotoAsync = function (obj, type) {
@@ -426,7 +426,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 	};
 	````
 
-4. Update the **loadPhotoAsync** method to handle errors on the **getTokenForResource** and **$http** calls.
+1. Update the **loadPhotoAsync** method to handle errors on the **getTokenForResource** and **$http** calls.
 
 	````JavaScript
 	myappService.loadPhotoAsync = function (obj, type) {
@@ -454,14 +454,14 @@ In this task, you'll update the solution to lazy load group photos by calling th
 	};
 	````
 
-5. Working with photos in the Microsoft Graph are a little from typical GETs. For starters, update the $http.get operation to indicate a **responseType** of **blob**.
+1. Working with photos in the Microsoft Graph are a little from typical GETs. For starters, update the $http.get operation to indicate a **responseType** of **blob**.
 
 	````JavaScript
 	$http.get(url, { responseType: "blob" }).then(function (image) {
 		...
 	````
 
-6. Setting the **responseType** to **blob** will allow the **$http** object to handle to photo blob coming back from the Microsoft Graph. This blob can't immediately be used to set the src attribute of an image in HTML. Instead, we need to add some code to create an object URL.
+1. Setting the **responseType** to **blob** will allow the **$http** object to handle to photo blob coming back from the Microsoft Graph. This blob can't immediately be used to set the src attribute of an image in HTML. Instead, we need to add some code to create an object URL.
 
 	````JavaScript
 	$http.get(url, { responseType: "blob" }).then(function (image) {
@@ -476,7 +476,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 	});
 	````
 
-7. Finally, we need to update the **homeCtrl** in the **controller.js** file to call our new **loadPhotoAsync** function. You can call this in the loop we created in **Step 5** of the previous Task.
+1. Finally, we need to update the **homeCtrl** in the **controller.js** file to call our new **loadPhotoAsync** function. You can call this in the loop we created in **Step 5** of the previous Task.
 
 	````JavaScript
 	myappService.getGroups().then(function (data) {
@@ -499,9 +499,9 @@ In this task, you'll update the solution to lazy load group photos by calling th
 	});
 	````
 
-8. Press **F5** or start the debugger to deploy the updated app to the **Visual Studio Emulator for Android**.
+1. Press **F5** or start the debugger to deploy the updated app to the **Visual Studio Emulator for Android**.
 
-9. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. The groups will initially load with the generic group.png image, but will later load the actual group photos from Office 365.
+1. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. The groups will initially load with the generic group.png image, but will later load the actual group photos from Office 365.
 
 	![Groups with group photos loaded through Microsoft Graph](Images/Mod1_Debug3.png?raw=true "Groups with group photos loaded through Microsoft Graph")
 	

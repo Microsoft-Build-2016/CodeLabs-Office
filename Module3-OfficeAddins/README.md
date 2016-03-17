@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Building Office Add-ins with Web Development #
 
 ---
@@ -40,8 +40,8 @@ The following is required to complete this module:
 This module includes the following exercises:
 
 1. [Converting Web Application to Mail Add-in](#Exercise1)
-2. [Using Yeoman to Generate Office Add-in Projects](#Exercise2)
-3. [Connecting to the Microsoft Graph from Add-in](#Exercise2)
+1. [Using Yeoman to Generate Office Add-in Projects](#Exercise2)
+1. [Connecting to the Microsoft Graph from Add-in](#Exercise2)
 
 Estimated time to complete this module: **60 minutes**
 
@@ -63,71 +63,71 @@ In this Task, you will get the starter project up and running, then convert it t
 
 1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
 
-2. The solution contains two projects. **MailCRM** is an ASP.NET MVC app that hosts all the web components of the solution. **MailCRM.Data** is a data project the defined the data model for the solution. You need to publish the database to **LocalDB**. Right-click the **MailCRM.Data** project and select **Publish**.
+1. The solution contains two projects. **MailCRM** is an ASP.NET MVC app that hosts all the web components of the solution. **MailCRM.Data** is a data project the defined the data model for the solution. You need to publish the database to **LocalDB**. Right-click the **MailCRM.Data** project and select **Publish**.
 
-3.  On the **Publish Database** dialog, click on the **Edit** button to configure the connection information.
+1.  On the **Publish Database** dialog, click on the **Edit** button to configure the connection information.
 
 	![Publish database](Images/Mod3_PubDB1.png?raw=true "Publish database")
     
     _Publish database_
 
-4. On the **Connection Properties** dialog enter **(localdb)\MSSQLLocalDB** for the **Server name** and click **OK**.
+1. On the **Connection Properties** dialog enter **(localdb)\MSSQLLocalDB** for the **Server name** and click **OK**.
 
 	![Database connection properties](Images/Mod3_PubDB2.png?raw=true "Database connection properties")
     
     _Database connection properties_
 
-5. When you return to the **Publish Database** dialog, click the **Publish** button to publish the database to **LocalDb**.
+1. When you return to the **Publish Database** dialog, click the **Publish** button to publish the database to **LocalDb**.
 
-6. With the database published, you should be able to test the web application. Press **F5** or start the debugger the launch the web application. Right now, the application should be blank, but this is an activity feed that will show real-time comments made on contacts.
+1. With the database published, you should be able to test the web application. Press **F5** or start the debugger the launch the web application. Right now, the application should be blank, but this is an activity feed that will show real-time comments made on contacts.
 
 	![Comment activity](Images/Mod3_ActivityEmpty.png?raw=true "Comment activity")
     
     _Comment activity_
 
-7. After you stop debugging, right-click the **MailCRM** web project and select **Convert > Convert to App for Office Project...**
+1. After you stop debugging, right-click the **MailCRM** web project and select **Convert > Convert to App for Office Project...**
 
 	![Convert project](Images/Mod3_Convert.png?raw=true "Convert project")
     
     _Convert project_
 
-8. When the Office Add-in wizard launches, select **Mail** as the app type and click **Next**.
+1. When the Office Add-in wizard launches, select **Mail** as the app type and click **Next**.
 
 	![Wizard part1](Images/Mod3_Wizard1.png?raw=true "Wizard part1")
     
     _Wizard part1_
 
-9. On the next wizard screen, select the option to have the add-in display for **Read form** on **Email messages** and click **Finish**.
+1. On the next wizard screen, select the option to have the add-in display for **Read form** on **Email messages** and click **Finish**.
 
 	![Wizard part2](Images/Mod3_Wizard2.png?raw=true "Wizard part2")
     
     _Wizard part2_
 
-10. The Office Add-in wizard will add a new **MailCRM.Office** project to the solution, but this project should contain only an XML manifest (**MailCRM.Office.xml**) file that defines how the add-in will appear in Outlook.
+1. The Office Add-in wizard will add a new **MailCRM.Office** project to the solution, but this project should contain only an XML manifest (**MailCRM.Office.xml**) file that defines how the add-in will appear in Outlook.
 
 	![Solution with new Office add-in project](Images/Mod3_SlnWithOffice.png?raw=true "Solution with new Office add-in project")
     
     _Solution with new Office add-in project_
 
-11. Open the **MailCRM.Office.xml** file located the **MailCRM.Office** project. Locate the **SourceLocation** element and update the value of the **DefaultValue** attribute to **~remoteAppUrl/Home/Agave**.
+1. Open the **MailCRM.Office.xml** file located the **MailCRM.Office** project. Locate the **SourceLocation** element and update the value of the **DefaultValue** attribute to **~remoteAppUrl/Home/Agave**.
 
-12. The **/Home/Agave** view we just referenced doesn't yet exist. Create it by right clicking the **Views > Home** folder (in the **MailCRM** project) and selecting **Add > View**.
+1. The **/Home/Agave** view we just referenced doesn't yet exist. Create it by right clicking the **Views > Home** folder (in the **MailCRM** project) and selecting **Add > View**.
 
 	![Add view](Images/Mod3_AddView.png?raw=true "Add view")
     
     _Add view_
 
-13. On the **Add View** dialog provide a **View name** of **Agave** and click the **Add** button.
+1. On the **Add View** dialog provide a **View name** of **Agave** and click the **Add** button.
 
 	![Add agave view](Images/Mod3_AgaveView.png?raw=true "Add agave view")
     
     _Add agave view_
 
-14. On the bottom of the new **Agave** view, insert the **o365-agaveview** code snippet using the key-combination **Ctrl-K**, **Ctrl-X**, and locate the **o365-agaveview** snippet under **My HTML Snippets**.
+1. On the bottom of the new **Agave** view, insert the **o365-agaveview** code snippet using the key-combination **Ctrl-K**, **Ctrl-X**, and locate the **o365-agaveview** snippet under **My HTML Snippets**.
 
 	>**NOTE:** the snippet added a script reference to **Office.js**. Office.js is the script file that provides the interop between web and Office. You will work more with this in **Task 2**. Also notice the **Office.initialize** reference. This is required to be called on any page that is displayed in an add-in. 
 
-15. The conversion is almost complete, but the new **Agave** view doesn't have a matching activity in the **HomeController**. Open the **HomeContoller.cs** file in the **Controllers** folder of the **MailCRM** project. Add the following activity inside the **HomeController** class.
+1. The conversion is almost complete, but the new **Agave** view doesn't have a matching activity in the **HomeController**. Open the **HomeContoller.cs** file in the **Controllers** folder of the **MailCRM** project. Add the following activity inside the **HomeController** class.
 
 	````C#
 	public ActionResult Agave()
@@ -136,7 +136,7 @@ In this Task, you will get the starter project up and running, then convert it t
 	}
 	````
 
-16. The conversion is complete and this Task is complete. You could try debugging the add-in, but right now the add-in will display a blank page. You will add functionality in **Task 2**.
+1. The conversion is complete and this Task is complete. You could try debugging the add-in, but right now the add-in will display a blank page. You will add functionality in **Task 2**.
 
 <a name="Ex1Task2"></a>
 #### Task 2 - Leverage Office.js in Outlook ####
@@ -145,7 +145,7 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 
 1. Open the **Agave.cshtml** file located at **Views > Home** in the **MailCRM** web project. 
 
-2. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for).
+1. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for).
 
 	````JavaScript
 	Office.initialize = function (reason) {
@@ -154,7 +154,7 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 			 var sender = Office.context.mailbox.item.sender;
 	````
 
-3. Using the sender, you should perform a **REST** **GET** using the endpoint syntax /api/Comments?email=*{sender_email}*. Replace **sender_email** with email address of the sender, which can be found at **sender.emailAddress**. The **o365-httpget** code snippet can help you add a **JQuery** script block for performing an **HTTP** **GET**.
+1. Using the sender, you should perform a **REST** **GET** using the endpoint syntax /api/Comments?email=*{sender_email}*. Replace **sender_email** with email address of the sender, which can be found at **sender.emailAddress**. The **o365-httpget** code snippet can help you add a **JQuery** script block for performing an **HTTP** **GET**.
 
 	````JavaScript
 	$.ajax({
@@ -167,7 +167,7 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 	});
 	````
 
-4. Next, add some additional script to loop through the data returned from the REST service and build the user interface in the **list** element. While you are at it, set the **header** element to the **sender.emailAddress** you retrieved from **Office.js** in **Step 2**.
+1. Next, add some additional script to loop through the data returned from the REST service and build the user interface in the **list** element. While you are at it, set the **header** element to the **sender.emailAddress** you retrieved from **Office.js** in **Step 2**.
 
 	````JavaScript
 	$("#header").html("Comments for " + sender.emailAddress);
@@ -185,7 +185,7 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 	  });
 	````
 
-5. Finally, add some script to **POST** new comments when the **submit** element is clicked. You can use the **o365-httppost** code snippet to generate a **JQuery** **HTTP** **POST** block and use the **/api/Comments** REST endpoint.
+1. Finally, add some script to **POST** new comments when the **submit** element is clicked. You can use the **o365-httppost** code snippet to generate a **JQuery** **HTTP** **POST** block and use the **/api/Comments** REST endpoint.
 
 	````JavaScript
 	$("#submit").click(function () {
@@ -205,19 +205,19 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 	  });
 	````
 
-6. To test the add-in, press **F5** or start the debugger. If you are prompted to **Connect to Exchange email account**, provide the Office 365 credentials that were provided to you.
+1. To test the add-in, press **F5** or start the debugger. If you are prompted to **Connect to Exchange email account**, provide the Office 365 credentials that were provided to you.
 
 	![Connect to Exchange](Images/Mod3_debug.png?raw=true "Connect to Exchange")
     
     _Connect to Exchange_
 
-7. Visual Studio will associate the add-in XML manifest with your Office 365 account and launch **OWA** in a browser to test the add-in. To test the add-in select a mail message and click on the **MailCRM** link below the recipients section of the reading pane.
+1. Visual Studio will associate the add-in XML manifest with your Office 365 account and launch **OWA** in a browser to test the add-in. To test the add-in select a mail message and click on the **MailCRM** link below the recipients section of the reading pane.
 
 	![Mail CRM](Images/Mod3_Mail1.png?raw=true "Mail CRM")
     
     _Mail CRM_
 
-8. With the add-in expanded, you can add new comments for a contact by typing in the text box and clicking submit.
+1. With the add-in expanded, you can add new comments for a contact by typing in the text box and clicking submit.
 
 	![Mail Add-in](Images/Mod3_Mail2.png?raw=true "Mail Add-in")
     
@@ -230,19 +230,19 @@ In the final task for this exercise, you will update the add-in manifest to leve
 
 1. Open the add-in manifest file (**MailCRM.Office.xml**) in the **MailCRM.Office** project.'
 
-2. Clear out everything in the manifest file and replace it with the **o365-addinmanifest** code snippet by using the key combination **Ctrl-K**, **Ctrl-X**, and selecting **o365-addinmanifest** from the **My XML Snippets**.
+1. Clear out everything in the manifest file and replace it with the **o365-addinmanifest** code snippet by using the key combination **Ctrl-K**, **Ctrl-X**, and selecting **o365-addinmanifest** from the **My XML Snippets**.
 
-3. The code snippet added **VersionOverrides** element with the **Add-in Command** details. This element is ignored in older versions of Outlook. Take a moment to look at the details that are defined in this new section.
+1. The code snippet added **VersionOverrides** element with the **Add-in Command** details. This element is ignored in older versions of Outlook. Take a moment to look at the details that are defined in this new section.
 
-4. Test **Add-in Command** by press **F5** or start the debugger. Once **OWA** launches, open the **Outlook 2016** client. If prompted provide account details, provide the Office 365 account that was provided to you.
+1. Test **Add-in Command** by press **F5** or start the debugger. Once **OWA** launches, open the **Outlook 2016** client. If prompted provide account details, provide the Office 365 account that was provided to you.
 
-5. When **Outlook** launches, select a message and look in the ribbon for your **Add-in Command**.
+1. When **Outlook** launches, select a message and look in the ribbon for your **Add-in Command**.
 
 	![Add-in command](Images/Mod3_AddinCommand.png?raw=true "Add-in command")
     
     _Add-in command_
 
-6. Click the Add-in Command and the add-in will now display as a task pane, but otherwise functions the same.
+1. Click the Add-in Command and the add-in will now display as a task pane, but otherwise functions the same.
 
 	![Mail add-in as task pane](Images/Mod3_MailTaskPane.png?raw=true "Mail add-in as task pane")
     
@@ -262,31 +262,31 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 1. Press the Windows start button and type Node.js, then locate and open the **Node.js command prompt** in the search results.
 
-2. Change directories the C:\Project folder.
+1. Change directories the C:\Project folder.
 
 	````CMD
 	cd C:\Projects
 	````
 
-3. Create a new directory for your Office Add-in named **ContactCleanup**
+1. Create a new directory for your Office Add-in named **ContactCleanup**
 
 	````CMD
 	mkdir ContactCleanup
 	````
 
-4. Change directories to the new directory.
+1. Change directories to the new directory.
 
 	````CMD
 	cd ContactCleanup
 	````
 
-5. Start the **Yeoman generator for Office Add-ins** by typing **yo office**.
+1. Start the **Yeoman generator for Office Add-ins** by typing **yo office**.
 
 	````CMD
 	yo office
 	````
 
-6. The **Yeoman generator for Office Add-ins** is a command-line version of the new Office add-in wizard in Visual Studio. It will walk you though a few questions. Provide the following responses:
+1. The **Yeoman generator for Office Add-ins** is a command-line version of the new Office add-in wizard in Visual Studio. It will walk you though a few questions. Provide the following responses:
 
 	- **Project name (display name)**: Contact Cleanup
 	- **Office project type**: Task Pane Add-in
@@ -297,7 +297,7 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
     
     _Yeoman generator for Office add-ins_
 
-7. After providing the details above, Yeoman will use a number of tools to generate a starter project that will be used throughout this exercise. When it is complete, type the following to open the project in Visual Studio Code.
+1. After providing the details above, Yeoman will use a number of tools to generate a starter project that will be used throughout this exercise. When it is complete, type the following to open the project in Visual Studio Code.
 
 	````CMD
 	Code .
@@ -310,7 +310,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
 1. Return to the command prompt you used in the previous Task. It should be opened to the project folder, but if no, change directories to that location.
 
-2. Next, **gulp serve-static** in command window to allow a Gulp task to host the web application on port **8443**.
+1. Next, **gulp serve-static** in command window to allow a Gulp task to host the web application on port **8443**.
 
 	````CMD
 	gulp serve-static
@@ -320,13 +320,13 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
     
     _Gulp serve-static_
 
-3. Open a browser and navigate to **https://localhost:8443**. Yeoman not only created the basic project scaffolding for your add-in, it also generated and SSL certificate for hosting as add-ins are required the be hosted over SSL. 
+1. Open a browser and navigate to **https://localhost:8443**. Yeoman not only created the basic project scaffolding for your add-in, it also generated and SSL certificate for hosting as add-ins are required the be hosted over SSL. 
 
 	![Localhost](Images/Mod3_localhost.png?raw=true "Localhost")
     
     _Localhost_
 
-4. If your browser displays certificate warning, click the option to **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate**.
+1. If your browser displays certificate warning, click the option to **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate**.
 
 	![Certificate Error](Images/Mod3_CertError.png?raw=true "Certificate Error")
     
@@ -336,77 +336,77 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
     
     _Install Cert_
 
-5. Now that the web application is host, you need to deploy the manifest so you can test the add-in. There are several ways to do this and we explore two of them. First, open a browser and navigate to [https://onedrive.live.com/](https://onedrive.live.com/ "https://onedrive.live.com/").
+1. Now that the web application is host, you need to deploy the manifest so you can test the add-in. There are several ways to do this and we explore two of them. First, open a browser and navigate to [https://onedrive.live.com/](https://onedrive.live.com/ "https://onedrive.live.com/").
 
-6. Sign-in with a **Microsoft Account (MSA)** such as **outlook.com**, **live.com**, **hotmail.com**, etc (same type of account you use to sign into Xbox). If you don't have one, you can get a free **OneDrive** account at [https://signup.live.com/](https://signup.live.com/ "https://signup.live.com/").
+1. Sign-in with a **Microsoft Account (MSA)** such as **outlook.com**, **live.com**, **hotmail.com**, etc (same type of account you use to sign into Xbox). If you don't have one, you can get a free **OneDrive** account at [https://signup.live.com/](https://signup.live.com/ "https://signup.live.com/").
 
-7. Once you are signed into **OneDrive**, select **New > Excel workbook** from the top navigation to launch a new workbook in **Excel Online**.
+1. Once you are signed into **OneDrive**, select **New > Excel workbook** from the top navigation to launch a new workbook in **Excel Online**.
 
 	![New Excel Workbook](Images/Mod3_NewExcel.png?raw=true "New Excel Workbook")
     
     _New Excel Workbook_
 
-8. In **Excel Online**, select the **Insert** tab in the ribbon and then click the **Office Add-ins** button.
+1. In **Excel Online**, select the **Insert** tab in the ribbon and then click the **Office Add-ins** button.
 
 	![Insert Add-in](Images/Mod3_InsertAddin.png?raw=true "Insert Add-in")
     
     _Insert Add-in_
 
-9. In the **Office Add-ins** dialog, locate and click the **Manage My Add-ins** link the upper right (near the **Refresh** link).
+1. In the **Office Add-ins** dialog, locate and click the **Manage My Add-ins** link the upper right (near the **Refresh** link).
 
 	![Manage Add-ins](Images/Mod3_ManageAddins.png?raw=true "Manage Add-ins")
     
     _Manage Add-ins_
 
-10. Select **Upload My Add-in** from the selection menu and browse to the location of the **add-in XML manifest** file (should be in the root of your project folder).
+1. Select **Upload My Add-in** from the selection menu and browse to the location of the **add-in XML manifest** file (should be in the root of your project folder).
 
 	![Upload manifest](Images/Mod3_UploadManifest.png?raw=true "Upload manifest")
     
     _Upload manifest_
 
-11. After uploading the **add-in XML manifest** file, the add-in should appear as a **task pane** in **Excel Online**.
+1. After uploading the **add-in XML manifest** file, the add-in should appear as a **task pane** in **Excel Online**.
 
 	![Excel Online with Add-in](Images/Mod3_AddinEO.png?raw=true "Excel Online with Add-in")
     
     _Excel Online with Add-in_
 
-12. You can now test and debug the add-in using the browser's developer tools (**F12**). However, this approach does not enable you to test the Office Add-in in the **Office client**. To do this, you can either use a special site collection in **SharePoint** (call an **App Catalog**) or use a **network file share**. We will use the network file share approach as it is easy and convenient for developers.
+1. You can now test and debug the add-in using the browser's developer tools (**F12**). However, this approach does not enable you to test the Office Add-in in the **Office client**. To do this, you can either use a special site collection in **SharePoint** (call an **App Catalog**) or use a **network file share**. We will use the network file share approach as it is easy and convenient for developers.
 
-13. Open **Windows Explorer** and create a folder at the root the C: drive called **Apps** (C:\Apps).
+1. Open **Windows Explorer** and create a folder at the root the C: drive called **Apps** (C:\Apps).
 
-14. Right-click the new folder and select **Properties** from the bottom of the menu. 
+1. Right-click the new folder and select **Properties** from the bottom of the menu. 
 
-15. In the **Properties** dialog, select the **Sharing** tab and then click the **Share** button.
+1. In the **Properties** dialog, select the **Sharing** tab and then click the **Share** button.
 
 	![Properties](Images/Mod3_Share.png?raw=true "Properties")
     
     _Properties_
 
-16. In the **File Sharing** dialog, click the **Share** button to create the share.
+1. In the **File Sharing** dialog, click the **Share** button to create the share.
 
 	![Share](Images/Mod3_Share2.png?raw=true "Share")
     
     _Share_
 
-17. After configuring the share, the **Sharing** tab on the **Properties** dialog should display a **Network Path**. Copy or remember this path as we will configure Office to look at it for add-in manifests.
+1. After configuring the share, the **Sharing** tab on the **Properties** dialog should display a **Network Path**. Copy or remember this path as we will configure Office to look at it for add-in manifests.
 
 	![Network Path](Images/Mod3_Share3.png?raw=true "Network Path")
     
     _Network Path_
 
-18. Next, open the **Excel 2016 client** and a new blank workbook.
+1. Next, open the **Excel 2016 client** and a new blank workbook.
 
-19. Select **File > Options** to launch the **Excel Options** dialog.
+1. Select **File > Options** to launch the **Excel Options** dialog.
 
-20. Locate the **Trust Center** link in the left navigation and then click on the **Trust Center Settings** button to launch the **Trust Center** dialog.
+1. Locate the **Trust Center** link in the left navigation and then click on the **Trust Center Settings** button to launch the **Trust Center** dialog.
 
-21. In the **Trust Center** dialog, select **Trusted Add-in Catalogs** from the left navigation and add the network file share location from **Step 17** to the **Trusted Catalogs Table**. Make sure you check the **Show in Menu** checkbox.
+1. In the **Trust Center** dialog, select **Trusted Add-in Catalogs** from the left navigation and add the network file share location from **Step 17** to the **Trusted Catalogs Table**. Make sure you check the **Show in Menu** checkbox.
 
 	![Trusted catalogs](Images/Mod3_TrustedCats.png?raw=true "Trusted catalogs")
     
     _Trusted catalogs_
 
-22. Close all the dialogs and return to the blank workbook in Excel. When you launch the Office Add-in dialog (via **Insert** tab > **My Add-ins**), you should now see a **Shared Folder** tab. This will load any add-in XML manifest that you place in the folder. Go ahead and try this with the manifest you built with Yeoman.
+1. Close all the dialogs and return to the blank workbook in Excel. When you launch the Office Add-in dialog (via **Insert** tab > **My Add-ins**), you should now see a **Shared Folder** tab. This will load any add-in XML manifest that you place in the folder. Go ahead and try this with the manifest you built with Yeoman.
 
 	![Shared Folder Insert Option](Images/Mod3_SharedFolderOption.png?raw=true "Shared Folder Insert Option")
     
@@ -426,13 +426,13 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 
 1. Open a browser and navigate to the **Office 365 App Registration Tool** at **[http://dev.office.com/app-registration](http://dev.office.com/app-registration "http://dev.office.com/app-registration")**.
 
-2. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
+1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
 	![App registration sign-in](Images/Mod3_AppRegSignin.png?raw=true "App registration sign-in")
     
     _App registration sign-in_
 
-3. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
+1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
 
 	- **App name**: **Contact Cleanup**
 	- **App type**: **Web**
@@ -440,7 +440,7 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 	- **Redirect URI**: **https://localhost:8443/app/auth/auth.html**
 	- **App permissions**: **Contacts.ReadWrite**
  
-4. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise. The registration tool will also list a **Client Secret**, but you can ignore that as we will be using an **Implicit OAuth Flow** that doesn't use the Secret.
+1. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise. The registration tool will also list a **Client Secret**, but you can ignore that as we will be using an **Implicit OAuth Flow** that doesn't use the Secret.
 
 	![Registration Confirmation](Images/Mod3_RegSuccess.png?raw=true "Registration Confirmation")
     
@@ -455,9 +455,9 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 
 1. Open your Office add-in project (created with Yeoman) in **Visual Studio Code**.
 
-2. Open the **app.js** file located in the **app** folder.
+1. Open the **app.js** file located in the **app** folder.
 
-3. After the variable **self** is defined, add properties to **self** for **clientId**, **tenant**, and **redirectUrl** with values from the app registration you performed in the previous task (**tenant** will be the domain of the Office 365 account you are using such as sometenant.onmicrosoft.com).
+1. After the variable **self** is defined, add properties to **self** for **clientId**, **tenant**, and **redirectUrl** with values from the app registration you performed in the previous task (**tenant** will be the domain of the Office 365 account you are using such as sometenant.onmicrosoft.com).
 
 	````JavaScript
 	self.clientId = "31b239c4-bd0e-4225-89e0-d59b7c52155b";
@@ -465,19 +465,19 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 	self.redirectUri = "https://localhost:8443/app/auth/auth.html";
 	````
 
-4. Next, open a command prompt to the location of your Office add-in project you started with Yeoman. If you need to stop the Gulp task, press Ctrl-C.
+1. Next, open a command prompt to the location of your Office add-in project you started with Yeoman. If you need to stop the Gulp task, press Ctrl-C.
 
-5. Install the **adal-angular** module by typing the command listed below in the command prompt:
+1. Install the **adal-angular** module by typing the command listed below in the command prompt:
 
 	````CMD
 	bower install adal-angular --save
 	````
 
-6. Return to **Visual Studio Code** and create a new folder named **auth** inside the **app** folder (ex: **app/auth**).
+1. Return to **Visual Studio Code** and create a new folder named **auth** inside the **app** folder (ex: **app/auth**).
 
-7. Next, create a new file named **auth.html** in the **auth** folder (ex: **app/auth/auth.html**).
+1. Next, create a new file named **auth.html** in the **auth** folder (ex: **app/auth/auth.html**).
 
-8. **auth.html** will use **ADAL.js** to authenticate users of your app. Use the code snippet **o365-authjs** to complete this file by typing **o365-authjs** and pressing enter. The snippet will add script to check if the user is authenticated. If so, it will get an **access token** for the **Microsoft Graph** and return it to the parent (later in the exercise you will launch this page in a dialog). If the user isn't authenticated, it will force them through a sign-in and consent flow with Azure AD. Below is main block that handles that.
+1. **auth.html** will use **ADAL.js** to authenticate users of your app. Use the code snippet **o365-authjs** to complete this file by typing **o365-authjs** and pressing enter. The snippet will add script to check if the user is authenticated. If so, it will get an **access token** for the **Microsoft Graph** and return it to the parent (later in the exercise you will launch this page in a dialog). If the user isn't authenticated, it will force them through a sign-in and consent flow with Azure AD. Below is main block that handles that.
 
 	````C#
 	var user = authContext.getCachedUser();
@@ -506,7 +506,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 	  }
 	````
 
-9. Next, let's modify the main user interface of the add-in. Open the **home.html** file located in the **app\home** folder and simplify the body to look like the following.
+1. Next, let's modify the main user interface of the add-in. Open the **home.html** file located in the **app\home** folder and simplify the body to look like the following.
 
 	````HTML
 	<body>
@@ -525,7 +525,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 	</body>
 	````
 
-10. Open the **home.js** file located in the **app\home** folder and modify the **(document).ready** script as seen below. This script loads the **auth.html** page in a dialog using a new **Dialog API** when the **btnSignin** element is clicked.
+1. Open the **home.js** file located in the **app\home** folder and modify the **(document).ready** script as seen below. This script loads the **auth.html** page in a dialog using a new **Dialog API** when the **btnSignin** element is clicked.
 
 	````JavaScript
 	var _dlg; // global pointer to the dialog
@@ -547,7 +547,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 	};
 	````
 
-11. _**dlg.addEventHandler** is adding an event handler to listen for messages sent from the dialog. Add a new **dialogMessageReceived** function with a **result** parameter to satisfy this handler.
+1. _**dlg.addEventHandler** is adding an event handler to listen for messages sent from the dialog. Add a new **dialogMessageReceived** function with a **result** parameter to satisfy this handler.
 
 	````JavaScript
 	function dialogMessageReceived(result) {
@@ -558,19 +558,19 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 	};
 	````
 
-12. You should be ready to test authentication now. If needed, start the web server by typing **gulp serve-static** in a command prompt.
+1. You should be ready to test authentication now. If needed, start the web server by typing **gulp serve-static** in a command prompt.
 
 	````CMD
 	gulp serve-static
 	````
 
-13. Test the add-in the **Excel 2016** client. When you click on the Sign-in with Office 365 button, the add-in should launch a dialog for you to sign-in and consent to the app permissions.
+1. Test the add-in the **Excel 2016** client. When you click on the Sign-in with Office 365 button, the add-in should launch a dialog for you to sign-in and consent to the app permissions.
 
 	![Consenting app in dialog](Images/Mod3_Consent.png?raw=true "Consenting app in dialog")
     
     _Consenting app in dialog_
 
-14. After signing in and consenting the application, the dialog should automatically close and the **Status** of the add-in should change to **Connected**.
+1. After signing in and consenting the application, the dialog should automatically close and the **Status** of the add-in should change to **Connected**.
 
 	![Connected](Images/Mod3_Connected.png?raw=true "Connected")
     
@@ -607,7 +607,7 @@ In the final task, you will use the **access token** returned from the dialog an
 	};
 	````
 
-2. Inside the **success** callback, add script to loop through the returned contacts and write them to Excel using the **Office.context.document.setSelectedDataAsync** function.
+1. Inside the **success** callback, add script to loop through the returned contacts and write them to Excel using the **Office.context.document.setSelectedDataAsync** function.
 
 	````JavaScript
 	success: function (data) {
@@ -644,21 +644,21 @@ In the final task, you will use the **access token** returned from the dialog an
 		);
 	````
 
-3. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Connects** using the **Microsoft Graph** and write them to a table in Excel.
+1. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Connects** using the **Microsoft Graph** and write them to a table in Excel.
 
 	![Table written to Excel](Images/Mod3_ExcelTable.png?raw=true "Table written to Excel")
     
     _Table written to Excel_
 
-4. Office.js support a numerous powerful operations, including many product-specific. You could use these to deliver powerful scenarios in Office. Say we wanted to allow users to make bulk updates to contacts in Excel and then save them back to Office 365. You could use bindings and event handlers to know when the contact data changes in Excel. To see how you might start this, replace the **dialogMessageReceived** with the code snippet **o365-dialogMessageReceived** by typing **o365-dialogMessageReceived** and pressing **enter**.
+1. Office.js support a numerous powerful operations, including many product-specific. You could use these to deliver powerful scenarios in Office. Say we wanted to allow users to make bulk updates to contacts in Excel and then save them back to Office 365. You could use bindings and event handlers to know when the contact data changes in Excel. To see how you might start this, replace the **dialogMessageReceived** with the code snippet **o365-dialogMessageReceived** by typing **o365-dialogMessageReceived** and pressing **enter**.
 
-5. Test the add-in one more time in the **Excel 2016** client. Once the add-in creates the table of Contacts, modify a contact and note that the add-in was notified of this change using a **BindingDataChanged** event handler.
+1. Test the add-in one more time in the **Excel 2016** client. Once the add-in creates the table of Contacts, modify a contact and note that the add-in was notified of this change using a **BindingDataChanged** event handler.
 
 	![Data changed notification](Images/Mod3_DataChanged.png?raw=true "Data changed notification")
     
     _Data changed notification_
 
-6. Take a few moments to look at the script that created the binding and registered the event handler. This completes this Exercise and the Module.
+1. Take a few moments to look at the script that created the binding and registered the event handler. This completes this Exercise and the Module.
 
 <a name="Summary" />
 ## Summary ##

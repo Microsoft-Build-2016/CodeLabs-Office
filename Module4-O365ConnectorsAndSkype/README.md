@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Integrating Conversations with Skype and Office 365 Connectors #
 
 ---
@@ -38,7 +38,7 @@ The following is required to complete this module:
 This module includes the following exercises:
 
 1. [Building Office 365 Connectors](#Exercise1)
-2. [Developing with the Skype Web SDK](#Exercise2)
+1. [Developing with the Skype Web SDK](#Exercise2)
 
 Estimated time to complete this module: **60 minutes**
 
@@ -58,49 +58,49 @@ In this Task, you will explore Office 365 Groups and some of the existing Office
 
 1. Open a browser and navigate to [https://portal.office.com](https://portal.office.com "https://portal.office.com") and sign-in with the Office 365 credentials that were provided to you.
 
-2. **Office 365 Connectors** for Groups are currently under developer preview. In order to access them, navigate to **OWA** using the URL [https://outlook.office.com/owa/#path=/mail&EnableConnectorDevPreview=true](https://outlook.office.com/owa/#path=/mail&EnableConnectorDevPreview=true "https://outlook.office.com/owa/#path=/mail&EnableConnectorDevPreview=true")
+1. **Office 365 Connectors** for Groups are currently under developer preview. In order to access them, navigate to **OWA** using the URL [https://outlook.office.com/owa/#path=/mail&EnableConnectorDevPreview=true](https://outlook.office.com/owa/#path=/mail&EnableConnectorDevPreview=true "https://outlook.office.com/owa/#path=/mail&EnableConnectorDevPreview=true")
 
-3. Once you are signed into OWA, locate the Office 365 Groups you are a member of in the lower left navigation.
+1. Once you are signed into OWA, locate the Office 365 Groups you are a member of in the lower left navigation.
 
 	![Groups in OWA](Images/Mod4_Groups.png?raw=true "Groups in OWA")
     
     _Groups in OWA_
 
-4. Create your own unique group by clicking the **+** (plus) sign to the right of the **Groups** title in the left navigation.
+1. Create your own unique group by clicking the **+** (plus) sign to the right of the **Groups** title in the left navigation.
 
 	![Add Group](Images/Mod4_AddGroup.png?raw=true "Add Group")
     
     _Add Group_
 
-5. Provide a **name** and **description** for the new group and click **Create** (optionally add members once the groups has been created).
+1. Provide a **name** and **description** for the new group and click **Create** (optionally add members once the groups has been created).
 
-6. Select **More > Connectors** from the Group's top navigation (if More isn't an option, you might try navigating back to the group using the link in **Step 2**).
+1. Select **More > Connectors** from the Group's top navigation (if More isn't an option, you might try navigating back to the group using the link in **Step 2**).
 
 	![Connectors in group navigation](Images/Mod4_ConnectorsMenu.png?raw=true "Connectors in group navigation")
     
     _Connectors in group navigation_
 
-7. Explore some of the Office 365 Connectors that are available out of the box.
+1. Explore some of the Office 365 Connectors that are available out of the box.
 
 	![OOTB Connectors](Images/Mod4_Connectors.png?raw=true "OOTB Connectors")
     
     _OOTB Connectors_
 
-8. Locate the **Twitter** connector and click **Add**.
+1. Locate the **Twitter** connector and click **Add**.
 
-9. The Twitter connector requires you to sign-in with a Twitter account. To do this, click on the Log in button.
+1. The Twitter connector requires you to sign-in with a Twitter account. To do this, click on the Log in button.
 
 	![Twitter Connector Log in](Images/Mod4_Twitter1.png?raw=true "Twitter Connector Log in")
     
     _Twitter Connector Log in_
 
-10. After authorizing the Office 365 Connector for Twitter, you can select specific **users**/**hashtags** to follow and how **frequently** they show up in the Office 365 Group. Try to follow yourself or a hashtag.
+1. After authorizing the Office 365 Connector for Twitter, you can select specific **users**/**hashtags** to follow and how **frequently** they show up in the Office 365 Group. Try to follow yourself or a hashtag.
 
 	![Configure Twitter Connector](Images/Mod4_Twitter2.png?raw=true "Configure Twitter Connector")
     
     _Configure Twitter Connector_
 
-11. Post a tweet that matches the criteria in Step 10 and see it show up in the Office 365 Group.
+1. Post a tweet that matches the criteria in Step 10 and see it show up in the Office 365 Group.
 
 	![Twitter post via Office 365 Connector](Images/Mod4_Twitter3.png?raw=true "Twitter post via Office 365 Connector")
     
@@ -113,23 +113,23 @@ Hopefully Task 1 helped to illustrate the power of Office 365 Connectors, but di
 
 1. Navigate to the Office 365 Group you created in the previous Task and select **More > Connectors** from the Group's top navigation.
 
-2. Locate the **Incoming Webhook** Connector and click the **Add** button.
+1. Locate the **Incoming Webhook** Connector and click the **Add** button.
 
 	![Incoming Webhook](Images/Mod4_IncomingWebhook.png?raw=true "Incoming Webhook")
     
     _Incoming Webhook_
 
-3. Specify a **name** for the incoming webhook (ex: Build 2016) and click the **Create** button.
+1. Specify a **name** for the incoming webhook (ex: Build 2016) and click the **Create** button.
 
-4. The confirmation screen will display a **URL** that is the webhook end-point we will use later in this Task.
+1. The confirmation screen will display a **URL** that is the webhook end-point we will use later in this Task.
 
 	![Webhook Confirmation](Images/Mod4_IncomingConfirmation.png?raw=true "Webhook Confirmation")
     
     _Webhook Confirmation_
 
-5. Open a new browser tab and navigate to [https://www.hurl.it](https://www.hurl.it "https://www.hurl.it"), which is an in-browser web request composer similar to what Fiddler offers.
+1. Open a new browser tab and navigate to [https://www.hurl.it](https://www.hurl.it "https://www.hurl.it"), which is an in-browser web request composer similar to what Fiddler offers.
 
-6. When the page loads, add the following details:
+1. When the page loads, add the following details:
 	- **Operation**: **POST**
 	- **Destination Address**: **webhook URL** from **Step 4**
 	- **Headers**: **Content-Type: application/json** 
@@ -139,19 +139,19 @@ Hopefully Task 1 helped to illustrate the power of Office 365 Connectors, but di
     
     _Manual Webhook_
 
-7. Accept the **Captcha** and click the **Launch Request** button. You should get a confirmation screen that looks similar to the following.
+1. Accept the **Captcha** and click the **Launch Request** button. You should get a confirmation screen that looks similar to the following.
 
 	![Webhook Manual Confirmation](Images/Mod4_ManualConfirm.png?raw=true "Webhook Manual Confirmation")
     
     _Webhook Manual Confirmation_
 
-8. If you return to the Office 365 Group, you should be able to locate the message you sent into it via the webhook.
+1. If you return to the Office 365 Group, you should be able to locate the message you sent into it via the webhook.
 
 	![Message sent into Group via webhook](Images/Mod4_HookDone.png?raw=true "Message sent into Group via webhook")
     
     _Message sent into Group via webhook_
 
-9. Although you sent a very simple message into the webhook, Office 365 Connectors support a much more complex message format. You can get more details on the message format by visiting [https://dev.outlook.com/Connectors/GetStarted](https://dev.outlook.com/Connectors/GetStarted "https://dev.outlook.com/Connectors/GetStarted").
+1. Although you sent a very simple message into the webhook, Office 365 Connectors support a much more complex message format. You can get more details on the message format by visiting [https://dev.outlook.com/Connectors/GetStarted](https://dev.outlook.com/Connectors/GetStarted "https://dev.outlook.com/Connectors/GetStarted").
 
 <a name="Ex1Task3"></a>
 #### Task 3 - Integreting "Connect to Office 365" into Existing Applications ####
@@ -162,37 +162,37 @@ This Task uses a starter project to serve as the existing application. The appli
 
 1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
 
-2. Double-click the solution file (**BillsListASPNET.sln**) to open the solution in **Visual Studio Community 2015**.
+1. Double-click the solution file (**BillsListASPNET.sln**) to open the solution in **Visual Studio Community 2015**.
 
-3. The starter solution actually has two project...**BillsListASPNET** (the web application) and **BillsListASPNET.Data** (database project). Right-click the **BillsListASPNET.Data** project and select **Publish**.
+1. The starter solution actually has two project...**BillsListASPNET** (the web application) and **BillsListASPNET.Data** (database project). Right-click the **BillsListASPNET.Data** project and select **Publish**.
 
-4. On the **Publish Database** dialog, click on the **Edit** button to configure the connection information.
+1. On the **Publish Database** dialog, click on the **Edit** button to configure the connection information.
 
 	![Publish DB](Images/Mod4_PubDB1.png?raw=true "Publish DB")
     
     _Publish DB_
 
-5. On the **Connection Properties** dialog enter **(localdb)\MSSQLLocalDB** for the **Server name** and click **OK**.
+1. On the **Connection Properties** dialog enter **(localdb)\MSSQLLocalDB** for the **Server name** and click **OK**.
 
 	![Connection Properties](Images/Mod4_DbCon2.png?raw=true "Connection Properties")
     
     _Connection Properties_
 
-6. When you return to the **Publish Database** dialog, click the **Publish** button to publish the database to **LocalDb**.
+1. When you return to the **Publish Database** dialog, click the **Publish** button to publish the database to **LocalDb**.
 
-7. When the database has finished publishing, press **F5** or start the debugger to test the starter project.
+1. When the database has finished publishing, press **F5** or start the debugger to test the starter project.
 
-8. When the application loads, click on **Listings** in the top navigation. This will prompt you to sign-in. Use the **Office 365 account** that was provided to you (it also supports Consumer/MSA accounts like outlook.com, live.com, hotmail.com, etc).
+1. When the application loads, click on **Listings** in the top navigation. This will prompt you to sign-in. Use the **Office 365 account** that was provided to you (it also supports Consumer/MSA accounts like outlook.com, live.com, hotmail.com, etc).
 
-9. The **Listings** view is one of the views we want to modify to support subscriptions to Office 365 Connectors. Notice that listings also have a category link, which is the second view we will add the "**Connect to Office 365**" button.
+1. The **Listings** view is one of the views we want to modify to support subscriptions to Office 365 Connectors. Notice that listings also have a category link, which is the second view we will add the "**Connect to Office 365**" button.
 
 	![Listings](Images/Mod4_Listings.png?raw=true "Listings")
     
     _Listings_
  
-10. Close the browser to stop debugging and open the **Index.cshtml** file located in the web project at **Views\Items**.
+1. Close the browser to stop debugging and open the **Index.cshtml** file located in the web project at **Views\Items**.
 
-11. Copy and paste the following markup at the end of the **H2** element (right after the text "**for sale**").
+1. Copy and paste the following markup at the end of the **H2** element (right after the text "**for sale**").
 
 	````HTML
 	<a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
@@ -200,16 +200,16 @@ This Task uses a starter project to serve as the existing application. The appli
 	</a>  
 	````
 
-12. This snippet will add a "Connect to Office 365" button to the view. It passes the following parameters to Office 365:
+1. This snippet will add a "Connect to Office 365" button to the view. It passes the following parameters to Office 365:
 
 	- **state**: optional state information...in our case we are passing the current view information so we can return to it after the connection has been established with Office 365
 	- **app_name**: the name of the application (ex: BillsList)
 	- **app_logo_url**: the application logo that will be displayed in Office 365 when messages are sent in via webhook
 	- **callback**: the location that Office 365 will return webhook information to after the user has confirmed the connection (ex: https://localhost:44300/callback)
 
-13. Next, open the **Category.cshtml** file located in the web project at **Views\Items**.
+1. Next, open the **Category.cshtml** file located in the web project at **Views\Items**.
 
-14. Copy and paste the following markup at the end of the **H2** element (right after "**@ViewData["category"]**").
+1. Copy and paste the following markup at the end of the **H2** element (right after "**@ViewData["category"]**").
 
 	````HTML
 	<a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList%20(@ViewData["category"])&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
@@ -217,17 +217,17 @@ This Task uses a starter project to serve as the existing application. The appli
 	</a>
 	````
 
-15. This markup snippet is slightly different. It sends a dynamic **app_name** to Office 365 that includes the category the user is subscribing to. This allows the user to subscribe to specific categories instead of ALL listings.
+1. This markup snippet is slightly different. It sends a dynamic **app_name** to Office 365 that includes the category the user is subscribing to. This allows the user to subscribe to specific categories instead of ALL listings.
 
-16. You might recall we are passing in a callback location of **https://localhost:44300/callback** to Office 365. However, the **Callback** controller does not yet exist...let's create it. Right click the **Controllers** folder in the web project and select **Add > Controller**.
+1. You might recall we are passing in a callback location of **https://localhost:44300/callback** to Office 365. However, the **Callback** controller does not yet exist...let's create it. Right click the **Controllers** folder in the web project and select **Add > Controller**.
 
-17. Select **MVC Controller - Empty** for the controller type and name it **CallbackController**.
+1. Select **MVC Controller - Empty** for the controller type and name it **CallbackController**.
 
 	![New Controller](Images/Mod4_CallbackCtrl.png?raw=true "New Controller")
     
     _New Controller_
 
-18. Inside the **CallbackController** class, add the **o365-callbackctrl** code snippet by typing **o365-callbackctrl** and pressing **tab**.
+1. Inside the **CallbackController** class, add the **o365-callbackctrl** code snippet by typing **o365-callbackctrl** and pressing **tab**.
 
 	````C#
 	// GET: Callback
@@ -262,16 +262,16 @@ This Task uses a starter project to serve as the existing application. The appli
 	}
 	````
 
-19. This controller looks for information returned from Office 365 and saves it as a subscription. The specific information passed from Office 365 as parameters include:
+1. This controller looks for information returned from Office 365 and saves it as a subscription. The specific information passed from Office 365 as parameters include:
 
 	- **error**: error details if the connection with Office 365 failed (ex: user rejected the connection)
 	- **state**: the state value that was passed in via the "Connect to Office 365" button. In our case, it could include the category the user subscribed to
 	- **group_name**: the name of the group the user selected to connect to
 	- **webhook_url**: the webhook end-point our application will use to send messages into Office 365
 
-20. Almost done, just need to update the **Create** activity to send messages to the appropriate webhooks. Open the **ItemsController.cs** file located in the **Controllers** folder of the web project.
+1. Almost done, just need to update the **Create** activity to send messages to the appropriate webhooks. Open the **ItemsController.cs** file located in the **Controllers** folder of the web project.
 
-21. Towards the bottom of the class, add the **o365-callwebhook** code snippet by typing **o365-callwebhook** and pressing **tab** (resolve using dependencies if necessary).
+1. Towards the bottom of the class, add the **o365-callwebhook** code snippet by typing **o365-callwebhook** and pressing **tab** (resolve using dependencies if necessary).
 
 	````C#
 	private async Task callWebhook(string webhook, Item item)
@@ -342,9 +342,9 @@ This Task uses a starter project to serve as the existing application. The appli
 	}
 	````
 
-22. This snippet takes the new listing details and sends it to Office 365 via **POST** to the webhook end-point.
+1. This snippet takes the new listing details and sends it to Office 365 via **POST** to the webhook end-point.
 
-23. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
+1. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
 
 	````C#
 	//save the item to the database
@@ -364,21 +364,21 @@ This Task uses a starter project to serve as the existing application. The appli
 	}
 	````
 
-24. It's time to test your work. Press **F5** or start the debugger to launch the application. When you click on **Listings** (and sign-in) the **Listings** view will have a "**Connect to Office 365**" button in the upper right. This button will also display on the **Category** view.
+1. It's time to test your work. Press **F5** or start the debugger to launch the application. When you click on **Listings** (and sign-in) the **Listings** view will have a "**Connect to Office 365**" button in the upper right. This button will also display on the **Category** view.
 
 	![Connect to Office 365 button](Images/Mod4_ConnectTo.png?raw=true "Connect to Office 365 button")
     
     _Connect to Office 365 button_
 
-25. View a specific **Category** and then click on the "**Connect to Office 365**" button. You should be redirected to a screen to select a Office 365 Group to connect to.
+1. View a specific **Category** and then click on the "**Connect to Office 365**" button. You should be redirected to a screen to select a Office 365 Group to connect to.
 
 	![Select group to connect to](Images/Mod4_GroupSelect.png?raw=true "Select group to connect to")
     
     _Select group to connect to_
 
-26. Select an Office 365 Group and click **Allow** to complete establish the connection with Office 365 and return to BillsList.
+1. Select an Office 365 Group and click **Allow** to complete establish the connection with Office 365 and return to BillsList.
 
-27. To test the connection, click on **My Listings** and **Create listing** with the **category** you subscribed to. A Connector **Card** for the listing should almost immediately show up in the Office 365 Group.
+1. To test the connection, click on **My Listings** and **Create listing** with the **category** you subscribed to. A Connector **Card** for the listing should almost immediately show up in the Office 365 Group.
 
 	![Connector card](Images/Mod4_Card.png?raw=true "Connector card")
     
