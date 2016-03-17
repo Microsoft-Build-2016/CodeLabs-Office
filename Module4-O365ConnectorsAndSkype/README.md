@@ -33,23 +33,6 @@ The following is required to complete this module:
 
 > **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.
 
-<a name="Setup" />
-### Setup ###
-In order to run the exercises in this module, you'll need to set up your environment first.
-
-1. Open Windows Explorer and browse to the module's **Source** folder.
-2. Right-click **Setup.cmd** and select **Run as administrator** to launch the setup process that will configure your environment and install the Visual Studio code snippets for this module.
-3. If the User Account Control dialog box is shown, confirm the action to proceed.
-
-> **Note:** Make sure you've checked all the dependencies for this module before running the setup.
-
-<a name="CodeSnippets" />
-### Using the Code Snippets ###
-
-Throughout the module document, you'll be instructed to insert code blocks. For your convenience, most of this code is provided as Visual Studio Code Snippets, which you can access from within Visual Studio 2015 to avoid having to add it manually.
-
->**Note**: Each exercise is accompanied by a starting solution located in the **Begin** folder of the exercise that allows you to follow each exercise independently of the others. Please be aware that the code snippets that are added during an exercise are missing from these starting solutions and may not work until you've completed the exercise. Inside the source code for an exercise, you'll also find an **End** folder containing a Visual Studio solution with the code that results from completing the steps in the corresponding exercise. You can use these solutions as guidance if you need additional help as you work through this module.
-
 ---
 
 <a name="Exercises" />
@@ -179,7 +162,7 @@ Task 2 had you manually register a webhook for an Office 365 Connector. In this 
 
 This Task uses a starter project to serve as the existing application. The application is a Craigslist-style selling site named BillsList. You are tasked with enhancing BillsList to allow users to subscribe to listing categories and send messages to Office 365 Groups when new listings match the subscription criteria. 
 
-1. Open Windows Explorer and browse to the module's **Source > Ex1 > Begin** folder.
+1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
 
 2. Double-click the solution file (**BillsListASPNET.sln**) to open the solution in **Visual Studio Community 2015**.
 
@@ -209,13 +192,15 @@ This Task uses a starter project to serve as the existing application. The appli
     
     _Listings_
  
-10. Close the browser to stop debugging and open the **Index.cshtml** file located in the web project at **Views > Items**.
+10. Close the browser to stop debugging and open the **Index.cshtml** file located in the web project at **Views\Items**.
 
 11. Copy and paste the following markup at the end of the **H2** element (right after the text "**for sale**").
 
-        <a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
-            <img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
-        </a>    
+	````HTML
+	<a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
+		<img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
+	</a>  
+	````
 
 12. This snippet will add a "Connect to Office 365" button to the view. It passes the following parameters to Office 365:
 
@@ -224,13 +209,15 @@ This Task uses a starter project to serve as the existing application. The appli
 	- **app_logo_url**: the application logo that will be displayed in Office 365 when messages are sent in via webhook
 	- **callback**: the location that Office 365 will return webhook information to after the user has confirmed the connection (ex: https://localhost:44300/callback)
 
-13. Next, open the **Category.cshtml** file located in the web project at **Views > Items**.
+13. Next, open the **Category.cshtml** file located in the web project at **Views\Items**.
 
 14. Copy and paste the following markup at the end of the **H2** element (right after "**@ViewData["category"]**").
 
-        <a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList%20(@ViewData["category"])&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
-            <img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
-        </a>
+	````HTML
+	<a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList%20(@ViewData["category"])&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
+		<img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
+	</a>
+	````
 
 15. This markup snippet is slightly different. It sends a dynamic **app_name** to Office 365 that includes the category the user is subscribing to. This allows the user to subscribe to specific categories instead of ALL listings.
 
@@ -244,36 +231,38 @@ This Task uses a starter project to serve as the existing application. The appli
 
 18. Inside the **CallbackController** class, add the **o365-callbackctrl** code snippet by typing **o365-callbackctrl** and pressing **tab**.
 
-        // GET: Callback
-        public ActionResult Index()
-        {
-            var error = Request["error"];
-            var state = Request["state"];
-            if (!String.IsNullOrEmpty(error))
-            {
-                return RedirectToAction("Error", "Home", null);
-            }
-            else
-            {
-                var group = Request["group_name"];
-                var webhook = Request["webhook_url"];
-                Subscription sub = new Subscription();
-                sub.GroupName = group;
-                sub.WebHookUri = webhook;
+	````C#
+	// GET: Callback
+	public ActionResult Index()
+	{
+		var error = Request["error"];
+		var state = Request["state"];
+		if (!String.IsNullOrEmpty(error))
+		{
+			 return RedirectToAction("Error", "Home", null);
+		}
+		else
+		{
+			 var group = Request["group_name"];
+			 var webhook = Request["webhook_url"];
+			 Subscription sub = new Subscription();
+			 sub.GroupName = group;
+			 sub.WebHookUri = webhook;
 
-                //set optional category
-                if (state.IndexOf("?c=") != -1)
-                    sub.Category = state.Substring(state.IndexOf("?c=") + 3);
+			 //set optional category
+			 if (state.IndexOf("?c=") != -1)
+				  sub.Category = state.Substring(state.IndexOf("?c=") + 3);
 
-                //save the subscription
-                using (BillsListEntities entities = new BillsListEntities())
-                {
-                    entities.Subscriptions.Add(sub);
-                    entities.SaveChanges();
-                    return Redirect(state);
-                }
-            }
-        }
+			 //save the subscription
+			 using (BillsListEntities entities = new BillsListEntities())
+			 {
+				  entities.Subscriptions.Add(sub);
+				  entities.SaveChanges();
+				  return Redirect(state);
+			 }
+		}
+	}
+	````
 
 19. This controller looks for information returned from Office 365 and saves it as a subscription. The specific information passed from Office 365 as parameters include:
 
@@ -286,92 +275,96 @@ This Task uses a starter project to serve as the existing application. The appli
 
 21. Towards the bottom of the class, add the **o365-callwebhook** code snippet by typing **o365-callwebhook** and pressing **tab** (resolve using dependencies if necessary).
 
-        private async Task callWebhook(string webhook, Item item)
-        {
-            var imgString = "https://billslist.azurewebsites.net/images/logo_40.png";
-            if (Request.Files.Count > 0)
-            {
-                //resize the image
-                Request.Files[0].InputStream.Position = 0;
-                Image img = Image.FromStream(Request.Files[0].InputStream);
-                var newImg = (Image)(new Bitmap(img, new Size(40, 40)));
+	````C#
+	private async Task callWebhook(string webhook, Item item)
+	{
+		var imgString = "https://billslist.azurewebsites.net/images/logo_40.png";
+		if (Request.Files.Count > 0)
+		{
+			 //resize the image
+			 Request.Files[0].InputStream.Position = 0;
+			 Image img = Image.FromStream(Request.Files[0].InputStream);
+			 var newImg = (Image)(new Bitmap(img, new Size(40, 40)));
 
-                //convert the stream
-                using (var stream = new System.IO.MemoryStream())
-                {
-                    newImg.Save(stream, ImageFormat.Jpeg);
-                    stream.Position = 0;
-                    var bytes = new byte[stream.Length];
-                    stream.Read(bytes, 0, bytes.Length);
-                    imgString = "data:image/jpg;base64, " + Convert.ToBase64String(bytes);
-                }
-            }
+			 //convert the stream
+			 using (var stream = new System.IO.MemoryStream())
+			 {
+				  newImg.Save(stream, ImageFormat.Jpeg);
+				  stream.Position = 0;
+				  var bytes = new byte[stream.Length];
+				  stream.Read(bytes, 0, bytes.Length);
+				  imgString = "data:image/jpg;base64, " + Convert.ToBase64String(bytes);
+			 }
+		}
 
-            //prepare the json payload
-            var json = @"
-                {
-                    'summary': 'A new listing was posted to BillsList',
-                    'sections': [
-                        {
-                            'activityTitle': 'New BillsList listing',
-                            'activitySubtitle': '" + item.Title + @"',
-                            'activityImage': '" + imgString + @"',
-                            'facts': [
-                                {
-                                    'name': 'Category',
-                                    'value': '" + item.Category + @"'
-                                },
-                                {
-                                    'name': 'Price',
-                                    'value': '$" + item.Price + @"'
-                                },
-                                {
-                                    'name': 'Listed by',
-                                    'value': '" + item.Owner + @"'
-                                }
-                            ]
-                        }
-                    ],
-                    'potentialAction': [
-                        {
-                            '@context': 'http://schema.org',
-                            '@type': 'ViewAction',
-                            'name': 'View in BillsList',
-                            'target': [
-                                'https://localhost:44300/items/detail/" + item.Id + @"'
-                            ]
-                        }
-                    ]}";
+		//prepare the json payload
+		var json = @"
+			 {
+				  'summary': 'A new listing was posted to BillsList',
+				  'sections': [
+						{
+							 'activityTitle': 'New BillsList listing',
+							 'activitySubtitle': '" + item.Title + @"',
+							 'activityImage': '" + imgString + @"',
+							 'facts': [
+								  {
+										'name': 'Category',
+										'value': '" + item.Category + @"'
+								  },
+								  {
+										'name': 'Price',
+										'value': '$" + item.Price + @"'
+								  },
+								  {
+										'name': 'Listed by',
+										'value': '" + item.Owner + @"'
+								  }
+							 ]
+						}
+				  ],
+				  'potentialAction': [
+						{
+							 '@context': 'http://schema.org',
+							 '@type': 'ViewAction',
+							 'name': 'View in BillsList',
+							 'target': [
+								  'https://localhost:44300/items/detail/" + item.Id + @"'
+							 ]
+						}
+				  ]}";
 
-            //prepare the http POST
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            using (var response = await client.PostAsync(webhook, content))
-            {
-                //TODO: check response.IsSuccessStatusCode
-            }
-        }
+		//prepare the http POST
+		HttpClient client = new HttpClient();
+		client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+		var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+		using (var response = await client.PostAsync(webhook, content))
+		{
+			 //TODO: check response.IsSuccessStatusCode
+		}
+	}
+	````
 
 22. This snippet takes the new listing details and sends it to Office 365 via **POST** to the webhook end-point.
 
 23. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
 
-        //save the item to the database
-        using (BillsListEntities entities = new BillsListEntities())
-        {
-            entities.Items.Add(item);
-            var id = entities.SaveChanges();
+	````C#
+	//save the item to the database
+	using (BillsListEntities entities = new BillsListEntities())
+	{
+		entities.Items.Add(item);
+		var id = entities.SaveChanges();
 
-            //loop through subscriptions and call webhooks for each
-            var subs = entities.Subscriptions.Where(i => i.Category == null || i.Category == item.Category);
-            foreach (var sub in subs)
-            {
-                await callWebhook(sub.WebHookUri, item);
-            }
+		//loop through subscriptions and call webhooks for each
+		var subs = entities.Subscriptions.Where(i => i.Category == null || i.Category == item.Category);
+		foreach (var sub in subs)
+		{
+			 await callWebhook(sub.WebHookUri, item);
+		}
 
-            return RedirectToAction("Detail", new { id = item.Id });
-        }
+		return RedirectToAction("Detail", new { id = item.Id });
+	}
+	````
 
 24. It's time to test your work. Press **F5** or start the debugger to launch the application. When you click on **Listings** (and sign-in) the **Listings** view will have a "**Connect to Office 365**" button in the upper right. This button will also display on the **Category** view.
 
