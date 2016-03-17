@@ -1,4 +1,4 @@
-<a name="HOLTop" />
+﻿<a name="HOLTop" />
 # Mobile Development and the Microsoft Graph #
 
 ---
@@ -40,24 +40,24 @@ The following is required to complete this module:
 ## Exercises ##
 This module includes the following exercises:
 
-1. [Get Familiar with Solution](#Exercise1)
-1. [Register App with Azure AD](#Exercise2)
-1. [Implement ADAL Plug-in for Authentication](#Exercise3)
-1. [Use Microsoft Graph to load Office 365 Groups](#Exercise4)
+1. [Getting Familiar with the Solution](#Exercise1)
+1. [Registering the App with Azure AD](#Exercise2)
+1. [Implementing the ADAL plug-in for Authentication](#Exercise3)
+1. [Using Microsoft Graph to load Office 365 Groups](#Exercise4)
 
 Estimated time to complete this module: **60 minutes**
 
 >**Note:** When you first start Visual Studio, you must select one of the predefined settings collections. Each predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this module describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in the steps that you should take into account.
 
 <a name="Exercise1"></a>
-### Exercise 1: Get Familiar with Solution ###
+### Exercise 1: Getting Familiar with Solution ###
 
 In this module you will build a native mobile application using the **Apache Cordova**, which is framework for building cross-platform mobile applications using client-side web development. Apache Cordova apps are installed like other native apps and have a rich ecosystem of plug-ins to perform advanced device-specific operations. The Visual Studio Tools for Apache Cordova allow Apache Cordova apps to be built and tested in Visual Studio.
 
 This exercise uses a starter project with basic project scaffolding pre-configured. The solution uses the **Ionic Framework** and **AngularJS** to facilitate the app design and functionality. Ionic is an open source front-end SDK that makes it incredibly easy to build beautiful and interactive mobile apps with Apache Cordova. You do not need any prior experience with Apache Cordova, Ionic, or AngularJS to complete this module.
 
 <a name="Ex1Task1"></a>
-#### Task 1 - Explore the Solution ####
+#### Task 1 - Exploring the Solution ####
 In this tasks you will explore the starter solution in Visual Studio and get familiar with the project structure of a project leveraging **Apache Cordova**, **Ionic**, and **AngularJS**.
 
 1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
@@ -67,9 +67,9 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 1. Bring up **Solution Explorer** to familiarize yourself with the project scaffolding.
 
 	![Starter project in Solution Explorer](Images/Mod1_SlnExplorer.png?raw=true "Starter project in Solution Explorer")
-	
+
 	_Starter project in Solution Explorer_
-	
+
 1. Open and explore the **config.xml** file, which contains the configuration for the app, including app details (name, icons, splash screens) and plug-ins. Click on the different links in the left navigation to get an idea of the different configuration settings available.
 
 1. The **www** folder contains all the web artifacts that make up the user interface of an Apache Cordova application. Expand this folder and open the **Index.html** file. This application is considered a **Single-Page Application** (**SPA**). A SPA displays a single HTML page (**Index.html**) in which partial views are dynamically loaded into. In this application, the dynamic partial views are loaded into the **ion-nav-view** directive on **Line 16**.
@@ -136,7 +136,7 @@ In this tasks you will explore the starter solution in Visual Studio and get fam
 	(function () {
 		"use strict";
 
-		angular.module("myapp", ["ionic", 
+		angular.module("myapp", ["ionic",
 			"myapp.controllers", "myapp.services"])
 	````
 
@@ -167,7 +167,7 @@ In this task, you will explore the debugging options for an Apache Cordova proje
 1. Look at the debugging toolbar in Visual Studio Community 2015 and locate the **Solution Platform** and **Debug Target** options.
 
 	![Solution Platform and Debug Tagets](Images/Mod1_Targets.png?raw=true "Solution Platform and Debug Tagets")
-	
+
 	_Solution Platform and Debug Tagets_
 
 1. The **Solution Platform** dropdown allows you to select a platform target. It should have options for **Android**, **iOS**, **Windows Phone (Universal)**, **Windows Phone 8**, **Windows-AnyCPU**, **Windows-ARM**, **Windows-x64**, and **Windows-x86**. Each **Solution Platform** has its own unique **Debug Target** options. Look at some of the different **Debug Target** options by selecting different **Solution Platforms**. Note that most of the options allow for both emulator and physical device debugging options.
@@ -179,18 +179,18 @@ In this task, you will explore the debugging options for an Apache Cordova proje
 1. Once the emulator launches and Android boots, the application should automatically launch with the Visual Studio debugger attached. Right now the application doesn't do much as it has hard-coded group data. This completes **Exercise 1**, but you might keep the emulator up for subsequent exercises.
 
 	![Start project with hard-coded groups](Images/Mod1_Debug1.png?raw=true "Start project with hard-coded groups")
-	
+
 	_Start project with hard-coded groups_
 
 >**Note**: It might take a few minutes for the emulator to completely boot up Android. If the User Account Control dialog box is shown for Hyper-V related escalation, confirm the action to proceed.
 
 <a name="Exercise2"></a>
-### Exercise 2: Register App with Azure AD ###
+### Exercise 2: Registering the App with Azure AD ###
 
 Now that you are familiar with the project structure, it's time to convert the application to authenticate against Azure Active Directory and call into the Microsoft Graph. In this exercise, you'll register an application in Azure AD and capture app details that will be used in subsequent exercises.
 
 <a name="Ex2Task1"></a>
-#### Task 1 - Register the App ####
+#### Task 1 - Registering the App ####
 
 In this task, you'll go through the steps of registering an app in Azure AD using the **Office 365 App Registration Tool**. You can also register apps in the **Azure Management Portal**, but the **Office 365 App Registration Tool** allows you to register applications without having access to the **Azure Management Portal**.
 
@@ -199,7 +199,7 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
 	![Office 365 App Registration Tool sign-in](Images/Mod1_AppRegSignin.png?raw=true "Office 365 App Registration Tool sign-in")
-	
+
 	_Office 365 App Registration Tool sign-in_
 
 1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
@@ -208,20 +208,20 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 	- **App type**: **Native**
 	- **Redirect URI**: **http://localhost:8000**
 	- **App permissions**: **Groups.Read.All**
- 
+
 1. Once the app registration is complete, the app registration page should display registration confirmation that includes a **Client ID** (below the **Register App** button). Copy this **Client ID** (or leave the browser up) for use in the next exercise.
 
 	![App registration confirmation with Client ID](Images/Mod1_AppRegConfirm.png?raw=true "App registration confirmation with Client ID")
-	
+
 	_App registration confirmation with Client ID_
 
 <a name="Exercise3"></a>
-### Implement ADAL Plug-in for Authentication ###
+### Exercise 3: Implementing the ADAL plug-in for Authentication ###
 
 In this exercise, you'll take the application registration from Exercise 2 and leverage it with the Apache Cordova mobile app in Visual Studio. This involves adding the Azure Active Directory Authentication Library (ADAL) plug-in and writing some script against ADAL in our project.
 
 <a name="Ex3Task1"></a>
-#### Task 1 - Adding the ADAL Plugin ####
+#### Task 1 - Adding the ADAL plug-in ####
 
 In this task, you'll add the Azure Active Directory Authentication Library (ADAL) plug-in for Apache Cordova to the project.
 
@@ -230,10 +230,10 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 1. Click on the **Plugins** link in the side navigation of the configuration screen. The **Plugins** view allows you to add powerful plug-ins to your Apache Cordova project. There are a number of popular "**Core**" plug-ins listed, but you can also import local plug-ins or plug-ins from Git using the **Custom** option. Locate the **Active Directory Authentication Library (ADAL)** plugin and click the **Add** button.
 
 	![ADAL Cordova plug-in](Images/Mod1_ADAL.png?raw=true "ADAL Cordova plug-in")
-	
+
 	_ADAL Cordova plug-in_
 
-1. Once the **ADAL** plug-in finishes downloading, open the **services.js** file located in the **www\app** folder. 
+1. Once the **ADAL** plug-in finishes downloading, open the **services.js** file located in the **www\app** folder.
 
 1. Right before the return statement on **Line 31**, insert the app settings code snippet by typing **o365-appsettings** and pressing **tab**. This will insert some private variable into the module that contain details about your app. You should update the value **aadAppClientId** to the **Client ID** you received when registering your application in **Exercise 2** (also update **aadAppRedirect** if you did not go with the default value of **http://localhost:8000**).
 
@@ -273,27 +273,27 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 1. When the app loads, it should display an Office 365 sign-in screen. You didn't have to build a sign-in screen...ADAL provided you with one. Sign-in using your Office 365 account or the one that was provided to you.
 
 	![Sign-in via ADAL plug-in](Images/Mod1_Signin.png?raw=true "Sign-in via ADAL plug-in")
-	
+
 	_Sign-in via ADAL plug-in_
 
 1. After you sign-in, the you will be prompted to consent to the permissions the mobile app is requesting (that you configured when you registered the app). Click the **Accept** button to consent to the application permissions.
 
 	![Consent via ADAL plug-in](Images/Mod1_Consent.png?raw=true "Consent via ADAL plug-in")
-	
+
 	_Consent via ADAL plug-in_
 
-1. After consenting the application, the ADAL will close all the Azure AD screens and return to the home view of the application. The groups displayed are still hard-coded, but that will change in **Exercise 4**. 
+1. After consenting the application, the ADAL will close all the Azure AD screens and return to the home view of the application. The groups displayed are still hard-coded, but that will change in **Exercise 4**.
 
 	> **Note:** Once you consent to the application, you won't be prompted again for consent (unless you delete the consent). You also won't be prompted to sign-in next time you launch the app, as the ADAL plug-in automatically handles token caching. You should only be prompted sign-in after your token invalidates (ex: Office 365 password changes), you go 14 days without launching the app, or after 90 days of continual use.
 
 
 <a name="Exercise4"></a>
-### Exercise 4: Use Microsoft Graph to load Office 365 Groups ###
+### Exercise 4: Using the Microsoft Graph to load Office 365 Groups ###
 
 In this exercise, you'll take the token you acquired in Exercise 3 and use it to call into the Microsoft Graph to query data stored in Office 365. Specifically, you will query the new Office 365 groups and group photos.
 
 <a name="Ex4Task1"></a>
-#### Task 1 - Query Office 365 Groups with the Microsoft Graph ####
+#### Task 1 - Querying Office 365 Groups with the Microsoft Graph ####
 
 In this task, you'll replace the hard-coded groups with actual group data from Office 365 by calling the Microsoft Graph.
 
@@ -306,13 +306,13 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 		"use strict";
 
 		angular.module("myapp.services", [])
-		.factory("myappService", ["$rootScope", "$http", "$q", 
+		.factory("myappService", ["$rootScope", "$http", "$q",
 			function ($rootScope, $http, $q) {
 				var myappService = {};
 				...
 	````
 
-1. Locate the **getGroups** function and update it to use **$http** to **GET** the current user's joined groups with the Microsoft Graph (**https://graph.microsoft.com/beta/me/joinedgroups**). This operation should be completed directly after the call to **getTokenForResource**.
+1. Locate the **getGroups** function and update it to use **http** to **GET** the current user's joined groups with the Microsoft Graph [graph.microsoft.com/beta/me/joinedgroups](https://graph.microsoft.com/beta/me/joinedgroups). This operation should be completed directly after the call to **getTokenForResource**.
 
 	````JavaScript
 	myappService.getGroups = function () {
@@ -384,7 +384,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 1. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. All groups should display the same generic group photo, but in **Task 2** you will update the app the lazy load the actual group photos.
 
 	![App with groups using Microsoft Graph](Images/Mod1_Debug2.png?raw=true "App with groups using Microsoft Graph")
-	
+
 	_App with groups using Microsoft Graph_
 
 <a name="Ex4Task2"></a>
@@ -504,9 +504,9 @@ In this task, you'll update the solution to lazy load group photos by calling th
 1. When the app loads, it should display a waiting indicator before loading the Office 365 groups you are a member of. The groups will initially load with the generic group.png image, but will later load the actual group photos from Office 365.
 
 	![Groups with group photos loaded through Microsoft Graph](Images/Mod1_Debug3.png?raw=true "Groups with group photos loaded through Microsoft Graph")
-	
+
 	_Groups with group photos loaded through Microsoft Graph_
-	
+
 <a name="Summary" />
 ## Summary ##
 
