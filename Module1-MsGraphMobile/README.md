@@ -196,13 +196,13 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 
 1. Open a browser and navigate to the **Office 365 App Registration Tool** at **[http://dev.office.com/app-registration](http://dev.office.com/app-registration "http://dev.office.com/app-registration")**.
 
-1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
+1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
 	![Office 365 App Registration Tool sign-in](Images/Mod1_AppRegSignin.png?raw=true "Office 365 App Registration Tool sign-in")
 
 	_Office 365 App Registration Tool sign-in_
 
-1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
+1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click **Register App**.
 
 	- **App name**: **MobileGraphExplorer**
 	- **App type**: **Native**
@@ -227,7 +227,7 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 
 1. Locate and open the **config.xml** file in the root of the project to open the Apache Cordova project configuration screen.
 
-1. Click on the **Plugins** link in the side navigation of the configuration screen. The **Plugins** view allows you to add powerful plug-ins to your Apache Cordova project. There are a number of popular "**Core**" plug-ins listed, but you can also import local plug-ins or plug-ins from Git using the **Custom** option. Locate the **Active Directory Authentication Library (ADAL)** plugin and click the **Add** button.
+1. Click on the **Plugins** link in the side navigation of the configuration screen. The **Plugins** view allows you to add powerful plug-ins to your Apache Cordova project. There are a number of popular "**Core**" plug-ins listed, but you can also import local plug-ins or plug-ins from Git using the **Custom** option. Locate the **Active Directory Authentication Library (ADAL)** plugin and click **Add**.
 
 	![ADAL Cordova plug-in](Images/Mod1_ADAL.png?raw=true "ADAL Cordova plug-in")
 
@@ -276,7 +276,7 @@ In this task, you'll add the Azure Active Directory Authentication Library (ADAL
 
 	_Sign-in via ADAL plug-in_
 
-1. After you sign-in, the you will be prompted to consent to the permissions the mobile app is requesting (that you configured when you registered the app). Click the **Accept** button to consent to the application permissions.
+1. After you sign-in, the you will be prompted to consent to the permissions the mobile app is requesting (that you configured when you registered the app). Click **Accept** to consent to the application permissions.
 
 	![Consent via ADAL plug-in](Images/Mod1_Consent.png?raw=true "Consent via ADAL plug-in")
 
