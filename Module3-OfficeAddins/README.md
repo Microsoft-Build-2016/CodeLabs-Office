@@ -41,7 +41,7 @@ This module includes the following exercises:
 
 1. [Converting Web Application to Mail Add-in](#Exercise1)
 1. [Using Yeoman to Generate Office Add-in Projects](#Exercise2)
-1. [Connecting to the Microsoft Graph from Add-in](#Exercise2)
+1. [Connecting to the Microsoft Graph from Add-in](#Exercise3)
 
 Estimated time to complete this module: **60 minutes**
 
