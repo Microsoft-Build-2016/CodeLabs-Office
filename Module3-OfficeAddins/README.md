@@ -39,7 +39,7 @@ The following is required to complete this module:
 ## Exercises ##
 This module includes the following exercises:
 
-1. [Converting Web Application to Mail Add-in](#Exercise1)
+1. [Converting a Web App to a Mail Add-in](#Exercise1)
 1. [Using Yeoman to Generate Office Add-in Projects](#Exercise2)
 1. [Connecting to the Microsoft Graph from Add-in](#Exercise3)
 
@@ -48,7 +48,7 @@ Estimated time to complete this module: **60 minutes**
 >**Note:** When you first start Visual Studio, you must select one of the predefined settings collections. Each predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this module describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in the steps that you should take into account.
 
 <a name="Exercise1"></a>
-### Exercise 1: Converting Web Application to Mail Add-in ###
+### Exercise 1: Converting a Web App to a Mail Add-in ###
 
 Mail Add-ins provide a powerful and contextual extension to Microsoft Outlook and Outlook Web Access (OWA). Contextual, because these add-ins can function different for each message or appointment they are launched against. These add-ins can be used in Read scenarios (for existing items in your inbox) and Compose scenarios (for new messages and appointments). In this Exercise, you will convert an existing ASP.NET MVC application to host a Mail Add-in.
 
@@ -65,7 +65,7 @@ In this task, you will get the starter project up and running, then convert it t
 
 1. The solution contains two projects. **MailCRM** is an ASP.NET MVC app that hosts all the web components of the solution. **MailCRM.Data** is a data project the defined the data model for the solution. You need to publish the database to **LocalDB**. Right-click the **MailCRM.Data** project and select **Publish**.
 
-1.  On the **Publish Database** dialog, click on the **Edit** button to configure the connection information.
+1.  On the **Publish Database** dialog, click **Edit** to configure the connection information.
 
 	![Publish database](Images/Mod3_PubDB1.png?raw=true "Publish database")
 
@@ -77,7 +77,7 @@ In this task, you will get the starter project up and running, then convert it t
 
     _Database connection properties_
 
-1. When you return to the **Publish Database** dialog, click the **Publish** button to publish the database to **LocalDb**.
+1. When you return to the **Publish Database** dialog, click **Publish** to publish the database to **LocalDb**.
 
 1. With the database published, you should be able to test the web application. Press **F5** or start the debugger the launch the web application. Right now, the application should be blank, but this is an activity feed that will show real-time comments made on contacts.
 
@@ -117,7 +117,7 @@ In this task, you will get the starter project up and running, then convert it t
 
     _Add view_
 
-1. On the **Add View** dialog provide a **View name** of **Agave** and click the **Add** button.
+1. On the **Add View** dialog provide a **View name** of **Agave** and click **Add**.
 
 	![Add agave view](Images/Mod3_AgaveView.png?raw=true "Add agave view")
 
@@ -326,7 +326,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
     _Localhost_
 
-1. If your browser displays certificate warning, click the option to **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate**.
+1. If your browser displays certificate warning, click **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate**.
 
 	![Certificate Error](Images/Mod3_CertError.png?raw=true "Certificate Error")
 
@@ -346,13 +346,13 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
     _New Excel Workbook_
 
-1. In **Excel Online**, select the **Insert** tab in the ribbon and then click the **Office Add-ins** button.
+1. In **Excel Online**, select the **Insert** tab in the ribbon and then click **Office Add-ins**.
 
 	![Insert Add-in](Images/Mod3_InsertAddin.png?raw=true "Insert Add-in")
 
     _Insert Add-in_
 
-1. In the **Office Add-ins** dialog, locate and click the **Manage My Add-ins** link the upper right (near the **Refresh** link).
+1. In the **Office Add-ins** dialog, locate and click **Manage My Add-ins**, the upper right (near the **Refresh** link).
 
 	![Manage Add-ins](Images/Mod3_ManageAddins.png?raw=true "Manage Add-ins")
 
@@ -376,13 +376,13 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
 1. Right-click the new folder and select **Properties** from the bottom of the menu.
 
-1. In the **Properties** dialog, select the **Sharing** tab and then click the **Share** button.
+1. In the **Properties** dialog, select the **Sharing** tab and then click **Share**.
 
 	![Properties](Images/Mod3_Share.png?raw=true "Properties")
 
     _Properties_
 
-1. In the **File Sharing** dialog, click the **Share** button to create the share.
+1. In the **File Sharing** dialog, click **Share** to create the share.
 
 	![Share](Images/Mod3_Share2.png?raw=true "Share")
 
@@ -398,7 +398,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
 1. Select **File > Options** to launch the **Excel Options** dialog.
 
-1. Locate the **Trust Center** link in the left navigation and then click on the **Trust Center Settings** button to launch the **Trust Center** dialog.
+1. Locate the **Trust Center** link in the left navigation and then click **Trust Center Settings** to launch the **Trust Center** dialog.
 
 1. In the **Trust Center** dialog, select **Trusted Add-in Catalogs** from the left navigation and add the network file share location from **Step 17** to the **Trusted Catalogs Table**. Make sure you check the **Show in Menu** checkbox.
 
@@ -426,13 +426,13 @@ In this task, you'll go through the steps of registering an app in Azure AD usin
 
 1. Open a browser and navigate to the **Office 365 App Registration Tool** at **[http://dev.office.com/app-registration](http://dev.office.com/app-registration "http://dev.office.com/app-registration")**.
 
-1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click the **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
+1. The **Office 365 App Registration Tool** welcome screen will give you the option to use an existing Office 365 tenant or create a new Office 365 tenant. Click **Sign in with your Office 365 account** and use your Office 365 account or the one that was provided to you.
 
 	![App registration sign-in](Images/Mod3_AppRegSignin.png?raw=true "App registration sign-in")
 
     _App registration sign-in_
 
-1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click the **Register App** button:
+1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click **Register App**:
 
 	- **App name**: **Contact Cleanup**
 	- **App type**: **Web**
