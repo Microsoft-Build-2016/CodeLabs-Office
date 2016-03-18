@@ -40,8 +40,8 @@ The following is required to complete this module:
 This module includes the following exercises:
 
 1. [Converting a Web App to a Mail Add-in](#Exercise1)
-1. [Using Yeoman to Generate Office Add-in Projects](#Exercise2)
-1. [Connecting to the Microsoft Graph from Add-in](#Exercise3)
+1. [Using Yeoman to generate Office Add-in projects](#Exercise2)
+1. [Connecting to the Microsoft Graph from the Add-in](#Exercise3)
 
 Estimated time to complete this module: **60 minutes**
 
@@ -249,7 +249,7 @@ In the final task for this exercise, you will update the add-in manifest to leve
     _Mail add-in as task pane_
 
 <a name="Exercise2"></a>
-### Exercise 2: Using Yeoman to Generate Office Add-in Projects ###
+### Exercise 2: Using Yeoman to generate Office Add-in projects ###
 
 In Exercise 1, you leveraged Visual Studio to build an Office Add-in. Visual Studio provides the premier experience for development Office Add-ins. However, Microsoft offers a number of open source tools to develop Office Add-ins outside of Visual Studio.
 
@@ -262,13 +262,13 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 1. Press the Windows start button and type Node.js, then locate and open the **Node.js command prompt** in the search results.
 
-1. Change directories the C:\Project folder.
+1. Change directories to the C:\Project folder.
 
 	````CMD
 	cd C:\Projects
 	````
 
-1. Create a new directory for your Office Add-in named **ContactCleanup**
+1. Create a new directory for your Office Add-in named **ContactCleanup**.
 
 	````CMD
 	mkdir ContactCleanup
@@ -310,7 +310,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
 1. Return to the command prompt you used in the previous task. It should be opened to the project folder, but if no, change directories to that location.
 
-1. Next, **gulp serve-static** in command window to allow a Gulp task to host the web application on port **8443**.
+1. Next, run **gulp serve-static** in the command window to allow a Gulp task to host the web application on port **8443**.
 
 	````CMD
 	gulp serve-static
@@ -415,9 +415,9 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 	>**NOTE:** A SharePoint App Catalog is a much more "Enterprise" approach for hosting add-ins. SharePoint makes it easier to manage add-in permissions and helps with the entire add-in lifecycle and license management. Network file shares can be more convenient for developers as was the case in this exercise. Regardless of catalog choise, Group Policy can be used to automatically configure Office for the enterprise (ultimately handling this entire task of the exercise).
 
 <a name="Exercise3"></a>
-### Exercise 3: Connecting to the Microsoft Graph from Add-in ###
+### Exercise 3: Connecting to the Microsoft Graph from the Add-in ###
 
-Microsoft strategy around Office extensibility has focused on add-ins and APIs. So far, this module has focused completely on add-ins. In this last exercise you will combine the two by calling into the Microsoft Graph from your add-in.
+Microsoft strategy around Office extensibility has focused on add-ins and APIs. So far, this module has focused completely on add-ins. In this last exercise, you will combine the two by calling into the Microsoft Graph from your add-in.
 
 <a name="Ex3Task1"></a>
 #### Task 1 - Registering the Application with Azure AD ####
@@ -467,7 +467,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 
 1. Next, open a command prompt to the location of your Office add-in project you started with Yeoman. If you need to stop the Gulp task, press Ctrl-C.
 
-1. Install the **adal-angular** module by typing the command listed below in the command prompt:
+1. Install the **adal-angular** module by typing the command listed below in the command prompt.
 
 	````CMD
 	bower install adal-angular --save
