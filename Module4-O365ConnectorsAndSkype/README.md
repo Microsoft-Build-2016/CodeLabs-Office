@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <a name="HOLTop" />
 # Integrating Conversations with Skype and Office 365 Connectors #
 
@@ -774,7 +773,25 @@ By completing this module, you should have:
 - Skype-enabled and existing web application using the Skype Web SDK.
 
 > **Note:** You can take advantage of the [Visual Studio Dev Essentials]( https://www.visualstudio.com/en-us/products/visual-studio-dev-essentials-vs.aspx) subscription in order to get everything you need to build and deploy your app on any platform.
-=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+= this looks like updates that did not merge nicely
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = 
+
 <a name="HOLTop" />
 # Integrating Conversations with Skype and Office 365 Connectors #
 
