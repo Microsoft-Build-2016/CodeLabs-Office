@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Simple Skype Client</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="content/app.css">
+</head>
+<body ng-app="helpdesk">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/tickets">Helpdesk</a>
+        </div>
+    </nav>
+    <div class="container" ng-view></div>
+    
+    <!-- JQuery and Bootstrap references -->
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Skype reference -->
+    <script src="https://swx.cdn.skype.com/shared/v/latest/SkypeBootstrap.min.js"></script>
+    
+    <!-- Angular references -->
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-route/angular-route.js"></script>
+    
+    <!-- ADAL references -->
+    <script type="text/javascript" src="lib/adal-angular/dist/adal.min.js"></script>
+    <script type="text/javascript" src="lib/adal-angular/dist/adal-angular.min.js"></script>
+    
+    <!-- App scripts -->
+    <script type="text/javascript" src="app/factory.js"></script>
+    <script type="text/javascript" src="app/skype.js"></script>
+    <script type="text/javascript" src="app/controllers.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+</body>
+</html>

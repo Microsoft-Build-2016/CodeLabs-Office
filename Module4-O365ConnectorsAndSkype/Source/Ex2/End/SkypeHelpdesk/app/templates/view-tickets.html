@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="media">
+        <div class="media-left">
+            <img class="media-object img-circle" ng-src="{{pic}}">
+        </div>
+        <div class="media-body">
+            <h2 class="media-heading">My Assigned Tickets</h2>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Created By</th>
+                <th>Title</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="ticket in tickets">
+                <td>
+                    <span class="badge" ng-class="ticket.created_by.status" ng-click="startChat(ticket)"><span class="glyphicon glyphicon-minus"></span></span>
+                    <span>{{ticket.created_by.name}}</span>
+                </td>
+                <td>{{ticket.title}}</td>
+                <td>{{ticket.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="chatWindow" ng-class="{'show': showChatWindow}">
+    <span class="glyphicon glyphicon-remove close-chat" ng-click="closeChatWindow()"></span>
+    <div id="chatWindowInner"></div>
+</div>

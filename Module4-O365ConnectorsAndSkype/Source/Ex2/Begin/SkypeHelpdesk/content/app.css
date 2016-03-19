@@ -1,0 +1,79 @@
+body {
+    overflow: hidden;    
+}
+.alert {
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    padding: 5px;  
+}
+
+.badge {
+    border: 1px solid #fff;
+}
+
+.Online {
+    background-color: green !important;
+    color: green !important;
+    cursor: pointer;
+}
+
+.Busy {
+    background-color: red !important;
+    color: red !important;
+    cursor: pointer;
+}
+
+.Idle, .IdleOnline, .Away, .BeRightBack {
+    background-color: gold !important;
+    color: gold;
+    cursor: pointer;
+}
+
+.DoNotDisturb {
+    background-color: red !important;
+    color:  white !important;
+}
+
+.Offline, .Unknown, .Hidden {
+    background-color: grey !important;
+    color: grey !important;
+}
+
+#chatWindow {
+    position: absolute;
+    width: 520px;
+    top: 0px;
+    bottom: 0px;
+    right: -520px;
+    background: #222;
+    border-left: 1px solid #ddd;
+    transition: 0.5s linear all;
+}
+
+#chatWindow.show {
+    transition: 0.5s linear all;
+    right: 0px;
+}
+
+#chatWindowInner {
+    position: absolute;
+    width: 500px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #fff;
+}
+
+.close-chat {
+    color: #fff; 
+    font-size: 20px;
+}
+
+.media-heading {
+    padding-top: 8px;
+}
+
+.media-object {
+    width: 50px;
+    height: 50px;
+}

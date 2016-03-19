@@ -1,0 +1,25 @@
+{
+  "name": "MyContacts",
+  "homepage": "https://github.com/richdizz/O365BuildWorkshops",
+  "authors": [
+    "richdizz <richdizz@outlook.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "*",
+    "angular-route": "~1.5.0",
+    "adal-angular": "~1.0.8"
+  }
+}
