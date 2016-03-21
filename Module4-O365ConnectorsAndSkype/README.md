@@ -246,6 +246,8 @@ This Task uses a starter project to serve as the existing application. The appli
 
 1. Inside the **CallbackController** class, add the **o365-callbackctrl** code snippet by typing **o365-callbackctrl** and pressing **tab**.
 
+ (Code Snippet - _o365-callbackctrl_)
+
  ```C#
         // GET: Callback
         public ActionResult Index()
@@ -289,6 +291,8 @@ This Task uses a starter project to serve as the existing application. The appli
 1. Almost done, just need to update the **Create** activity to send messages to the appropriate webhooks. Open the **ItemsController.cs** file located in the **Controllers** folder of the web project.
 
 1. Towards the bottom of the class, add the **o365-callwebhook** code snippet by typing **o365-callwebhook** and pressing **tab** (resolve using dependencies if necessary).
+
+ (Code Snippet - _o365-callwebhook_)
 
  ```C#
         private async Task callWebhook(string webhook, Item item)
@@ -362,6 +366,8 @@ This Task uses a starter project to serve as the existing application. The appli
 1. This snippet takes the new listing details and sends it to Office 365 via **POST** to the webhook end-point.
 
 1. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
+
+ (Code Snippet - _o365-saveitemtodatabase_)
 
  ```C#
         //save the item to the database
@@ -508,6 +514,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
 
 1. Create a **skype.js** file in the **app** folder of the solution and populate it with base scaffolding using the **o365-skypefactory** code snippet. This creates a **skype.services** Angular module and populates it with some of the core settings to integrate the **Skype Web SDK**. The **skypeSvc** factory will provide persistent objects and services across all controllers of the application. It uses a **singleton** pattern for defining properties a functions.
 
+ (Code Snippet - _o365-skypefactory_)
+
  ```JavaScript
         angular.module("skype.services", [])
         .factory("skypeSvc", ["$rootScope", "$http", "$q", function($rootScope, $http, $q) {
@@ -568,6 +576,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
 
 6. Return to the **skype.js** file you created in Step 1. In the "Add additional Skype logic here" section, add an **ensureClient** function on the **skypeSvc** object to initialize the Skype Web SDK. You can follow the code below or use the **o365-skypeEnsureClient** code snippet.
 
+ (Code Snippet - _o365-skypeEnsureClient_)
+
  ```JavaScript
         //ensures the skype client object is initialized
         var ensureClient = function() {
@@ -595,6 +605,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
  ```
 
 7. The code in Step 6 ensures the Skype Web SDK is initialized, but you also need to ensure the user is signed in. Below ensureClient, add an **ensureSignIn** function to the **skypeSvc** object by using the **o365-skypeEnsureSignIn** code snippet. Notice that it checks the uses the **client.signInManager** to check the sign-in state and calls **signIn** if needed.
+
+ (Code Snippet - _o365-skypeEnsureSignIn_)
 
  ```JavaScript
         //signs into skype
@@ -639,6 +651,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
  ```
 
 9. Next, you should create a **subscribeToStatus** function on the **skypeSvc** to check the status of user that is passed into it (queried using **client.personsAndGroupsManager.createPersonSearchQuery**). The function should also subscribe to status changes for the user. However, you don't want to subscribe the same user more than once, so keep track of subscriptions in a **userSubs** array. You can add this script block using the **o365-skypeSubscribeUser** code snippet.
+
+ (Code Snippet - _o365-skypeSubscribeUser_)
 
  ```JavaScript
         //subscribes to the status of a user
@@ -730,6 +744,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
 
 12. You also want to "listen" for status changes by Skype users. You already subscribed to these events with the Skype Web SDK in step 9, but you need to listen to the **statusChanged** event broadcast from the **skypeSvc**. You can do that as follows or using the **o365-skypeListenStatus** code snippet.
 
+ (Code Snippet - _o365-skypeListenStatus_)
+
  ```JavaScript
         //listen for status changes
         $scope.$on("statusChanged", function(evt, data) {
@@ -747,6 +763,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
  ```
 
 13. Finally, you need to modify the **view-tickets.html** file located in the **app** > **templates** folder to display the Skype presence of each user. Locate the the repeated table row and update the first table cell as follows or using the **o365-skypePresence** code snippet.
+
+ (Code Snippet - _o365-skypePresence_)
 
  ```HTML
         <tbody>
@@ -784,6 +802,8 @@ In this task, you will continue to customize the Help Desk application to includ
 
 1. Open the **skype.js** file created in the previous task and update it with a new **startConversation** function on the **skypeSvc** object that accepts a SIP address for a user an initiates a conversation with them using the Skype Web SDK. All you have to do to initiate the Skype conversation UI is to use the **apiManager** and the **renderConversation** function, providing a **DIV control** in the page that it can render in ("chatWindowInner" in the example below) and the conversation details (participants, modalities, etc). You can follow the code below or use the **o365-skypeStartConversation** code snippet.
 
+ (Code Snippet - _o365-skypeStartConversation_)
+
  ```JavaScript
         //start a conversation with a user
         skypeSvc.startConversation = function(sip) {
@@ -810,6 +830,8 @@ In this task, you will continue to customize the Help Desk application to includ
 
 2. Next, you need to update the **view-tickets.html** file in the **app** > **templates** folder to accommodate the conversation UI. Add the following HTML to the bottom of this file or use the **o365-skypeConversationUI** code snippet.
 
+ (Code Snippet - _o365-skypeConversationUI_)
+
  ```HTML
         <div id="chatWindow" ng-class="{'show': showChatWindow}">
             <span class="glyphicon glyphicon-remove close-chat" ng-click="closeChatWindow()"></span>
@@ -825,6 +847,8 @@ In this task, you will continue to customize the Help Desk application to includ
 
 4. Next, open the **controllers.js** file in the **app** folder and locate the **ticketsCtrl**. At the bottom of this controller add a private **canChat** function that returns true/false based on the status and it's ability to accept instant messages. You can also add this using the **o365-skypeCanChat** code snippet.
 
+ (Code Snippet - _o365-skypeCanChat_)
+
  ```JavaScript
         //helper function to check if a status can perform chat
         var canChat = function(status) {
@@ -836,6 +860,8 @@ In this task, you will continue to customize the Help Desk application to includ
  ```
 
 5. Next, define a **startChat** function on the **$scope** object to initiate a conversation with the ticket opener. The function should accept a **ticket parameter** and check if the ticket opener is available to chat based on their availability (via the **canChat** function you just created). If the ticket opener is available for chat, you should call the **skypeSvc.startConversation** function from step 1 of this task. You can use the **o365-skypeStartChat** code snippet or follow the code below.
+
+ (Code Snippet - _o365skypeStartChat_)
 
  ```JavaScript
         //starts a chat
