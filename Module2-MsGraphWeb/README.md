@@ -214,7 +214,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 <a name="Ex1Task3"></a>
 #### Task 3 - Calling the Microsoft Graph ####
 
-In the final Task of Exercise 1, you will convert the hard-coded contacts to real data from **Office 365** using the **Microsoft Graph**.
+In this task, you will convert the hard-coded contacts to real data from **Office 365** using the **Microsoft Graph**.
 
 1. In Visual Studio Code, open the **app.js** file in the **app** folder.
 
@@ -490,13 +490,13 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 <a name="Ex2Task3"></a>
 #### Task 3 - Calling the Microsoft Graph ####
 
-I the final exercise of this module, you will use a v2.0 access token and call into the Microsoft Graph for both Office 365 and Microsoft (MSA) accounts.
+In this task, you will use a v2.0 access token and call into the Microsoft Graph for both Office 365 and Microsoft (MSA) accounts.
 
-1. Open the **Index.cshtml** located in the **Views**\**Home** folder.
+1. Open the **Index.cshtml** located in the **Views/Home** folder.
 
 1. Replace the entire view markup with the **o365-contactsindex** code snippet. This configures a table to display the contacts. It also defines the model of the view as a **Newtonsoft.Json.Linq.JArray**. This has been simplified for the workshop. A more solid pattern would be to create a Contact class and parse the JSON from the **Microsoft Graph**.
 
-	> **Note:** Microsoft is working to release a number of SDKs for the Microsoft Graph. At the time of this writing, a preview SDK was available for ASP.NET MVC 4.x, but not yet supported in ASP.NET Core. Stay posted for updated on SDKs that can simplify data access with the Microsoft Graph.
+	> **Note:** Microsoft is working to release a number of SDKs for the Microsoft Graph. At the time of writing, a preview SDK was available for ASP.NET MVC 4.x, but not yet supported in ASP.NET Core. Stay posted for updated on SDKs that can simplify data access with the Microsoft Graph.
 
 1. Open the **HomeController.cs** file in the **Controllers** folder and add update the entire Index action with the **o365-contactsindex** code snippet.
 
@@ -530,7 +530,7 @@ I the final exercise of this module, you will use a v2.0 access token and call i
 	}
 	````
 
-1. You will likely need to resolve a number of reference after inserting this snippet.
+1. You will likely need to resolve a number of references after inserting this snippet.
 
 	````C#
 	using Newtonsoft.Json.Linq;

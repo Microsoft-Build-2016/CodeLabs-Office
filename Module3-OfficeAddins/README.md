@@ -417,7 +417,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 <a name="Exercise3"></a>
 ### Exercise 3: Connecting to the Microsoft Graph from the Add-in ###
 
-Microsoft strategy around Office extensibility has focused on add-ins and APIs. So far, this module has focused completely on add-ins. In this last exercise, you will combine the two by calling into the Microsoft Graph from your add-in.
+Microsoft's strategy around Office extensibility has focused on add-ins and APIs. So far, this module has focused completely on add-ins. In this last exercise, you will combine the two by calling into the Microsoft Graph from your add-in.
 
 <a name="Ex3Task1"></a>
 #### Task 1 - Registering the Application with Azure AD ####
@@ -564,7 +564,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 	gulp serve-static
 	````
 
-1. Test the add-in the **Excel 2016** client. When you click on the Sign-in with Office 365 button, the add-in should launch a dialog for you to sign-in and consent to the app permissions.
+1. Test the add-in the **Excel 2016** client. When you click the Sign-in with Office 365 button, the add-in should launch a dialog for you to sign-in and consent to the app permissions.
 
 	![Consenting app in dialog](Images/Mod3_Consent.png?raw=true "Consenting app in dialog")
 
@@ -579,7 +579,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 <a name="Ex3Task3"></a>
 #### Task 3 - Calling the Microsoft Graph ####
 
-In the final task, you will use the **access token** returned from the dialog and use it to call the **Microsoft Graph**. Specifically, you will query **Contacts** information stored in Office 365 and display it as a table in **Excel**.
+In this task, you will use the **access token** returned from the dialog and use it to call the **Microsoft Graph**. Specifically, you will query **Contacts** information stored in Office 365 and display it as a table in **Excel**.
 
 1. Modify the **dialogMessageReceived** function to call into the Microsoft Graph. Notice the **Authorization** header we are setting on the request to "**Bearer** " plus the **access token** returned from the dialog. This is required to successfully get data back from the Microsoft Graph.
 
