@@ -330,7 +330,7 @@ In this task, you'll replace the hard-coded groups with actual group data from O
 	};
 	````
 
-1. Calling into the Microsoft Graph requires that the access token is attached to the **Authorization** header of all request (as **Bearer** token). Update the code to set this header and the **accept** header to **application/json;odata=verbose**.
+1. Calling into the Microsoft Graph requires that the access token is attached to the **Authorization** header of all requests (as **Bearer** token). Update the code to set this header and the **accept** header to **application/json;odata=verbose**.
 
 	> **Note:** The code below also implements error checking on the getTokenForResource and $http calls. If an error occurs, the getGroups function rejects the promise.
 
@@ -454,7 +454,7 @@ In this task, you'll update the solution to lazy load group photos by calling th
 	};
 	````
 
-1. Working with photos in the Microsoft Graph are a little from typical GETs. For starters, update the $http.get operation to indicate a **responseType** of **blob**.
+1. Working with photos in the Microsoft Graph is a little different from typical GETs. For starters, update the $http.get operation to indicate a **responseType** of **blob**.
 
 	````JavaScript
 	$http.get(url, { responseType: "blob" }).then(function (image) {
