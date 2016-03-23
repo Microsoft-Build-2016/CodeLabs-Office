@@ -91,8 +91,7 @@ namespace BillsListASPNET.Controllers
                 var id = entities.SaveChanges();
 
                 //loop through subscriptions and call webhooks for each
-                var subs = entities.Subscriptions.Where(i => i.Category == null || i.Category == item.Category);
-                foreach (var sub in subs)
+                foreach (var sub in entities.Subscriptions)
                 {
                     await callWebhook(sub.WebHookUri, item);
                 }

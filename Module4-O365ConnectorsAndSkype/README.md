@@ -178,39 +178,55 @@ This Task uses a starter project to serve as the existing application. The appli
 9. The **Listings** view is one of the views we want to modify to support subscriptions to Office 365 Connectors. Notice that listings also have a category link, which is the second view we will add the "**Connect to Office 365**" button.
 
 	![Listings](http://i.imgur.com/mx5SdfB.png)
- 
-10. Close the browser to stop debugging and open the **Index.cshtml** file located in the web project at **Views > Items**.
 
-11. Copy and paste the following markup at the end of the **H2** element (right after the text "**for sale**").
+10. Open a browser and navigate to [https://outlook.office.com](https://outlook.office.com "https://outlook.office.com") and sign-in with the Office 365 account that was provided to you.
 
-        <a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
-            <img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
-        </a>    
+11. Once you are signed into Outlook, navigate to the **Connectors Developer Dashboard** [https://outlook.office.com/connectors/publish](https://outlook.office.com/connectors/publish "https://outlook.office.com/connectors/publish"). This is a special page that allows you to register 3rd party connectors and generate "Connect to Office 365" markup.
 
-12. This snippet will add a "Connect to Office 365" button to the view. It passes the following parameters to Office 365:
+	![Add Connectors screen](http://i.imgur.com/GKKstbS.png)
 
-	- **state**: optional state information...in our case we are passing the current view information so we can return to it after the connection has been established with Office 365
-	- **app_name**: the name of the application (ex: BillsList)
-	- **app_logo_url**: the application logo that will be displayed in Office 365 when messages are sent in via webhook
-	- **callback**: the location that Office 365 will return webhook information to after the user has confirmed the connection (ex: https://localhost:44300/callback)
+12. Click on the **New Connector** and fill out the following details in the New Connector form in the Connectors Developer Dashboard.
 
-13. Next, open the **Category.cshtml** file located in the web project at **Views > Items**.
+	- **Connector Name**: BillsList
+	- **Logo**: (upload the BillsList.png file in the project root)
+	- **Short Description**: Any description
+	- **Detailed Description**: Any description
+	- **Company Website**: Any website (ex: http://www.foo.com)
+	- **Landing page for your users**: https://localhost:44300
+	- **Redirect URL**: https://localhost:44300/callback
 
-14. Copy and paste the following markup at the end of the **H2** element (right after "**@ViewData["category"]**").
+13. Save the Form to generate "Connect to Office 365" button markup in step 2 of the form. Copy this markup for use in subsequent steps.
 
-        <a style="float: right;" href="https://outlook.office.com/connectors/ConnectToO365?state=@Request.Url.AbsoluteUri&app_name=BillsList%20(@ViewData["category"])&app_logo_url=http://billslist.azurewebsites.net/images/logo_128.png&callback_url=https://localhost:44300/callback">
-            <img src="https://connecttoo365.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365" style="height: 32px;"></img>
-        </a>
+	![](http://i.imgur.com/1InrXFG.png)
 
-15. This markup snippet is slightly different. It sends a dynamic **app_name** to Office 365 that includes the category the user is subscribing to. This allows the user to subscribe to specific categories instead of ALL listings.
+14. Close the browser to stop debugging and open the **_Layout.cshtml** file located in the web project at **Views > Shared**.
 
-16. You might recall we are passing in a callback location of **https://localhost:44300/callback** to Office 365. However, the **Callback** controller does not yet exist...let's create it. Right click the **Controllers** folder in the web project and select **Add > Controller**.
+15. After the second **navbar-collapse** element (**between lines 27-28**), add following markup as a container for the "Connect to Office 365" button.
 
-17. Select **MVC Controller - Empty** for the controller type and name it **CallbackController**.
+        <div class="navbar-collapse collapse" style="padding-top: 5px;">
+            <div class="nav navbar-nav navbar-right">
+  
+            </div>
+        </div>	
+
+16. Next, paste the "**Connect to Office 365**" button markup generated in step 13 into the new div and wrap the entire thing in a authentication check (**Request.IsAuthenticated**). This will only show the button when the user is signed in.
+
+        @if (Request.IsAuthenticated)
+        {
+        <div class="navbar-collapse collapse" style="padding-top: 5px;">
+            <div class="nav navbar-nav navbar-right">
+                <a href="https://outlook.office.com/connectors/Connect?state=myAppsState&app_id=a786cbb7-f80d-4968-91c0-9df7a96d75f0&callback_url=https://localhost:44300/callback"><img src="https://o365connectors.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365"></img></a>  
+            </div>
+        </div>
+        }
+
+17. You might recall we are passing in a callback location of **https://localhost:44300/callback** to Office 365. However, the **Callback** controller does not yet exist...let's create it. Right click the **Controllers** folder in the web project and select **Add > Controller**.
+
+18. Select **MVC Controller - Empty** for the controller type and name it **CallbackController**.
 
 	![New Controller](http://i.imgur.com/oEfHEsy.png)
 
-18. Inside the **CallbackController** class, add the **o365-callbackctrl** code snippet by typing **o365-callbackctrl** and pressing **tab**.
+19. Inside the **CallbackController** class, add the **o365-callbackctrl** code snippet by typing **o365-callbackctrl** and pressing **tab**.
 
         // GET: Callback
         public ActionResult Index()
@@ -229,10 +245,6 @@ This Task uses a starter project to serve as the existing application. The appli
                 sub.GroupName = group;
                 sub.WebHookUri = webhook;
 
-                //set optional category
-                if (state.IndexOf("?c=") != -1)
-                    sub.Category = state.Substring(state.IndexOf("?c=") + 3);
-
                 //save the subscription
                 using (BillsListEntities entities = new BillsListEntities())
                 {
@@ -243,16 +255,20 @@ This Task uses a starter project to serve as the existing application. The appli
             }
         }
 
-19. This controller looks for information returned from Office 365 and saves it as a subscription. The specific information passed from Office 365 as parameters include:
+20. You may need to resolve the following reference after adding the above snippet.
+
+		using BillsListASPNET.Models;
+
+21. This controller looks for information returned from Office 365 and saves it as a subscription. The specific information passed from Office 365 as parameters include:
 
 	- **error**: error details if the connection with Office 365 failed (ex: user rejected the connection)
 	- **state**: the state value that was passed in via the "Connect to Office 365" button. In our case, it could include the category the user subscribed to
 	- **group_name**: the name of the group the user selected to connect to
 	- **webhook_url**: the webhook end-point our application will use to send messages into Office 365
 
-20. Almost done, just need to update the **Create** activity to send messages to the appropriate webhooks. Open the **ItemsController.cs** file located in the **Controllers** folder of the web project.
+22. Almost done, just need to update the **Create** activity to send messages to the appropriate webhooks. Open the **ItemsController.cs** file located in the **Controllers** folder of the web project.
 
-21. Towards the bottom of the class, add the **o365-callwebhook** code snippet by typing **o365-callwebhook** and pressing **tab** (resolve using dependencies if necessary).
+23. Towards the bottom of the class, add the **o365-callwebhook** code snippet by typing **o365-callwebhook** and pressing **tab**.
 
         private async Task callWebhook(string webhook, Item item)
         {
@@ -321,9 +337,17 @@ This Task uses a starter project to serve as the existing application. The appli
             }
         }
 
-22. This snippet takes the new listing details and sends it to Office 365 via **POST** to the webhook end-point.
+24. You will likely need to resolve a number of references after adding the above snippet.
 
-23. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
+		using System.Net.Http;
+		using System.Net.Http.Headers;
+		using System.Threading.Tasks;
+		using System.Drawing;
+		using System.Drawing.Imaging;
+
+25. The snippet takes the new listing details and sends it to Office 365 via **POST** to the webhook end-point.
+
+26. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
 
         //save the item to the database
         using (BillsListEntities entities = new BillsListEntities())
@@ -332,8 +356,7 @@ This Task uses a starter project to serve as the existing application. The appli
             var id = entities.SaveChanges();
 
             //loop through subscriptions and call webhooks for each
-            var subs = entities.Subscriptions.Where(i => i.Category == null || i.Category == item.Category);
-            foreach (var sub in subs)
+            foreach (var sub in entities.Subscriptions)
             {
                 await callWebhook(sub.WebHookUri, item);
             }
@@ -341,19 +364,19 @@ This Task uses a starter project to serve as the existing application. The appli
             return RedirectToAction("Detail", new { id = item.Id });
         }
 
-24. It's time to test your work. Press **F5** or start the debugger to launch the application. When you click on **Listings** (and sign-in) the **Listings** view will have a "**Connect to Office 365**" button in the upper right. This button will also display on the **Category** view.
+27. It's time to test your work. Press **F5** or start the debugger to launch the application. When you click on **Listings** (and sign-in) the "**Connect to Office 365**" button should display in the header.
 
-	![Connect to Office 365 button](http://i.imgur.com/1lsNgEP.png)
+	![Connect to Office 365 button in header](http://i.imgur.com/6iDZ34T.png)
 
-25. View a specific **Category** and then click on the "**Connect to Office 365**" button. You should be redirected to a screen to select a Office 365 Group to connect to.
+28. Click on the "**Connect to Office 365**" button. You should be redirected to a screen to select a Office 365 Group to connect to.
 
-	![Select group to connect to](http://i.imgur.com/FyzHqKJ.png)
+	![Select group to connect to](http://i.imgur.com/4wj3BKz.png)
 
-26. Select an Office 365 Group and click **Allow** to complete establish the connection with Office 365 and return to BillsList.
+29. Select an Office 365 Group and click **Allow** to complete establish the connection with Office 365 and return to BillsList.
 
-27. To test the connection, click on **My Listings** and **Create listing** with the **category** you subscribed to. A Connector **Card** for the listing should almost immediately show up in the Office 365 Group.
+30. To test the connection, click on **My Listings** and **Create listing** with the **category** you subscribed to. A Connector **Card** for the listing should almost immediately show up in the Office 365 Group.
 
-![Connector card](http://i.imgur.com/xfTGxOZ.png)
+	![Connect message in group UI](http://i.imgur.com/Jr5u18V.png)
 
 <a name="Exercise2"></a>
 ### Exercise 2: Developing with the Skype Web SDK ###

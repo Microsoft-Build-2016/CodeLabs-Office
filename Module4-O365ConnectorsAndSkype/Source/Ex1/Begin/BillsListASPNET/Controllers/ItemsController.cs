@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -65,7 +66,7 @@ namespace BillsListASPNET.Controllers
 
         [Route("items/create")]
         [HttpPost]
-        public ActionResult Create(Item item)
+        public async Task<ActionResult> Create(Item item)
         {
             //convert the image to a base64 string
             if (Request.Files.Count > 0)

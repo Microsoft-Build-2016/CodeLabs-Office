@@ -17,5 +17,6 @@ namespace BillsListASPNET.Models
         public int Id { get; set; }
         public string GroupName { get; set; }
         public string WebHookUri { get; set; }
+        public string Category { get; set; }
     }
 }

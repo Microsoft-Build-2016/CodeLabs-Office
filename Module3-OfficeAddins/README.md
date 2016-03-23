@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Building Office Add-ins with Web Development #
 
 ---
@@ -461,7 +461,7 @@ The Azure Active Directory Authentication Libraries (ADAL) are a set of librarie
 
 	````JavaScript
 	self.clientId = "31b239c4-bd0e-4225-89e0-d59b7c52155b";
-	self.tenant = "rzdemos.com";
+	self.tenant = "tenant.onmicrosoft.com";
 	self.redirectUri = "https://localhost:8443/app/auth/auth.html";
 	````
 

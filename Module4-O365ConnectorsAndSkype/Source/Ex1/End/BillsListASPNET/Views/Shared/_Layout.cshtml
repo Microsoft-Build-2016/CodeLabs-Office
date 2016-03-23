@@ -10,7 +10,7 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" style="float: left;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -18,13 +18,21 @@
                 </button>
                 @Html.ActionLink("BillsList", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="float: left;">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Listings", "Index", "Items")</li>
                     <li>@Html.ActionLink("My Listings", "My", "Items")</li>
                 </ul>
             </div>
+            @if (Request.IsAuthenticated)
+            {
+            <div class="navbar-collapse collapse" style="padding-top: 5px;">
+                <div class="nav navbar-nav navbar-right">
+                    <a href="https://outlook.office.com/connectors/Connect?state=myAppsState&app_id=a786cbb7-f80d-4968-91c0-9df7a96d75f0&callback_url=https://localhost:44300/callback"><img src="https://o365connectors.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365"></img></a>  
+                </div>
+            </div>
+            }
         </div>
     </div>
     <div class="container body-content">

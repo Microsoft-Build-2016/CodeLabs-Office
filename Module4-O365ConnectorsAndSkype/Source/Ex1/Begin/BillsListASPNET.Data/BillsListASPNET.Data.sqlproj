@@ -62,4 +62,7 @@
     <Build Include="Item.sql" />
     <Build Include="Subscription.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="TestDataLoad.sql" />
+  </ItemGroup>
 </Project>

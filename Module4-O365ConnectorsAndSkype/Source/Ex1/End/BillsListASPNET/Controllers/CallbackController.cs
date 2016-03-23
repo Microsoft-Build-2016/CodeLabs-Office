@@ -26,10 +26,6 @@ namespace BillsListASPNET.Controllers
                 sub.GroupName = group;
                 sub.WebHookUri = webhook;
 
-                //set optional category
-                if (state.IndexOf("?c=") != -1)
-                    sub.Category = state.Substring(state.IndexOf("?c=") + 3);
-
                 //save the subscription
                 using (BillsListEntities entities = new BillsListEntities())
                 {
