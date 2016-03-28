@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Web Development and the Microsoft Graph #
 
 ---
@@ -29,8 +29,12 @@ In this module, you'll see how to:
 The following is required to complete this module:
 
 - [Visual Studio Community 2015][1] or greater
+- [Visual Studio Code][2]
+- [NodeJS][3]
 
 [1]: https://www.visualstudio.com/products/visual-studio-community-vs
+[2]: https://code.visualstudio.com
+[3]: https://nodejs.org
 
 ---
 
@@ -68,7 +72,7 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
 1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click **Register App**.
 
 	- **App name**: **Angular Contacts**
-	- **App type**: **Web**
+	- **App type**: **Web App**
 	- **Sign on URL**: **http://localhost:8000**
 	- **Redirect URI**: **http://localhost:8000**
 	- **App permissions**: **Contacts.Read**
@@ -101,6 +105,12 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 	_Project structure_
 
 1. Open the **app.js** file located in the **app** folder. Notice that the **o365Service.getContacts** function returns hard-coded contact data. This will be converted to real contacts from Office 365 by the end of the exercise.
+
+1. Install the superstatic and bower node modules.
+
+	````CMD
+	npm install superstatic bower -g
+	````
 
 1. Return to the command prompt (still set to the project start folder) and start a static web server by typing **superstatic --port 8000**.
 
@@ -190,7 +200,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 			tenant: "mytenant.onmicrosoft.com",
 			clientId: "15f43fac-22db-4da6-9aa2-19037ea5138c",
 			endpoints: {
-				"MSGraph": "https://graph.microsoft.com"
+				"https://graph.microsoft.com": "https://graph.microsoft.com"
 			}
 		}, $httpProvider);
 	}]);
@@ -252,7 +262,7 @@ In this task, you will convert the hard-coded contacts to real data from **Offic
 	}
 	````
 
-1. Every call into the Microsoft Graph requires an **access token** passed as an **Authorization** header of the request. You would normally set these headers on the **$http** object in the above code. However, the **AdalAngular** module automatically does this for you. In fact, **ADAL** handles all of the token management (caching, headers, etc) for you!
+    Every call into the Microsoft Graph requires an **access token** passed as an **Authorization** header of the request. You would normally set these headers on the **$http** object in the above code. However, the **AdalAngular** module automatically does this for you. In fact, **ADAL** handles all of the token management (caching, headers, etc) for you!
 
 1. Open a browser and navigate to **http://localhost:8000**. After clicking **Sign-in with Office 365** the application should query the Microsoft Graph and display actual contacts from Office 365. If you want to test further, go to [https://outlook.office365.com](https://outlook.office365.com "https://outlook.office365.com") to add a few more contacts.
 
