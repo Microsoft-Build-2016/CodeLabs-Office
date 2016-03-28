@@ -31,10 +31,12 @@ The following is required to complete this module:
 - [Visual Studio Community 2015][1] or greater
 - [Visual Studio Code][2]
 - [NodeJS][3]
+- [ASP.NET 5][4]
 
 [1]: https://www.visualstudio.com/products/visual-studio-community-vs
 [2]: https://code.visualstudio.com
 [3]: https://nodejs.org
+[4]: https://get.asp.net/
 
 ---
 
@@ -307,7 +309,7 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 1. Provide a **Name** for the new app and click **Create application**.
 
-1. On the new app confirmation screen, click **Generate New Password** to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you display it again.
+1. On the new app confirmation screen, click **Generate New Password** to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you cannot display it again.
 
 	![Generate secret](Images/Mod2_Secret.png?raw=true "Generate secret")
 
@@ -400,7 +402,13 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 	}
 	````
 
-1. Next, create a **Utils** folder in the root of the web project and then a **SettingsHelper.cs** class in the **Utils** folder.
+1. Next, create a **Utils** folder in the root of the web project and then a **SettingsHelper.cs** class in the **Utils** folder. 
+
+1. Add the following namespace declaration to the top of the file:
+
+    ````C#
+    using Microsoft.Extensions.Configuration;
+    ```` 
 
 1. Use the **o365-settingshelper** code snippet to populate the **SettingsHelper** class and resolve missing references (ex: **using Microsoft.Extensions.Configuration**). This class reads configuration settings you set in Step 10 and makes them available as strongly-typed properties.
 
@@ -408,10 +416,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 	````C#
 	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Threading.Tasks;
+    using Microsoft.AspNet.Http;
 
 	namespace MyContactsV2App.Utils
 	{
@@ -424,13 +429,14 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 1. Next, use the **o365-sessiontokencache** code snippet to populate the remainder of the **SessionTokenCache** class. You may need to resolve a reference to **Microsoft.AspNet.Http**. This class will provide the token caching mechanism for **ADAL**.
 
-1. Finally, open the **Startup.cs** file in the root of the web project. After **Line 51** (app.UseStaticFiles()), insert the **o365-startup** code snippet. You will also have to resolve the following references.
+1. Finally, open the **Startup.cs** file in the root of the web project. After **Line 51** (`app.UseStaticFiles()`), insert the **o365-startup** code snippet. You will also have to resolve the following references.
 
 	````C#
 	using Microsoft.AspNet.Authentication.Cookies;
 	using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 	using Microsoft.AspNet.Authentication.OpenIdConnect;
 	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+    using MyContactsV2App.Utils;
 	````
 
 1. The **o365-startup** code snippet configured **session state**, **cookie authentication**, and **OpenIdConnect** authentication with the v2.0 application model.
@@ -483,6 +489,8 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 		return View();
 	}
 	````
+
+1. Add the `using Microsoft.AspNet.Authorization;` statement to the top of the HomeController.cs file.
 
 1. It is time to test your work. Press **F5** or start the debugger. When the application loads, it should bring up a sign-in screen that you can provide either a Office 365 or Microsoft (MSA) account on. After sign-in, you will be presented with a consent screen to authorize the app the permission scopes passed in. This consent screen will look slightly different if using an MSA account, but it achieves the same thing.
 
@@ -547,6 +555,7 @@ In this task, you will use a v2.0 access token and call into the Microsoft Graph
 	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
 	using System.Net.Http;
 	using System.Security.Claims;
+    using MyContactsV2App.Utils;
 	````
 
 1. Here are a few important things to analyze in this snippet.
