@@ -61,7 +61,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 In this task, you will get the starter project up and running, then convert it to host and Office Add-in. Specifically, you will convert it to host a Mail Add-in activated when you read messages.
 
-1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin** folder.
+1. Open Windows Explorer and browse to the module's **Source\Ex1\Begin\MailCRM** folder and open solution using the **MailCRM.sln** file.
 
 1. The solution contains two projects. **MailCRM** is an ASP.NET MVC app that hosts all the web components of the solution. **MailCRM.Data** is a data project the defined the data model for the solution. You need to publish the database to **LocalDB**. Right-click the **MailCRM.Data** project and select **Publish**.
 
@@ -145,16 +145,17 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 
 1. Open the **Agave.cshtml** file located at **Views > Home** in the **MailCRM** web project.
 
-1. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for).
+1. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for). You should display the sender in the header div as seen below.
 
 	````JavaScript
 	Office.initialize = function (reason) {
 		$(document).ready(function () {
 			 //look up the sender
 			 var sender = Office.context.mailbox.item.sender;
+			 $("#header").html("Comments for " + sender.emailAddress);
 	````
 
-1. Using the sender, you should perform a **REST** **GET** using the endpoint syntax /api/Comments?email=*{sender_email}*. Replace **sender_email** with email address of the sender, which can be found at **sender.emailAddress**. The **o365-httpget** code snippet can help you add a **JQuery** script block for performing an **HTTP** **GET**.
+1. Using the sender, you should perform a **REST** **GET** using the endpoint syntax /api/Comments?email=*{sender_email}*. Replace **sender_email** with email address of the sender, which can be found at **sender.emailAddress**. The **o365-httpget** code snippet can help you add a **JQuery** script block for performing an **HTTP** **GET**. You should also provide the URL for the REST end-point as seen below.
 
 	````JavaScript
 	$.ajax({
@@ -163,26 +164,27 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 		dataType: "json",
 		success: function (data) {
 
+		},
+		error: function (err) {
 		}
 	});
 	````
 
-1. Next, add some additional script to loop through the data returned from the REST service and build the user interface in the **list** element. While you are at it, set the **header** element to the **sender.emailAddress** you retrieved from **Office.js** in **Step 2**.
+1. Next, modify the success function to loop through the data returned from the REST service and build the user interface in the **list** element.
 
 	````JavaScript
-	$("#header").html("Comments for " + sender.emailAddress);
-	  $.ajax({
-		url: "/api/Comments?email=" + sender.emailAddress,
+		$.ajax({
+			url: "/api/Comments?email=" + sender.emailAddress,
 			method: "GET",
 			dataType: "json",
 			success: function (data) {
 				var html = "";
-			$(data).each(function (i, e) {
-				html += "<li class='list-group-item'>" + e.CommentText + "</li>";
-			})
-			$("#list").html(html);
+			    $(data).each(function (i, e) {
+				    html += "<li class='list-group-item'>" + e.CommentText + "</li>";
+			    });
+			    $("#list").html(html);
 			}
-	  });
+		});
 	````
 
 1. Finally, add some script to **POST** new comments when the **submit** element is clicked. You can use the **o365-httppost** code snippet to generate a **JQuery** **HTTP** **POST** block and use the **/api/Comments** REST endpoint.
@@ -190,19 +192,59 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 	````JavaScript
 	$("#submit").click(function () {
 		$.ajax({
-				url: "/api/Comments",
-					method: "POST",
-				 contentType: "application/json; charset=utf-8",
-				 dataType: "json",
-				 data: JSON.stringify({ ContactEmail: sender.emailAddress, CommentText: $("#comment").val() }),
-				 success: function (data) {
-					var html = $("#list").html();
-					  html = "<li class='list-group-item'>" + $("#comment").val() + "</li>" + html;
-					  $("#list").html(html);
-					  $("#comment").val("");
-				 }
+		    url: "/api/Comments",
+		    method: "POST",
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    data: JSON.stringify({ ContactEmail: sender.emailAddress, CommentText: $("#comment").val() }),
+		    success: function (data) {
+		        var html = $("#list").html();
+		        html = "<li class='list-group-item'>" + $("#comment").val() + "</li>" + html;
+		        $("#list").html(html);
+		        $("#comment").val("");
+		    }
+		});
+	});
+	````
+
+1. The completed JavaScript block should look like the following.
+
+	````JavaScript
+	Office.initialize = function (reason) {
+		$(document).ready(function () {
+			//look up the sender
+			var sender = Office.context.mailbox.item.sender;
+			$("#header").html("Comments for " + sender.emailAddress);
+			$.ajax({
+				url: "/api/Comments?email=" + sender.emailAddress,
+				method: "GET",
+				dataType: "json",
+				success: function (data) {
+					var html = "";
+					$(data).each(function (i, e) {
+						html += "<li class='list-group-item'>" + e.CommentText + "</li>";
+					});
+					$("#list").html(html);
+				}
 			});
-	  });
+
+			$("#submit").click(function () {
+				$.ajax({
+					url: "/api/Comments",
+					method: "POST",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					data: JSON.stringify({ ContactEmail: sender.emailAddress, CommentText: $("#comment").val() }),
+					success: function (data) {
+						var html = $("#list").html();
+						html = "<li class='list-group-item'>" + $("#comment").val() + "</li>" + html;
+						$("#list").html(html);
+						$("#comment").val("");
+					}
+				});
+			});
+		});
+	};
 	````
 
 1. To test the add-in, press **F5** or start the debugger. If you are prompted to **Connect to Exchange email account**, provide the Office 365 credentials that were provided to you.
