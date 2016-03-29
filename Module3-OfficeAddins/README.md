@@ -304,7 +304,7 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 1. Press the Windows start button and type Node.js, then locate and open the **Node.js command prompt** in the search results.
 
-1. Change directories to the C:\Project folder.
+1. Change directories to the **C:\Projects** folder.
 
 	````CMD
 	cd C:\Projects
