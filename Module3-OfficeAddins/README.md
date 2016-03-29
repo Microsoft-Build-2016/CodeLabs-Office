@@ -145,7 +145,7 @@ Office Add-ins can use just about any web technology (minus ActiveX). The become
 
 1. Open the **Agave.cshtml** file located at **Views > Home** in the **MailCRM** web project.
 
-1. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for). You should display the sender in the header div as seen below.
+1. Directly after the **$(document).ready(function () {** line add script that uses **Office.js** to get the sender of the email message (that the add-in is displayed for). You should display the sender in the **header** div as seen below.
 
 	````JavaScript
 	Office.initialize = function (reason) {
