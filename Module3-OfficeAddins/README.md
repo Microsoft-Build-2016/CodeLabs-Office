@@ -686,7 +686,7 @@ In this task, you will use the **access token** returned from the dialog and use
 		);
 	````
 
-1. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Connects** using the **Microsoft Graph** and write them to a table in Excel.
+1. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Contacts** using the **Microsoft Graph** and write them to a table in Excel.
 
 	![Table written to Excel](Images/Mod3_ExcelTable.png?raw=true "Table written to Excel")
 
