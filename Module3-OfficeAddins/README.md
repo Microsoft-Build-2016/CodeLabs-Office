@@ -331,9 +331,10 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 1. The **Yeoman generator for Office Add-ins** is a command-line version of the new Office add-in wizard in Visual Studio. It will walk you though a few questions. Provide the following responses:
 
 	- **Project name (display name)**: Contact Cleanup
+    - **Root Folder of Project** current (enter for default) 
 	- **Office project type**: Task Pane Add-in
-	- **Technology to use**: HTML, CSS & JavaScript
 	- **Supported Office applications**: Excel
+	- **Technology to use**: HTML, CSS & JavaScript
 
 	![Yeoman generator for Office add-ins](Images/Mod3_Yeoman.png?raw=true "Yeoman generator for Office add-ins")
 
