@@ -28,10 +28,13 @@ The following is required to complete this module:
 - [Visual Studio Community 2015][1] or greater
 - [Visual Studio Code][2]
 - [Microsoft Office 2016][3]
+- [Node.js/NPM]
+- Yeoman Generator for Office (npm install -g tsd bower gulp yo generator-office)
 
 [1]: https://www.visualstudio.com/products/visual-studio-community-vs
 [2]: https://code.visualstudio.com/
 [3]: https://portal.office.com
+[4]: https://nodejs.org
 
 ---
 

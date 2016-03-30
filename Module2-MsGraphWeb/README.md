@@ -421,11 +421,12 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 	using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 	using Microsoft.AspNet.Authentication.OpenIdConnect;
 	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+    using MyContacts.Utils;
 	````
 
 1. The **o365-startup** code snippet configured **session state**, **cookie authentication**, and **OpenIdConnect** authentication with the v2.0 application model.
 
-1. Look at the **UseOpenIdConnectAuthentication** method and notice its use of **Scope** to specify the permissions for the app (**Contacts.ReadWrite** and **offline_access**). Also notice the use of **OnAuthorizationCodeReceived** to handle authorization codes coming back from a user's sign in and app consent.
+1. Look at the **UseOpenIdConnectAuthentication** method and notice its use of **Scope** to specify the permissions for the app (**Contacts.Read** and **offline_access**). Also notice the use of **OnAuthorizationCodeReceived** to handle authorization codes coming back from a user's sign in and app consent.
 
 	````C#
 	app.UseOpenIdConnectAuthentication(options =>
@@ -435,7 +436,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 		options.Authority = SettingsHelper.Authority;
 		options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 		options.ResponseType = OpenIdConnectResponseTypes.CodeIdToken;
-		options.Scope.Add("https://graph.microsoft.com/contacts.readwrite");
+		options.Scope.Add("Contacts.Read");
 		options.Scope.Add("offline_access");
 		options.Events = new OpenIdConnectEvents
 		{
@@ -445,7 +446,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 				ClientCredential clientCred = new ClientCredential(SettingsHelper.AppId, SettingsHelper.AppPassword);
 				AuthenticationContext authContext = new AuthenticationContext(options.Authority, false, new SessionTokenCache(userObjectId, context.HttpContext));
 				AuthenticationResult authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
-					context.Code, new Uri(context.RedirectUri), clientCred, new string[] { "https://graph.microsoft.com/contacts.readwrite" });
+					context.Code, new Uri(context.RedirectUri), clientCred, new string[] { "Contacts.Read" });
 			}
 		};
 	});
@@ -498,7 +499,7 @@ In this task, you will use a v2.0 access token and call into the Microsoft Graph
 
 	> **Note:** Microsoft is working to release a number of SDKs for the Microsoft Graph. At the time of writing, a preview SDK was available for ASP.NET MVC 4.x, but not yet supported in ASP.NET Core. Stay posted for updated on SDKs that can simplify data access with the Microsoft Graph.
 
-1. Open the **HomeController.cs** file in the **Controllers** folder and add update the entire Index action with the **o365-contactsindex** code snippet.
+1. Open the **HomeController.cs** file in the **Controllers** folder and add update the entire Index action with the **o365-contactsindex** code snippet. Notice the **Authorize** directive added to the Index action.
 
 	````C#
 	[Authorize]
@@ -510,7 +511,7 @@ In this task, you will use a v2.0 access token and call into the Microsoft Graph
 		string userObjectId = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(i => i.Type == SettingsHelper.ObjectIdentifierKey).Value;
 		ClientCredential clientCredential = new ClientCredential(SettingsHelper.AppId, SettingsHelper.AppPassword);
 		AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, false, new SessionTokenCache(userObjectId, HttpContext));
-		var token = await authContext.AcquireTokenSilentAsync(new string[] { "https://graph.microsoft.com/contacts.readwrite" }, clientCredential, UserIdentifier.AnyUser);
+		var token = await authContext.AcquireTokenSilentAsync(new string[] { "Contacts.Read" }, clientCredential, UserIdentifier.AnyUser);
 
 		// Use the token to call Microsoft Graph
 		HttpClient client = new HttpClient();
@@ -537,6 +538,7 @@ In this task, you will use a v2.0 access token and call into the Microsoft Graph
 	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
 	using System.Net.Http;
 	using System.Security.Claims;
+    using MyContactsV2App.Utils;
 	````
 
 1. Here are a few important things to analyze in this snippet.
