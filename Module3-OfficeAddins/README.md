@@ -369,7 +369,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
     _Localhost_
 
-1. If your browser displays certificate warning, click **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate**.
+1. If your browser displays certificate warning, click **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate into the Trusted Root Authorities store**.
 
 	![Certificate Error](Images/Mod3_CertError.png?raw=true "Certificate Error")
 
