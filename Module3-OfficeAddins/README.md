@@ -307,7 +307,7 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 
 1. Press the Windows start button and type Node.js, then locate and open the **Node.js command prompt** in the search results.
 
-1. Change directories to the C:\Project folder.
+1. Change directories to the **C:\Projects** folder.
 
 	````CMD
 	cd C:\Projects
@@ -334,9 +334,10 @@ In this task, you will use **Yeoman** to generate project scaffolding for an Off
 1. The **Yeoman generator for Office Add-ins** is a command-line version of the new Office add-in wizard in Visual Studio. It will walk you though a few questions. Provide the following responses:
 
 	- **Project name (display name)**: Contact Cleanup
+    - **Root Folder of Project** current (enter for default) 
 	- **Office project type**: Task Pane Add-in
-	- **Technology to use**: HTML, CSS & JavaScript
 	- **Supported Office applications**: Excel
+	- **Technology to use**: HTML, CSS & JavaScript
 
 	![Yeoman generator for Office add-ins](Images/Mod3_Yeoman.png?raw=true "Yeoman generator for Office add-ins")
 
@@ -371,7 +372,7 @@ Visual Studio handles the entire add-in hosting, deployment, and debugging with 
 
     _Localhost_
 
-1. If your browser displays certificate warning, click **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate**.
+1. If your browser displays certificate warning, click **Continue to this site (not recommended)**, then view the certificate details and **manually install the self-signed certificate into the Trusted Root Authorities store**.
 
 	![Certificate Error](Images/Mod3_CertError.png?raw=true "Certificate Error")
 
@@ -689,7 +690,7 @@ In this task, you will use the **access token** returned from the dialog and use
 		);
 	````
 
-1. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Connects** using the **Microsoft Graph** and write them to a table in Excel.
+1. Test the add-in again in the **Excel 2016** client. After completing the sign-in dialog, the add-in should read **Contacts** using the **Microsoft Graph** and write them to a table in Excel.
 
 	![Table written to Excel](Images/Mod3_ExcelTable.png?raw=true "Table written to Excel")
 

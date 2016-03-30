@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Web Development and the Microsoft Graph #
 
 ---
@@ -29,8 +29,14 @@ In this module, you'll see how to:
 The following is required to complete this module:
 
 - [Visual Studio Community 2015][1] or greater
+- [Visual Studio Code][2]
+- [NodeJS][3]
+- [ASP.NET 5][4]
 
 [1]: https://www.visualstudio.com/products/visual-studio-community-vs
+[2]: https://code.visualstudio.com
+[3]: https://nodejs.org
+[4]: https://get.asp.net/
 
 ---
 
@@ -68,7 +74,7 @@ In this task, you'll go through the steps of registering an app in **Azure AD** 
 1. Once you are signed in, the app registration page will allow you to specify the details of your application. Use the details outlined below and then click **Register App**.
 
 	- **App name**: **Angular Contacts**
-	- **App type**: **Web**
+	- **App type**: **Web App**
 	- **Sign on URL**: **http://localhost:8000**
 	- **Redirect URI**: **http://localhost:8000**
 	- **App permissions**: **Contacts.Read**
@@ -101,6 +107,12 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 	_Project structure_
 
 1. Open the **app.js** file located in the **app** folder. Notice that the **o365Service.getContacts** function returns hard-coded contact data. This will be converted to real contacts from Office 365 by the end of the exercise.
+
+1. Install the superstatic and bower node modules.
+
+	````CMD
+	npm install superstatic bower -g
+	````
 
 1. Return to the command prompt (still set to the project start folder) and start a static web server by typing **superstatic --port 8000**.
 
@@ -190,7 +202,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 			tenant: "mytenant.onmicrosoft.com",
 			clientId: "15f43fac-22db-4da6-9aa2-19037ea5138c",
 			endpoints: {
-				"MSGraph": "https://graph.microsoft.com"
+				"https://graph.microsoft.com": "https://graph.microsoft.com"
 			}
 		}, $httpProvider);
 	}]);
@@ -252,7 +264,7 @@ In this task, you will convert the hard-coded contacts to real data from **Offic
 	}
 	````
 
-1. Every call into the Microsoft Graph requires an **access token** passed as an **Authorization** header of the request. You would normally set these headers on the **$http** object in the above code. However, the **AdalAngular** module automatically does this for you. In fact, **ADAL** handles all of the token management (caching, headers, etc) for you!
+    Every call into the Microsoft Graph requires an **access token** passed as an **Authorization** header of the request. You would normally set these headers on the **$http** object in the above code. However, the **AdalAngular** module automatically does this for you. In fact, **ADAL** handles all of the token management (caching, headers, etc) for you!
 
 1. Open a browser and navigate to **http://localhost:8000**. After clicking **Sign-in with Office 365** the application should query the Microsoft Graph and display actual contacts from Office 365. If you want to test further, go to [https://outlook.office365.com](https://outlook.office365.com "https://outlook.office365.com") to add a few more contacts.
 
@@ -297,7 +309,7 @@ The new v2.0 "converged" application model uses a centralized registration porta
 
 1. Provide a **Name** for the new app and click **Create application**.
 
-1. On the new app confirmation screen, click **Generate New Password** to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you display it again.
+1. On the new app confirmation screen, click **Generate New Password** to generate an application password. Make sure you copy this value before closing the **New password generated** dialog...you cannot display it again.
 
 	![Generate secret](Images/Mod2_Secret.png?raw=true "Generate secret")
 
@@ -390,7 +402,13 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 	}
 	````
 
-1. Next, create a **Utils** folder in the root of the web project and then a **SettingsHelper.cs** class in the **Utils** folder.
+1. Next, create a **Utils** folder in the root of the web project and then a **SettingsHelper.cs** class in the **Utils** folder. 
+
+1. Add the following namespace declaration to the top of the file:
+
+    ````C#
+    using Microsoft.Extensions.Configuration;
+    ```` 
 
 1. Use the **o365-settingshelper** code snippet to populate the **SettingsHelper** class and resolve missing references (ex: **using Microsoft.Extensions.Configuration**). This class reads configuration settings you set in Step 10 and makes them available as strongly-typed properties.
 
@@ -398,10 +416,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 	````C#
 	using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Threading.Tasks;
+    using Microsoft.AspNet.Http;
 
 	namespace MyContactsV2App.Utils
 	{
@@ -414,7 +429,7 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 
 1. Next, use the **o365-sessiontokencache** code snippet to populate the remainder of the **SessionTokenCache** class. You may need to resolve a reference to **Microsoft.AspNet.Http**. This class will provide the token caching mechanism for **ADAL**.
 
-1. Finally, open the **Startup.cs** file in the root of the web project. After **Line 51** (app.UseStaticFiles()), insert the **o365-startup** code snippet. You will also have to resolve the following references.
+1. Finally, open the **Startup.cs** file in the root of the web project. After **Line 51** (`app.UseStaticFiles()`), insert the **o365-startup** code snippet. You will also have to resolve the following references.
 
 	````C#
 	using Microsoft.AspNet.Authentication.Cookies;
@@ -474,6 +489,8 @@ You will leverage your new app registration in an ASP.NET Core web application. 
 		return View();
 	}
 	````
+
+1. Add the `using Microsoft.AspNet.Authorization;` statement to the top of the HomeController.cs file.
 
 1. It is time to test your work. Press **F5** or start the debugger. When the application loads, it should bring up a sign-in screen that you can provide either a Office 365 or Microsoft (MSA) account on. After sign-in, you will be presented with a consent screen to authorize the app the permission scopes passed in. This consent screen will look slightly different if using an MSA account, but it achieves the same thing.
 
