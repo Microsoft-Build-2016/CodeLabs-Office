@@ -48,4 +48,6 @@ angular.module("myContacts", ["myContacts.services", "myContacts.controllers", "
     }).otherwise({
         redirectTo: "/login"
     });
+
+    //Insert o365-adalInit snippet here
 }]);

@@ -29,6 +29,10 @@
             return deferred.promise;
         };
 
+        //insert o365-appsettings snippet here
+
+        //insert o365-adalcordova snippet here
+
         return myappService;
     }]);
 })();
