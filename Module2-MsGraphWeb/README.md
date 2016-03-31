@@ -32,6 +32,7 @@ The following is required to complete this module:
 - [Visual Studio Code][2]
 - [NodeJS][3]
 - [ASP.NET 5][4]
+- Bower and SuperStatic node modules (npm install -g superstatic bower)
 
 [1]: https://www.visualstudio.com/products/visual-studio-community-vs
 [2]: https://code.visualstudio.com
@@ -108,12 +109,6 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 
 1. Open the **app.js** file located in the **app** folder. Notice that the **o365Service.getContacts** function returns hard-coded contact data. This will be converted to real contacts from Office 365 by the end of the exercise.
 
-1. Install the superstatic and bower node modules.
-
-	````CMD
-	npm install superstatic bower -g
-	````
-
 1. Return to the command prompt (still set to the project start folder) and start a static web server by typing **superstatic --port 8000**.
 
 	````CMD
@@ -180,7 +175,7 @@ This exercise uses a starter project with basic project scaffolding pre-configur
 		}]);
 	````
 
-1. Next, use the **adalProvider.init()** function to define the app details from the app registration you performed in Task 1. You can add this by using the **o365-adalInit** code snippet directly after the **$routeProvider** defines the routes. You will need to fill in values for **tenant** and **clientId**.
+1. Next, use the **adalProvider.init()** function to define the app details from the app registration you performed in Task 1. You can add this by using the **o365-adalInit** code snippet directly after the **$routeProvider** defines the routes. You will need to fill in values for **tenant** and **clientId**. You can use the use the GUI **15f43fac-22db-4da6-9aa2-19037ea5138c** and tenant of **rzdemos.com** if you were given an rzdemos.com account.
 
 	````JavaScript
 	angular.module("myContacts", ["myContacts.services", "myContacts.controllers", "ngRoute", "AdalAngular"])
