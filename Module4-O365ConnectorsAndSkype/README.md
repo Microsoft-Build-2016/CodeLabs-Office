@@ -254,6 +254,10 @@ This Task uses a starter project to serve as the existing application. The appli
         </div>
         }
 
+1. Update the **state** URL parameter from **myAppsState** to **@Request.Url.OriginalString**
+
+        <a href="https://outlook.office.com/connectors/Connect?state=@Request.Url.OriginalString&app_id=a786cbb7-f80d-4968-91c0-9df7a96d75f0&callback_url=https://localhost:44300/callback"><img src="https://o365connectors.blob.core.windows.net/images/ConnectToO365Button.png" alt="Connect to Office 365"></img></a> 
+
 1. You might recall we are passing in a callback location of **https://localhost:44300/callback** to Office 365. However, the **Callback** controller does not yet exist...let's create it. Right click the **Controllers** folder in the web project and select **Add > Controller**.
 
 1. Select **MVC Controller - Empty** for the controller type and name it **CallbackController**.
@@ -393,7 +397,6 @@ This Task uses a starter project to serve as the existing application. The appli
 
 1. Finally, locate the **Create** activity within the class. **Create** is overloaded, so select the one that is marked with **HttpPost** and has the **Item** parameter. Inside the using statement add the code below between **SaveChanges()** of the new listing and the **RedirectToAction()** statement. This identifies matching subscriptions and calls the appropriate webhooks.
 
- (Code Snippet - _o365-saveitemtodatabase_)
 
  ```C#
         //save the item to the database
@@ -736,6 +739,8 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
             //get the helpdesk tickets
             helpdeskSvc.getTickets().then(function(tickets) {
                 $scope.tickets = tickets;
+                
+                //add o365-skypeSubscribeTickets snippet here
             });
 
             //get the user's profile picture
@@ -743,10 +748,18 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
             helpdeskSvc.getProfilePic().then(function(img) {
                 $scope.pic = img;
             });
+            
+            //add o365-skypeListenStatus snippet here
+
+            //add o365-skypeCanChat snippet here
+
+            //add o365-skypeStartChat snippet here
+
+            //add $scope.closeChatWindow code here
         }]);
 ```
 
-11. Next, locate where **getTickets** returns tickets in the "then" promise. After setting $scope.tickets, you should ensure the user is signed into Skype for Business (using **skypeSvc.ensureSignIn**) and then loop through each ticket, subscribing to the ticket opener's status in Skype for Business (using  **skypeSvc.subscribeToStatus**).
+11. Next, locate where **getTickets** returns tickets in the "then" promise. After setting $scope.tickets, you should ensure the user is signed into Skype for Business (using **skypeSvc.ensureSignIn**) and then loop through each ticket, subscribing to the ticket opener's status in Skype for Business (using  **skypeSvc.subscribeToStatus**). You can use the o365-skypeSubscribeTickets snippet for this where it is indicated in comments of the starter file.
 
  ```JavaScript
         //get the helpdesk tickets

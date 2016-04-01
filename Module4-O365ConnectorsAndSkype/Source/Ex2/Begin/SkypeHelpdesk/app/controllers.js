@@ -12,6 +12,8 @@ angular.module("helpdesk.controllers", [])
     //get the helpdesk tickets
     helpdeskSvc.getTickets().then(function(tickets) {
         $scope.tickets = tickets; 
+
+        //add o365-skypeSubscribeTickets snippet here
     });
     
     //get the user's profile picture
@@ -19,4 +21,12 @@ angular.module("helpdesk.controllers", [])
     helpdeskSvc.getProfilePic().then(function(img) {
          $scope.pic = img;
     });
+
+    //add o365-skypeListenStatus snippet here
+
+    //add o365-skypeCanChat snippet here
+
+    //add o365-skypeStartChat snippet here
+
+    //add $scope.closeChatWindow code here
 }]);

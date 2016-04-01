@@ -85,6 +85,9 @@ namespace BillsListASPNET.Controllers
             {
                 entities.Items.Add(item);
                 var id = entities.SaveChanges();
+
+                //TODO: loop through entities.Subscriptions and call webhook
+
                 return RedirectToAction("Detail", new { id = item.Id });
             }
         }
@@ -105,5 +108,7 @@ namespace BillsListASPNET.Controllers
                 return RedirectToAction("My");
             }
         }
+
+        //Add o365-callwebhook snippet here
     }
 }
