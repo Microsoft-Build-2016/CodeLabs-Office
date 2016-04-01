@@ -449,7 +449,7 @@ This exercise uses a starter solution that follows a help desk scenario.  It dis
 
 In the first task, you will familiarize yourself with the starter solution and get it running locally.
 
-1. Open a command prompt and browse to the module's **Source > Ex1 > Begin** folder.
+1. Open a command prompt and browse to the module's **Source > Ex2 > Begin** folder.
 
 2. Open the solution by typing `code .`
 
