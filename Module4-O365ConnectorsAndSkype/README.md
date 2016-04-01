@@ -786,18 +786,18 @@ In this task, you will introduce the Skype Web SDK into the solution and use it 
 
  ```JavaScript
         //listen for status changes
-        $scope.$on("statusChanged", function(evt, data) {
-            var id = data.user.id().replace("sip:", "");
+       $scope.$on("statusChanged", function(evt, data) {
+           var id = data.user.id().replace("sip:", "").toLowerCase();
 
-            //find all instances of this user
-            angular.forEach($scope.tickets, function(ticket, index) {
-                if (ticket.created_by.email === id) {
-                    ticket.created_by.status = data.status;
-                    if (!$scope.$$phase)
-                        $scope.$apply();
-                }
-            });
-        });
+           //find all instances of this user
+           angular.forEach($scope.tickets, function(ticket, index) {
+               if (ticket.created_by.email.toLowerCase() === id) {
+                   ticket.created_by.status = data.status;
+                   if (!$scope.$$phase)
+                       $scope.$apply();
+               }
+           });
+       });
  ```
 
 13. Finally, you need to modify the **view-tickets.html** file located in the **app** > **templates** folder to display the Skype presence of each user. Locate the the repeated table row and update the first table cell as follows or using the **o365-skypePresence** code snippet.
