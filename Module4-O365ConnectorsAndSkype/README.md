@@ -6,7 +6,7 @@
 <a name="Overview" />
 ## Overview ##
 
-Office 365 now enables developers to build a powerful new generation of **conversation**-driven applications. **Office 365 Connectors** and **Skype SDKs** are two developer platforms to lighting up conversations in your applications. Office 365 Connectors allow 3rd party applications to send data into Office 365 and Outlook in near real-time. Users can subscribe to relevant data/applications and have informative and actionable "cards" display in Outlook. Skype SDKs allow developers to being the power capabilities of Skype into their applications built for the web and mobile platforms.
+Office 365 now enables developers to build a powerful new generation of **conversation**-driven applications. **Office 365 Connectors** and **Skype SDKs** are two developer platforms to lighting up conversations in your applications. Office 365 Connectors allow 3rd party applications to send data into Office 365 and Outlook in near real-time. Users can subscribe to relevant data/applications and have informative and actionable "cards" display in Outlook. Skype SDKs allow developers to bring the power capabilities of Skype into their applications built for the web and mobile platforms.
 
 In this module, you will explore development with Office 365 Connectors and Skype SDKs, including how to integrate them into existing web applications.
 
